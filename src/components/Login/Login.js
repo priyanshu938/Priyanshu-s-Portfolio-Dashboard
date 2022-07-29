@@ -230,6 +230,10 @@ const Login = ({ setIsLoggedIn }) => {
             />
             <div className="Auth-form-content">
               <h3 className="Auth-form-title">OTP</h3>
+              <p>
+                An otp has been sent to {email.slice(0, 6)}
+                *************@gmail.com
+              </p>
               <div className="form-group mt-3">
                 <label>Enter otp</label>
                 <input
