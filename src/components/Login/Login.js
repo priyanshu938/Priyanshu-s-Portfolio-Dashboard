@@ -3,6 +3,7 @@ import "./Login.css";
 import url from "../../ServerUrl";
 import Snackbar from "../ReusableComponents/Snackbar";
 import axios from "axios";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const Login = ({ setIsLoggedIn }) => {
   const [email, setEmail] = useState("");
@@ -172,7 +173,10 @@ const Login = ({ setIsLoggedIn }) => {
                 className="forgot-password text-right mt-2 text-secondary"
                 onClick={handleForgotPasswordClick}
               >
-                <a className="link-secondary"> Forgot password?</a>
+                <a href="#" className="link-secondary pe-auto">
+                  {" "}
+                  Forgot password?
+                </a>
               </p>
             </div>
           </form>
@@ -181,6 +185,16 @@ const Login = ({ setIsLoggedIn }) => {
       {forgotPasswordPage && (
         <div className="Auth-form-container">
           <form className="Auth-form" onSubmit={handleSendOtp}>
+            <ArrowBackIcon
+              onClick={() => {
+                setLoginPage(true);
+                setForgotPasswordPage(false);
+                setOtpPage(false);
+                setChangePasswordPage(false);
+              }}
+              style={{ cursor: "pointer" }}
+            />
+
             <div className="Auth-form-content">
               <h3 className="Auth-form-title">OTP</h3>
               <div className="form-group mt-3">
@@ -205,6 +219,15 @@ const Login = ({ setIsLoggedIn }) => {
       {otpPage && (
         <div className="Auth-form-container">
           <form className="Auth-form" onSubmit={handleVerifyOtp}>
+            <ArrowBackIcon
+              onClick={() => {
+                setLoginPage(false);
+                setForgotPasswordPage(true);
+                setOtpPage(false);
+                setChangePasswordPage(false);
+              }}
+              style={{ cursor: "pointer" }}
+            />
             <div className="Auth-form-content">
               <h3 className="Auth-form-title">OTP</h3>
               <div className="form-group mt-3">
@@ -229,6 +252,15 @@ const Login = ({ setIsLoggedIn }) => {
       {changePasswordPage && (
         <div className="Auth-form-container">
           <form className="Auth-form" onSubmit={handleChangePassword}>
+            <ArrowBackIcon
+              onClick={() => {
+                setLoginPage(true);
+                setForgotPasswordPage(false);
+                setOtpPage(false);
+                setChangePasswordPage(false);
+              }}
+              style={{ cursor: "pointer" }}
+            />
             <div className="Auth-form-content">
               <h3 className="Auth-form-title">Change Password</h3>
 
