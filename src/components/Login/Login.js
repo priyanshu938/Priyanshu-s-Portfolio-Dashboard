@@ -11,7 +11,8 @@ const Login = ({ setIsLoggedIn }) => {
   const [message, setMessage] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [otp, setOtp] = useState();
-  const [otpId,setOtpId]=useState();
+  const [otpId, setOtpId] = useState();
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const [loginPage, setLoginPage] = useState(true);
   const [forgotPasswordPage, setForgotPasswordPage] = useState(false);
@@ -71,17 +72,17 @@ const Login = ({ setIsLoggedIn }) => {
       setMessage("User does not exist!");
     }
   };
-  const handleVerifyOtp = async () => {
+  const handleVerifyOtp = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post(`${url}/forgotPassword/verifyOtp`, {
         otpId: otpId,
-        otp:otp
+        otp: otp,
       });
       if (res.status === 200) {
         setIsOpen(true);
         setSeverity("success");
-        setMessage("Otp sent successfully!");
+        setMessage("Otp verified successfully!");
         setLoginPage(false);
         setForgotPasswordPage(false);
         setOtpPage(false);
@@ -93,9 +94,44 @@ const Login = ({ setIsLoggedIn }) => {
       setSeverity("error");
       setMessage("Wrong otp!");
     }
-
-
   };
+  const handleChangePassword = async (e) => {
+    e.preventDefault();
+    if (password === "" || confirmPassword === "") {
+      setIsOpen(true);
+      setSeverity("error");
+      setMessage("Please fill all the fields");
+    } else if (password !== confirmPassword) {
+      setIsOpen(true);
+      setSeverity("error");
+      setMessage("Passwords do not match");
+    } else {
+      try {
+        const res = await axios.post(`${url}/forgotPassword/changePassword`, {
+          email: email,
+          password: password,
+        });
+        if (res.status === 200) {
+          setIsOpen(true);
+          setSeverity("success");
+          setMessage("Password changed successfully!");
+          setLoginPage(true);
+          setForgotPasswordPage(false);
+          setOtpPage(false);
+          setChangePasswordPage(false);
+          setEmail("");
+          setConfirmPassword("");
+          setPassword("");
+        }
+      } catch (error) {
+        console.log(error);
+        setIsOpen(true);
+        setSeverity("error");
+        setMessage("Wrong otp!");
+      }
+    }
+  };
+
   return (
     <div>
       <Snackbar
@@ -195,7 +231,7 @@ const Login = ({ setIsLoggedIn }) => {
           <form className="Auth-form" onSubmit={handleChangePassword}>
             <div className="Auth-form-content">
               <h3 className="Auth-form-title">Change Password</h3>
-              
+
               <div className="form-group mt-3">
                 <label>Password</label>
                 <input
@@ -206,25 +242,19 @@ const Login = ({ setIsLoggedIn }) => {
                 />
               </div>
               <div className="form-group mt-3">
-              <label>Confirm Password</label>
-              <input
-                type="password"
-                className="form-control mt-1"
-                placeholder="Enter password"
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
-            </div>
+                <label>Confirm Password</label>
+                <input
+                  type="password"
+                  className="form-control mt-1"
+                  placeholder="Enter password"
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+              </div>
               <div className="d-grid gap-2 mt-3">
                 <button type="submit" className="btn btn-primary">
                   Change Password
                 </button>
               </div>
-              <p
-                className="forgot-password text-right mt-2 text-secondary"
-                onClick={handleForgotPasswordClick}
-              >
-                <a className="link-secondary"> Forgot password?</a>
-              </p>
             </div>
           </form>
         </div>
