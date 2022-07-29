@@ -10,6 +10,13 @@ const Login = ({ setIsLoggedIn }) => {
   const [severity, setSeverity] = useState("");
   const [message, setMessage] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [otp, setOtp] = useState();
+  const [otpId,setOtpId]=useState();
+
+  const [loginPage, setLoginPage] = useState(true);
+  const [forgotPasswordPage, setForgotPasswordPage] = useState(false);
+  const [otpPage, setOtpPage] = useState(false);
+  const [changePasswordPage, setChangePasswordPage] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,6 +41,61 @@ const Login = ({ setIsLoggedIn }) => {
       }
     }
   };
+  const handleForgotPasswordClick = (e) => {
+    e.preventDefault();
+    setLoginPage(false);
+    setForgotPasswordPage(true);
+    setOtpPage(false);
+    setChangePasswordPage(false);
+  };
+  const handleSendOtp = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post(`${url}/forgotPassword/sendOtp`, {
+        email: email,
+      });
+      if (res.status === 201) {
+        setIsOpen(true);
+        setSeverity("success");
+        setMessage("Otp sent successfully!");
+        setOtpId(res.data.otpId);
+        setLoginPage(false);
+        setForgotPasswordPage(false);
+        setOtpPage(true);
+        setChangePasswordPage(false);
+      }
+    } catch (error) {
+      console.log(error);
+      setIsOpen(true);
+      setSeverity("error");
+      setMessage("User does not exist!");
+    }
+  };
+  const handleVerifyOtp = async () => {
+    e.preventDefault();
+    try {
+      const res = await axios.post(`${url}/forgotPassword/verifyOtp`, {
+        otpId: otpId,
+        otp:otp
+      });
+      if (res.status === 200) {
+        setIsOpen(true);
+        setSeverity("success");
+        setMessage("Otp sent successfully!");
+        setLoginPage(false);
+        setForgotPasswordPage(false);
+        setOtpPage(false);
+        setChangePasswordPage(true);
+      }
+    } catch (error) {
+      console.log(error);
+      setIsOpen(true);
+      setSeverity("error");
+      setMessage("Wrong otp!");
+    }
+
+
+  };
   return (
     <div>
       <Snackbar
@@ -42,39 +104,131 @@ const Login = ({ setIsLoggedIn }) => {
         message={message}
         setIsOpen={setIsOpen}
       />
-      <div className="Auth-form-container">
-        <form className="Auth-form" onSubmit={handleSubmit}>
-          <div className="Auth-form-content">
-            <h3 className="Auth-form-title">Sign In</h3>
-            <div className="form-group mt-3">
-              <label>Email address</label>
-              <input
-                type="email"
-                className="form-control mt-1"
-                placeholder="Enter email"
-                onChange={(e) => setEmail(e.target.value)}
-              />
+      {loginPage && (
+        <div className="Auth-form-container">
+          <form className="Auth-form" onSubmit={handleSubmit}>
+            <div className="Auth-form-content">
+              <h3 className="Auth-form-title">Sign In</h3>
+              <div className="form-group mt-3">
+                <label>Email address</label>
+                <input
+                  type="email"
+                  className="form-control mt-1"
+                  placeholder="Enter email"
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div className="form-group mt-3">
+                <label>Password</label>
+                <input
+                  type="password"
+                  className="form-control mt-1"
+                  placeholder="Enter password"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+              <div className="d-grid gap-2 mt-3">
+                <button type="submit" className="btn btn-primary">
+                  Login
+                </button>
+              </div>
+              <p
+                className="forgot-password text-right mt-2 text-secondary"
+                onClick={handleForgotPasswordClick}
+              >
+                <a className="link-secondary"> Forgot password?</a>
+              </p>
             </div>
-            <div className="form-group mt-3">
-              <label>Password</label>
+          </form>
+        </div>
+      )}
+      {forgotPasswordPage && (
+        <div className="Auth-form-container">
+          <form className="Auth-form" onSubmit={handleSendOtp}>
+            <div className="Auth-form-content">
+              <h3 className="Auth-form-title">OTP</h3>
+              <div className="form-group mt-3">
+                <label>Enter Email address</label>
+                <input
+                  type="email"
+                  className="form-control mt-1"
+                  placeholder="Enter email"
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+
+              <div className="d-grid gap-2 mt-3">
+                <button type="submit" className="btn btn-primary">
+                  Send otp
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      )}
+      {otpPage && (
+        <div className="Auth-form-container">
+          <form className="Auth-form" onSubmit={handleVerifyOtp}>
+            <div className="Auth-form-content">
+              <h3 className="Auth-form-title">OTP</h3>
+              <div className="form-group mt-3">
+                <label>Enter otp</label>
+                <input
+                  type="text"
+                  className="form-control mt-1"
+                  placeholder="Enter otp"
+                  onChange={(e) => setOtp(e.target.value)}
+                />
+              </div>
+
+              <div className="d-grid gap-2 mt-3">
+                <button type="submit" className="btn btn-primary">
+                  Verify otp
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      )}
+      {changePasswordPage && (
+        <div className="Auth-form-container">
+          <form className="Auth-form" onSubmit={handleChangePassword}>
+            <div className="Auth-form-content">
+              <h3 className="Auth-form-title">Change Password</h3>
+              
+              <div className="form-group mt-3">
+                <label>Password</label>
+                <input
+                  type="password"
+                  className="form-control mt-1"
+                  placeholder="Enter password"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+              <div className="form-group mt-3">
+              <label>Confirm Password</label>
               <input
                 type="password"
                 className="form-control mt-1"
                 placeholder="Enter password"
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => setConfirmPassword(e.target.value)}
               />
             </div>
-            <div className="d-grid gap-2 mt-3">
-              <button type="submit" className="btn btn-primary">
-                Login
-              </button>
+              <div className="d-grid gap-2 mt-3">
+                <button type="submit" className="btn btn-primary">
+                  Change Password
+                </button>
+              </div>
+              <p
+                className="forgot-password text-right mt-2 text-secondary"
+                onClick={handleForgotPasswordClick}
+              >
+                <a className="link-secondary"> Forgot password?</a>
+              </p>
             </div>
-            <p className="forgot-password text-right mt-2 text-secondary">
-              <a className="link-secondary"> Forgot password?</a>
-            </p>
-          </div>
-        </form>
-      </div>
+          </form>
+        </div>
+      )}
     </div>
   );
 };
