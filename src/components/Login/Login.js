@@ -4,6 +4,12 @@ import url from "../../ServerUrl";
 import Snackbar from "../ReusableComponents/Snackbar";
 import axios from "axios";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import EmailIcon from "@mui/icons-material/Email";
+import LockIcon from "@mui/icons-material/Lock";
+import Input from "@mui/material/Input";
+import InputAdornment from "@mui/material/InputAdornment";
 
 const Login = ({ setIsLoggedIn }) => {
   const [email, setEmail] = useState("");
@@ -19,6 +25,12 @@ const Login = ({ setIsLoggedIn }) => {
   const [forgotPasswordPage, setForgotPasswordPage] = useState(false);
   const [otpPage, setOtpPage] = useState(false);
   const [changePasswordPage, setChangePasswordPage] = useState(false);
+
+  const [visibilityLoginPassword, setVisibilityLoginPassword] = useState(false);
+  const [visibilityChangePassword, setVisibilityChangePassword] =
+    useState(false);
+  const [visibilityChangePasswordConfirm, setVisibilityChangePasswordConfirm] =
+    useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -148,23 +160,56 @@ const Login = ({ setIsLoggedIn }) => {
               <h3 className="Auth-form-title">Sign In</h3>
               <div className="form-group mt-3">
                 <label>Email address</label>
-                <input
+                <br />
+                <Input
                   type="email"
-                  className="form-control mt-1"
+                  className="mt-1"
                   placeholder="Enter email"
                   onChange={(e) => setEmail(e.target.value)}
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <EmailIcon className="text-secondary" />
+                    </InputAdornment>
+                  }
                 />
               </div>
               <div className="form-group mt-3">
                 <label>Password</label>
-                <input
-                  type="password"
-                  className="form-control mt-1"
+                <br />
+                <Input
+                  type={visibilityLoginPassword ? "text" : "password"}
+                  className=" mt-1"
                   placeholder="Enter password"
                   onChange={(e) => setPassword(e.target.value)}
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <LockIcon className="text-secondary" />
+                    </InputAdornment>
+                  }
+                  endAdornment={
+                    <InputAdornment position="end">
+                      {visibilityLoginPassword ? (
+                        <VisibilityIcon
+                          className="text-secondary"
+                          style={{ cursor: "pointer" }}
+                          onClick={() =>
+                            setVisibilityLoginPassword(!visibilityLoginPassword)
+                          }
+                        />
+                      ) : (
+                        <VisibilityOffIcon
+                          className="text-secondary"
+                          style={{ cursor: "pointer" }}
+                          onClick={() =>
+                            setVisibilityLoginPassword(!visibilityLoginPassword)
+                          }
+                        />
+                      )}
+                    </InputAdornment>
+                  }
                 />
               </div>
-              <div className="d-grid gap-2 mt-3">
+              <div className="d-grid my-3">
                 <button type="submit" className="btn btn-primary">
                   Login
                 </button>
@@ -186,6 +231,7 @@ const Login = ({ setIsLoggedIn }) => {
         <div className="Auth-form-container">
           <form className="Auth-form" onSubmit={handleSendOtp}>
             <ArrowBackIcon
+              className="text-secondary"
               onClick={() => {
                 setLoginPage(true);
                 setForgotPasswordPage(false);
@@ -199,11 +245,16 @@ const Login = ({ setIsLoggedIn }) => {
               <h3 className="Auth-form-title">OTP</h3>
               <div className="form-group mt-3">
                 <label>Enter Email address</label>
-                <input
+                <Input
                   type="email"
-                  className="form-control mt-1"
+                  className="mt-2"
                   placeholder="Enter email"
                   onChange={(e) => setEmail(e.target.value)}
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <EmailIcon className="text-secondary" />
+                    </InputAdornment>
+                  }
                 />
               </div>
 
@@ -227,20 +278,24 @@ const Login = ({ setIsLoggedIn }) => {
                 setChangePasswordPage(false);
               }}
               style={{ cursor: "pointer" }}
+              className="text-secondary"
             />
             <div className="Auth-form-content">
               <h3 className="Auth-form-title">OTP</h3>
-              <p>
-                An otp has been sent to {email.slice(0, 6)}
-                *************@gmail.com
-              </p>
+              <p>An otp has been sent to pri*************789@gmail.com</p>
               <div className="form-group mt-3">
                 <label>Enter otp</label>
-                <input
+                <br />
+                <Input
                   type="text"
-                  className="form-control mt-1"
+                  className=" mt-2"
                   placeholder="Enter otp"
                   onChange={(e) => setOtp(e.target.value)}
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <LockIcon className="text-secondary" />
+                    </InputAdornment>
+                  }
                 />
               </div>
 
@@ -257,6 +312,7 @@ const Login = ({ setIsLoggedIn }) => {
         <div className="Auth-form-container">
           <form className="Auth-form" onSubmit={handleChangePassword}>
             <ArrowBackIcon
+              className="text-secondary"
               onClick={() => {
                 setLoginPage(true);
                 setForgotPasswordPage(false);
@@ -270,20 +326,81 @@ const Login = ({ setIsLoggedIn }) => {
 
               <div className="form-group mt-3">
                 <label>Password</label>
-                <input
-                  type="password"
-                  className="form-control mt-1"
+                <br />
+                <Input
+                  type={visibilityChangePassword ? "text" : "password"}
+                  className="mt-2"
                   placeholder="Enter password"
                   onChange={(e) => setPassword(e.target.value)}
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <LockIcon className="text-secondary" />
+                    </InputAdornment>
+                  }
+                  endAdornment={
+                    <InputAdornment position="end">
+                      {visibilityChangePassword ? (
+                        <VisibilityIcon
+                          className="text-secondary"
+                          style={{ cursor: "pointer" }}
+                          onClick={() =>
+                            setVisibilityChangePassword(
+                              !visibilityChangePassword
+                            )
+                          }
+                        />
+                      ) : (
+                        <VisibilityOffIcon
+                          className="text-secondary"
+                          style={{ cursor: "pointer" }}
+                          onClick={() =>
+                            setVisibilityChangePassword(
+                              !visibilityChangePassword
+                            )
+                          }
+                        />
+                      )}
+                    </InputAdornment>
+                  }
                 />
               </div>
               <div className="form-group mt-3">
                 <label>Confirm Password</label>
-                <input
-                  type="password"
-                  className="form-control mt-1"
-                  placeholder="Enter password"
+                <Input
+                  type={visibilityChangePasswordConfirm ? "text" : "password"}
+                  className=" mt-2"
+                  placeholder="Confirm password"
                   onChange={(e) => setConfirmPassword(e.target.value)}
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <LockIcon className="text-secondary" />
+                    </InputAdornment>
+                  }
+                  endAdornment={
+                    <InputAdornment position="end">
+                      {visibilityChangePasswordConfirm ? (
+                        <VisibilityIcon
+                          className="text-secondary"
+                          style={{ cursor: "pointer" }}
+                          onClick={() =>
+                            setVisibilityChangePasswordConfirm(
+                              !visibilityChangePasswordConfirm
+                            )
+                          }
+                        />
+                      ) : (
+                        <VisibilityOffIcon
+                          className="text-secondary"
+                          style={{ cursor: "pointer" }}
+                          onClick={() =>
+                            setVisibilityChangePasswordConfirm(
+                              !visibilityChangePasswordConfirm
+                            )
+                          }
+                        />
+                      )}
+                    </InputAdornment>
+                  }
                 />
               </div>
               <div className="d-grid gap-2 mt-3">
