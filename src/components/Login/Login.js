@@ -86,12 +86,16 @@ const Login = ({ setIsLoggedIn }) => {
           setOtpPage(true);
           setChangePasswordPage(false);
           setCounter(60);
+        } else {
+          setIsOpen(true);
+          setSeverity("error");
+          setMessage("User does not exist!");
         }
       } catch (error) {
         console.log(error);
         setIsOpen(true);
         setSeverity("error");
-        setMessage("User does not exist!");
+        setMessage("Internal Server Error!");
       }
     }
   };
@@ -133,6 +137,10 @@ const Login = ({ setIsLoggedIn }) => {
       setIsOpen(true);
       setSeverity("error");
       setMessage("Passwords do not match");
+    } else if (password.length < 6) {
+      setIsOpen(true);
+      setSeverity("error");
+      setMessage("Password too short !");
     } else {
       try {
         const res = await axios.post(`${url}/forgotPassword/changePassword`, {
