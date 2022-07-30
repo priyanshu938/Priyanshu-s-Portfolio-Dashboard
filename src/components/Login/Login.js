@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Login.css";
 import url from "../../ServerUrl";
 import Snackbar from "../ReusableComponents/Snackbar";
@@ -10,6 +10,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import LockIcon from "@mui/icons-material/Lock";
 import Input from "@mui/material/Input";
 import InputAdornment from "@mui/material/InputAdornment";
+import OTPPage from "./OTPPage";
 
 const Login = ({ setIsLoggedIn }) => {
   const [email, setEmail] = useState("");
@@ -31,6 +32,8 @@ const Login = ({ setIsLoggedIn }) => {
     useState(false);
   const [visibilityChangePasswordConfirm, setVisibilityChangePasswordConfirm] =
     useState(false);
+
+  const [counter, setCounter] = useState(60);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -64,29 +67,37 @@ const Login = ({ setIsLoggedIn }) => {
   };
   const handleSendOtp = async (e) => {
     e.preventDefault();
-    try {
-      const res = await axios.post(`${url}/forgotPassword/sendOtp`, {
-        email: email,
-      });
-      if (res.status === 201) {
-        setIsOpen(true);
-        setSeverity("success");
-        setMessage("Otp sent successfully!");
-        setOtpId(res.data.otpId);
-        setLoginPage(false);
-        setForgotPasswordPage(false);
-        setOtpPage(true);
-        setChangePasswordPage(false);
-      }
-    } catch (error) {
-      console.log(error);
+    if (email === "") {
       setIsOpen(true);
       setSeverity("error");
-      setMessage("User does not exist!");
+      setMessage("Please fill all the fields");
+    } else {
+      try {
+        const res = await axios.post(`${url}/forgotPassword/sendOtp`, {
+          email: email,
+        });
+        if (res.status === 201) {
+          setIsOpen(true);
+          setSeverity("success");
+          setMessage("Otp sent successfully!");
+          setOtpId(res.data.otpId);
+          setLoginPage(false);
+          setForgotPasswordPage(false);
+          setOtpPage(true);
+          setChangePasswordPage(false);
+          setCounter(60);
+        }
+      } catch (error) {
+        console.log(error);
+        setIsOpen(true);
+        setSeverity("error");
+        setMessage("User does not exist!");
+      }
     }
   };
   const handleVerifyOtp = async (e) => {
     e.preventDefault();
+
     try {
       const res = await axios.post(`${url}/forgotPassword/verifyOtp`, {
         otpId: otpId,
@@ -95,17 +106,21 @@ const Login = ({ setIsLoggedIn }) => {
       if (res.status === 200) {
         setIsOpen(true);
         setSeverity("success");
-        setMessage("Otp verified successfully!");
+        setMessage(res.data.message);
         setLoginPage(false);
         setForgotPasswordPage(false);
         setOtpPage(false);
         setChangePasswordPage(true);
+      } else {
+        setIsOpen(true);
+        setSeverity("error");
+        setMessage(res.data.message);
       }
     } catch (error) {
       console.log(error);
       setIsOpen(true);
       setSeverity("error");
-      setMessage("Wrong otp!");
+      setMessage("OTP expired!");
     }
   };
   const handleChangePassword = async (e) => {
@@ -268,45 +283,17 @@ const Login = ({ setIsLoggedIn }) => {
         </div>
       )}
       {otpPage && (
-        <div className="Auth-form-container">
-          <form className="Auth-form" onSubmit={handleVerifyOtp}>
-            <ArrowBackIcon
-              onClick={() => {
-                setLoginPage(false);
-                setForgotPasswordPage(true);
-                setOtpPage(false);
-                setChangePasswordPage(false);
-              }}
-              style={{ cursor: "pointer" }}
-              className="text-secondary"
-            />
-            <div className="Auth-form-content">
-              <h3 className="Auth-form-title">OTP</h3>
-              <p>An otp has been sent to pri*************789@gmail.com</p>
-              <div className="form-group mt-3">
-                <label>Enter otp</label>
-                <br />
-                <Input
-                  type="text"
-                  className=" mt-2"
-                  placeholder="Enter otp"
-                  onChange={(e) => setOtp(e.target.value)}
-                  startAdornment={
-                    <InputAdornment position="start">
-                      <LockIcon className="text-secondary" />
-                    </InputAdornment>
-                  }
-                />
-              </div>
-
-              <div className="d-grid gap-2 mt-3">
-                <button type="submit" className="btn btn-primary">
-                  Verify otp
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
+        <OTPPage
+          handleVerifyOtp={handleVerifyOtp}
+          handleSendOtp={handleSendOtp}
+          setLoginPage={setLoginPage}
+          setForgotPasswordPage={setForgotPasswordPage}
+          setChangePasswordPage={setChangePasswordPage}
+          setOtp={setOtp}
+          setOtpPage={setOtpPage}
+          counter={counter}
+          setCounter={setCounter}
+        />
       )}
       {changePasswordPage && (
         <div className="Auth-form-container">
