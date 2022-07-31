@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import ImageList from "@mui/material/ImageList";
 import Skill from "./Skill";
 import url from "../../../ServerUrl";
-import { Typography } from "@mui/material";
+import { Typography, Button } from "@mui/material";
 import Input from "@mui/material/Input";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
+import AddIcon from "@mui/icons-material/Add";
 export default function Skills() {
   const [skills, setSkills] = useState([]);
   const [allSkills, setAllSkills] = useState([]);
@@ -39,6 +40,7 @@ export default function Skills() {
       <Typography px={2} variant="h4" component="div" gutterBottom>
         My Skills
       </Typography>
+
       <Input
         type="text"
         className="mt-1 mx-4"
@@ -50,6 +52,13 @@ export default function Skills() {
           </InputAdornment>
         }
       />
+      <Button
+        variant="contained"
+        startIcon={<AddIcon />}
+        style={{ backgroundColor: "green" }}
+      >
+        Add skill
+      </Button>
       {skills.length > 0 ? (
         <ImageList
           sx={{

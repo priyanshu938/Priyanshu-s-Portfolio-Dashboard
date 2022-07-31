@@ -6,7 +6,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import Stack from "@mui/material/Stack";
 const Skill = ({ id, image }) => {
   return (
-    <div className="my-5">
+    <div className="my-5 mx-4">
       {" "}
       <ImageListItem key={id}>
         <img
@@ -17,7 +17,7 @@ const Skill = ({ id, image }) => {
           <Button
             variant="contained"
             startIcon={<EditIcon />}
-            style={{ backgroundColor: "green" }}
+            style={{ backgroundColor: "gray" }}
           >
             Edit
           </Button>
