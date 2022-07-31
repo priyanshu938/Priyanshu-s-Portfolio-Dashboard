@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import "./Login.css";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-
 import LockIcon from "@mui/icons-material/Lock";
 import Input from "@mui/material/Input";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -15,7 +14,7 @@ const OTPPage = ({
   setOtp,
   setOtpPage,
   counter,
-  setCounter
+  setCounter,
 }) => {
   useEffect(() => {
     const timer =
