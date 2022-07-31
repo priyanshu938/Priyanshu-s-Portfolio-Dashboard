@@ -4,7 +4,7 @@ import Login from "./components/Login/Login";
 import Dashboard from "./components/Dashboard/Dashboard";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); //change it to false later to view login screen first
+  const [isLoggedIn, setIsLoggedIn] = useState(true); //change it to false later to view login screen first
   return (
     <div>
       {!isLoggedIn ? (

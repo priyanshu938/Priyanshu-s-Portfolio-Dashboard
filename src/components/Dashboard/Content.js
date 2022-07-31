@@ -8,7 +8,7 @@ import Resume from "./Resume/Resume";
 
 const Content = ({ content }) => {
   return (
-    <Box flex={5}>
+    <Box flex={5} justifyContent="center">
       {content === "skills" && <Skills />}
       {content === "projects" && <Projects />}
       {content === "certificates" && <Certificates />}
