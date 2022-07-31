@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Snackbar from "../ReusableComponents/Snackbar";
-
+import Sidebar from "./Sidebar";
+import Content from "./Content";
+import { Box, Container, Grid, Paper, Stack, Typography } from "@mui/material";
 const Dashboard = ({ setIsLoggedIn }) => {
   //auto log out after 1 hour code
   {
@@ -19,24 +21,25 @@ const Dashboard = ({ setIsLoggedIn }) => {
 
   //image list mui for grid like all things
   const [loginSuccessful, setLoginSuccessful] = useState(true);
+  const [content, setContent] = useState("skills");
 
   return (
-    <div>
+    <Box pt={4}>
       <Snackbar
         isOpen={loginSuccessful}
         severity="success"
         message="Successfully logged in"
         setIsOpen={setLoginSuccessful}
       />
-      <h1>Dashboard</h1>
-      <div>Skills</div>
-      <div>Skills</div>
-      <div>Skills</div>
-      <div>Skills</div>
-      <div>Skills</div>
-
-      <button onClick={() => setIsLoggedIn(false)}>Log out</button>
-    </div>
+      <Stack direction="row" spacing={2} justifyContent="space-between">
+        <Sidebar
+          setIsLoggedIn={setIsLoggedIn}
+          content={content}
+          setContent={setContent}
+        />
+        <Content content={content} setContent={setContent} />
+      </Stack>
+    </Box>
   );
 };
 
