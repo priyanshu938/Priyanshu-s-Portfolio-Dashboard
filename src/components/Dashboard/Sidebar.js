@@ -35,7 +35,7 @@ const Sidebar = ({ setIsLoggedIn, content, setContent }) => {
     setIsLoggedIn(false);
   };
   return (
-    <div>
+    <div style={{ backgroundColor: "#FFFAFA", height: "100vh" }}>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -57,7 +57,7 @@ const Sidebar = ({ setIsLoggedIn, content, setContent }) => {
       <Box
         flex={1}
         sx={{ display: { xs: "none", sm: "block" } }}
-        style={{ cursor: "pointer" }}
+        style={{ cursor: "pointer", paddingTop: "30px" }}
       >
         <Typography px={2} variant="h6" component="div" gutterBottom>
           <FlutterDashIcon />

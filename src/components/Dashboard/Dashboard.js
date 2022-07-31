@@ -24,7 +24,7 @@ const Dashboard = ({ setIsLoggedIn }) => {
   const [content, setContent] = useState("skills");
 
   return (
-    <Box pt={4}>
+    <Box >
       <Snackbar
         isOpen={loginSuccessful}
         severity="success"
