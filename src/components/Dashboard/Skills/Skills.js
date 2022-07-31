@@ -7,10 +7,17 @@ import Input from "@mui/material/Input";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
+import EditSkillModal from "./AddSkillModal";
+import Snackbar from "../../ReusableComponents/Snackbar";
+
 export default function Skills() {
   const [skills, setSkills] = useState([]);
   const [allSkills, setAllSkills] = useState([]);
-  const [search, setSearch] = useState("");
+  const [openEditSkillModal, setOpenEditSkillModal] = useState(false);
+  const [severity, setSeverity] = useState("");
+  const [message, setMessage] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+
   const getAllSkills = async () => {
     const response = await fetch(`${url}/skills/getAllSkills`, {
       method: "GET",
@@ -23,7 +30,9 @@ export default function Skills() {
     setAllSkills(json.result);
     setSkills(json.result);
   };
-  useEffect(() => getAllSkills, []);
+
+  //Below useEffect will be called whenever value of isOpen will be changed
+  useEffect(() => getAllSkills, [isOpen]);
 
   const handleSearchChange = (e) => {
     const searchVal = e.target.value;
@@ -37,6 +46,21 @@ export default function Skills() {
   };
   return (
     <div className=" mt-4">
+      <Snackbar
+        isOpen={isOpen}
+        severity={severity}
+        message={message}
+        setIsOpen={setIsOpen}
+      />
+      {openEditSkillModal && (
+        <EditSkillModal
+          openEditSkillModal={openEditSkillModal}
+          setOpenEditSkillModal={setOpenEditSkillModal}
+          setIsOpen={setIsOpen}
+          setSeverity={setSeverity}
+          setMessage={setMessage}
+        />
+      )}
       <Typography px={2} variant="h4" component="div" gutterBottom>
         My Skills
       </Typography>
@@ -56,6 +80,7 @@ export default function Skills() {
         variant="contained"
         startIcon={<AddIcon />}
         style={{ backgroundColor: "green" }}
+        onClick={() => setOpenEditSkillModal(!openEditSkillModal)}
       >
         Add skill
       </Button>
@@ -67,10 +92,15 @@ export default function Skills() {
             "&::-webkit-scrollbar": { display: "none" },
           }}
           cols={5}
-          rowHeight={200}
+          rowHeight={240}
         >
           {skills.map((skill) => (
-            <Skill key={skill.id} id={skill.id} image={skill.image} />
+            <Skill
+              key={skill._id}
+              id={skill._id}
+              image={skill.image}
+              skill={skill.skill}
+            />
           ))}
         </ImageList>
       ) : (
