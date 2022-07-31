@@ -54,7 +54,11 @@ const Sidebar = ({ setIsLoggedIn, content, setContent }) => {
           <Button onClick={handleLogOut}>Yes</Button>
         </DialogActions>
       </Dialog>
-      <Box flex={1} sx={{ display: { xs: "none", sm: "block" } }}>
+      <Box
+        flex={1}
+        sx={{ display: { xs: "none", sm: "block" } }}
+        style={{ cursor: "pointer" }}
+      >
         <Typography px={2} variant="h6" component="div" gutterBottom>
           <FlutterDashIcon />
           My Dashboard
@@ -164,14 +168,7 @@ const Sidebar = ({ setIsLoggedIn, content, setContent }) => {
           //Logout
         }
         <List onClick={handleClickOpen}>
-          <ListItem
-            disablePadding
-            onClick={() => setContent("logout")}
-            style={{
-              backgroundColor: content === "logout" && "skyblue",
-              borderRadius: "5px",
-            }}
-          >
+          <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>
                 <LogoutIcon />
