@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Snackbar from "../ReusableComponents/Snackbar";
 import Sidebar from "./Sidebar";
 import Content from "./Content";
-import { Box, Container, Grid, Paper, Stack, Typography } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 const Dashboard = ({ setIsLoggedIn }) => {
   //auto log out after 1 hour code
   {
@@ -24,7 +24,7 @@ const Dashboard = ({ setIsLoggedIn }) => {
   const [content, setContent] = useState("skills");
 
   return (
-    <Box >
+    <Box>
       <Snackbar
         isOpen={loginSuccessful}
         severity="success"

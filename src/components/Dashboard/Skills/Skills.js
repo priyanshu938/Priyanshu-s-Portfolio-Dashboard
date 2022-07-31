@@ -100,6 +100,9 @@ export default function Skills() {
               id={skill._id}
               image={skill.image}
               skill={skill.skill}
+              setIsOpen={setIsOpen}
+              setSeverity={setSeverity}
+              setMessage={setMessage}
             />
           ))}
         </ImageList>
