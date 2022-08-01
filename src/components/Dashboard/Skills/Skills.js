@@ -7,13 +7,13 @@ import Input from "@mui/material/Input";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
-import EditSkillModal from "./AddSkillModal";
+import AddSkillModal from "./AddSkillModal";
 import Snackbar from "../../ReusableComponents/Snackbar";
 
 export default function Skills() {
   const [skills, setSkills] = useState([]);
   const [allSkills, setAllSkills] = useState([]);
-  const [openEditSkillModal, setOpenEditSkillModal] = useState(false);
+  const [openAddSkillModal, setOpenAddSkillModal] = useState(false);
   const [severity, setSeverity] = useState("");
   const [message, setMessage] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -52,10 +52,10 @@ export default function Skills() {
         message={message}
         setIsOpen={setIsOpen}
       />
-      {openEditSkillModal && (
-        <EditSkillModal
-          openEditSkillModal={openEditSkillModal}
-          setOpenEditSkillModal={setOpenEditSkillModal}
+      {openAddSkillModal && (
+        <AddSkillModal
+          openAddSkillModal={openAddSkillModal}
+          setOpenAddSkillModal={setOpenAddSkillModal}
           setIsOpen={setIsOpen}
           setSeverity={setSeverity}
           setMessage={setMessage}
@@ -80,7 +80,7 @@ export default function Skills() {
         variant="contained"
         startIcon={<AddIcon />}
         style={{ backgroundColor: "green" }}
-        onClick={() => setOpenEditSkillModal(!openEditSkillModal)}
+        onClick={() => setOpenAddSkillModal(!openAddSkillModal)}
       >
         Add skill
       </Button>

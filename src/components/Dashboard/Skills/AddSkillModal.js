@@ -7,7 +7,6 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import url from "../../../ServerUrl";
 
-
 const style = {
   position: "absolute",
   top: "50%",
@@ -21,15 +20,14 @@ const style = {
 };
 
 export default function AddSkillModal({
-  openEditSkillModal,
-  setOpenEditSkillModal,
+  openAddSkillModal,
+  setOpenAddSkillModal,
   setIsOpen,
   setSeverity,
-  setMessage
+  setMessage,
 }) {
   const [skill, setSkill] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-  
 
   const handleSubmitForm = async (e) => {
     e.preventDefault();
@@ -51,7 +49,7 @@ export default function AddSkillModal({
         setIsOpen(true);
         setSeverity("success");
         setMessage(json.message);
-        setOpenEditSkillModal(!openEditSkillModal)
+        setOpenAddSkillModal(!openAddSkillModal);
       }
     } catch (error) {
       setIsOpen(true);
@@ -62,10 +60,9 @@ export default function AddSkillModal({
 
   return (
     <div>
-   
       <Modal
-        open={openEditSkillModal}
-        onClose={() => setOpenEditSkillModal(!openEditSkillModal)}
+        open={openAddSkillModal}
+        onClose={() => setOpenAddSkillModal(!openAddSkillModal)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
