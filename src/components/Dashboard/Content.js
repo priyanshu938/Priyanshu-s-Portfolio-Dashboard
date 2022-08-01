@@ -4,7 +4,7 @@ import Skills from "./Skills/Skills";
 import Projects from "./Projects/Projects";
 import Certificates from "./Certificates/Certificates";
 import Works from "./Works/Works";
-import Resume from "./Resume/Resume";
+import AboutMe from "./About Me/AboutMe";
 
 const Content = ({ content }) => {
   return (
@@ -13,7 +13,7 @@ const Content = ({ content }) => {
       {content === "projects" && <Projects />}
       {content === "certificates" && <Certificates />}
       {content === "works" && <Works />}
-      {content === "resume" && <Resume />}
+      {content === "about-me" && <AboutMe />}
     </Box>
   );
 };

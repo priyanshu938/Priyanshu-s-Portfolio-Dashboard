@@ -64,6 +64,26 @@ const Sidebar = ({ setIsLoggedIn, content, setContent }) => {
           My Dashboard
         </Typography>
         {
+          //About Me
+        }
+        <List>
+          <ListItem
+            disablePadding
+            onClick={() => setContent("about-me")}
+            style={{
+              backgroundColor: content === "about-me" && "skyblue",
+              borderRadius: "5px",
+            }}
+          >
+            <ListItemButton>
+              <ListItemIcon>
+                <CoPresentIcon />
+              </ListItemIcon>
+              <ListItemText primary="About me" />
+            </ListItemButton>
+          </ListItem>
+        </List>
+        {
           // My Skills
         }
         <List>
@@ -144,26 +164,7 @@ const Sidebar = ({ setIsLoggedIn, content, setContent }) => {
             </ListItemButton>
           </ListItem>
         </List>
-        {
-          //My Resume
-        }
-        <List>
-          <ListItem
-            disablePadding
-            onClick={() => setContent("resume")}
-            style={{
-              backgroundColor: content === "resume" && "skyblue",
-              borderRadius: "5px",
-            }}
-          >
-            <ListItemButton>
-              <ListItemIcon>
-                <CoPresentIcon />
-              </ListItemIcon>
-              <ListItemText primary="My Resume" />
-            </ListItemButton>
-          </ListItem>
-        </List>
+
         {
           //Logout
         }

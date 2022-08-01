@@ -18,7 +18,7 @@ const Dashboard = ({ setIsLoggedIn }) => {
   //   }, [sessionExpireTimeLeft]);
 
   const [loginSuccessful, setLoginSuccessful] = useState(true);
-  const [content, setContent] = useState("skills");
+  const [content, setContent] = useState("about-me");
 
   return (
     <Box>
