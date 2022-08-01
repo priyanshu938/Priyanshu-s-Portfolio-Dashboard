@@ -8,10 +8,12 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
+import EditSkillModal from "./EditSkillModal";
 import url from "../../../ServerUrl";
 
 const Skill = ({ id, image, skill, setIsOpen, setSeverity, setMessage }) => {
   const [open, setOpen] = useState(false);
+  const [openEditSkillModal, setOpenEditSkillModal] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -45,7 +47,19 @@ const Skill = ({ id, image, skill, setIsOpen, setSeverity, setMessage }) => {
   };
   return (
     <div className="my-5 mx-4">
-      {" "}
+      {openEditSkillModal && (
+        <EditSkillModal
+          openEditSkillModal={openEditSkillModal}
+          setOpenEditSkillModal={setOpenEditSkillModal}
+          setIsOpen={setIsOpen}
+          setSeverity={setSeverity}
+          setMessage={setMessage}
+          id={id}
+          image={image}
+          skill={skill}
+        />
+      )}
+
       <Dialog
         open={open}
         onClose={handleClose}
@@ -82,6 +96,7 @@ const Skill = ({ id, image, skill, setIsOpen, setSeverity, setMessage }) => {
             variant="contained"
             startIcon={<EditIcon />}
             style={{ backgroundColor: "gray" }}
+            onClick={() => setOpenEditSkillModal(!openEditSkillModal)}
           >
             Edit
           </Button>
