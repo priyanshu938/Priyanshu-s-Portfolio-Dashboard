@@ -21,10 +21,6 @@ export default function Skills() {
   const getAllSkills = async () => {
     const response = await fetch(`${url}/skills/getAllSkills`, {
       method: "GET",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //     "auth-token": window.localStorage.getItem("token"),
-      //   },
     });
     const json = await response.json();
     setAllSkills(json.result);
