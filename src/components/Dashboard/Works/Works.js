@@ -61,7 +61,7 @@ const Works = () => {
       <Input
         type="text"
         className="mt-1 mx-4"
-        placeholder="Search work..."
+        placeholder="Search work experience..."
         onChange={handleSearchChange}
         startAdornment={
           <InputAdornment position="start">
