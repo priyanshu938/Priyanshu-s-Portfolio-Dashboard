@@ -80,6 +80,7 @@ const Skill = ({ id, image, skill, setIsOpen, setSeverity, setMessage }) => {
       </Dialog>
       <ImageListItem key={id}>
         <img
+        alt="skill"
           src={image}
           style={{ width: "100%", height: "undefined", aspectRatio: 1 }}
         />

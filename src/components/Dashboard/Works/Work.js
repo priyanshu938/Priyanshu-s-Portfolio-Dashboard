@@ -90,6 +90,7 @@ const Work = ({
       </Dialog>
       <ImageListItem key={id}>
         <img
+        alt="work"
           src={image}
           style={{ width: "100%", height: "30vh", aspectRatio: 1 }}
         />
