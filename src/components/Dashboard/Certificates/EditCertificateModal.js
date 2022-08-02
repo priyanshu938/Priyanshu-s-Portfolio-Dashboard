@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Input from "@mui/material/Input";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { MdSecurityUpdateGood } from "react-icons/md";
+import TextField from "@mui/material/TextField";
+
 import Url from "../../../ServerUrl";
 
 const style = {
@@ -83,38 +84,51 @@ export default function EditCertificateModal({
             Edit Certificate
           </Typography>
           <form className="mt-4" onSubmit={handleSubmitForm}>
-            <label htmlFor="">Name : </label>
-            <Input
+            <TextField
               type="text"
               className="ms-2 "
+              id="standard-basic"
+              label="Name"
+              variant="standard"
+              style={{ width: "30vw" }}
               value={updateName}
               onChange={(e) => setUpdateName(e.target.value)}
               required
             />
             <br />
-            <label htmlFor="">Image : </label>
-            <Input
+            <TextField
               type="url"
               className="ms-2 my-4"
               value={imageUrl}
+              id="standard-basic"
+              label="ImageURL"
+              variant="standard"
+              style={{ width: "30vw" }}
               onChange={(e) => setImageUrl(e.target.value)}
               required
             />{" "}
             <br />
-            <label htmlFor="">Description : </label>
-            <Input
+            <TextField
               type="text"
               className="ms-2 "
               value={updateDescription}
+              id="standard-basic"
+              label="Description"
+              variant="standard"
+              style={{ width: "30vw" }}
               onChange={(e) => setUpdateDescription(e.target.value)}
+              multiline
               required
             />
             <br />
-            <label htmlFor="">Link : </label>
-            <Input
+            <TextField
               type="url"
               className="ms-2 my-4"
               value={updateLink}
+              id="standard-basic"
+              label="Link"
+              variant="standard"
+              style={{ width: "30vw" }}
               onChange={(e) => setUpdateLink(e.target.value)}
               required
             />

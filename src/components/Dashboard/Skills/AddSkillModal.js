@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Input from "@mui/material/Input";
+import TextField from "@mui/material/TextField";
 import AddIcon from "@mui/icons-material/Add";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
@@ -71,16 +71,22 @@ export default function AddSkillModal({
             Add a Skill
           </Typography>
           <form className="mt-4" onSubmit={handleSubmitForm}>
-            <label htmlFor="">Skill name : </label>
-            <Input
+            <TextField
+              id="standard-basic"
+              label="Skill name"
+              variant="standard"
+              style={{ width: "30vw" }}
               type="text"
               className="ms-2 "
               onChange={(e) => setSkill(e.target.value)}
               required
             />
             <br />
-            <label htmlFor="">Image url : </label>
-            <Input
+            <TextField
+              id="standard-basic"
+              label="ImageURL"
+              variant="standard"
+              style={{ width: "30vw" }}
               type="url"
               className="ms-2 my-4"
               onChange={(e) => setImageUrl(e.target.value)}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Input from "@mui/material/Input";
+import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { MdSecurityUpdateGood } from "react-icons/md";
@@ -80,8 +80,11 @@ export default function EditWorkModal({
             Edit Work Experience
           </Typography>
           <form className="mt-4" onSubmit={handleSubmitForm}>
-            <label htmlFor="">Name : </label>
-            <Input
+            <TextField
+              id="standard-basic"
+              label="Name"
+              variant="standard"
+              style={{ width: "30vw" }}
               type="text"
               className="ms-2 "
               value={updateName}
@@ -89,8 +92,11 @@ export default function EditWorkModal({
               required
             />
             <br />
-            <label htmlFor="">Image : </label>
-            <Input
+            <TextField
+              id="standard-basic"
+              label="Image"
+              variant="standard"
+              style={{ width: "30vw" }}
               type="url"
               className="ms-2 my-4"
               value={imageUrl}
@@ -98,17 +104,24 @@ export default function EditWorkModal({
               required
             />{" "}
             <br />
-            <label htmlFor="">Description : </label>
-            <Input
+            <TextField
+              id="standard-basic"
+              label="Description"
+              variant="standard"
+              style={{ width: "30vw" }}
               type="text"
               className="ms-2 "
               value={updateDescription}
               onChange={(e) => setUpdateDescription(e.target.value)}
+              multiline
               required
             />
             <br />
-            <label htmlFor="">Link : </label>
-            <Input
+            <TextField
+              id="standard-basic"
+              label="Link"
+              variant="standard"
+              style={{ width: "30vw" }}
               type="url"
               className="ms-2 my-4"
               value={updateUrl}
