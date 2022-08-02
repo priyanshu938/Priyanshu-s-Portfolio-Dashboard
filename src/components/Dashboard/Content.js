@@ -5,6 +5,7 @@ import Projects from "./Projects/Projects";
 import Certificates from "./Certificates/Certificates";
 import Works from "./Works/Works";
 import AboutMe from "./About Me/AboutMe";
+import Contact from "./ContactUsMessages/contact";
 
 const Content = ({ content }) => {
   return (
@@ -14,6 +15,7 @@ const Content = ({ content }) => {
       {content === "certificates" && <Certificates />}
       {content === "works" && <Works />}
       {content === "about-me" && <AboutMe />}
+      {content === "contact" && <Contact />}
     </Box>
   );
 };

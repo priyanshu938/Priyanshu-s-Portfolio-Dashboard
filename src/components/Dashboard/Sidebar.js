@@ -16,6 +16,7 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 import AssuredWorkloadIcon from "@mui/icons-material/AssuredWorkload";
 import CoPresentIcon from "@mui/icons-material/CoPresent";
 import LogoutIcon from "@mui/icons-material/Logout";
+import MessageIcon from "@mui/icons-material/Message";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -164,7 +165,26 @@ const Sidebar = ({ setIsLoggedIn, content, setContent }) => {
             </ListItemButton>
           </ListItem>
         </List>
-
+        {
+          //Contact Us messages
+        }
+        <List>
+          <ListItem
+            disablePadding
+            onClick={() => setContent("contact")}
+            style={{
+              backgroundColor: content === "contact" && "skyblue",
+              borderRadius: "5px",
+            }}
+          >
+            <ListItemButton>
+              <ListItemIcon>
+                <MessageIcon />
+              </ListItemIcon>
+              <ListItemText primary="Messages" />
+            </ListItemButton>
+          </ListItem>
+        </List>
         {
           //Logout
         }
