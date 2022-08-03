@@ -157,7 +157,7 @@ const AddProjectModal = ({
               style={{ backgroundColor: "green" }}
               type="submit"
             >
-              Update Project
+              Add Project
             </Button>
           </form>
         </Box>
