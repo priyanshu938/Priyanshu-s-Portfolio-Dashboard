@@ -16,7 +16,6 @@ const Contact = () => {
       },
     });
     const json = await response.json();
-    console.log(json);
     if (response.status === 200) {
       setMessages(json.result);
       setAllMessages(json.result);
@@ -67,15 +66,21 @@ const Contact = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {messages.map((message) => (
-                        <tr key={message._id}>
-                          <td>{message.name}</td>
-                          <td>{message.email}</td>
-                          <td>{message.message}</td>
-                          <td>{message.date}</td>
-                          <td>{message.time}</td>
+                      {messages.length > 0 ? (
+                        messages.map((message) => (
+                          <tr key={message._id}>
+                            <td>{message.name}</td>
+                            <td>{message.email}</td>
+                            <td>{message.message}</td>
+                            <td>{message.date}</td>
+                            <td>{message.time}</td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan="5">No messages</td>
                         </tr>
-                      ))}
+                      )}
                     </tbody>
                   </table>
                 </div>
