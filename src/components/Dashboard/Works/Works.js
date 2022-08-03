@@ -19,8 +19,12 @@ const Works = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const getAllWorks = async () => {
-    const response = await fetch(`${url}/works/getAllWorks`, {
+    const response = await fetch(`${url}/works/getAllWorksDashboard`, {
       method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": window.localStorage.getItem("token"),
+      },
     });
     const json = await response.json();
     setAllWorks(json.result);

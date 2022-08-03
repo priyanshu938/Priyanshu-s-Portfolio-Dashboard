@@ -19,9 +19,16 @@ const Certificates = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const getAllCertificates = async () => {
-    const response = await fetch(`${url}/certificates/getAllCertificates`, {
-      method: "GET",
-    });
+    const response = await fetch(
+      `${url}/certificates/getAllCertificatesDashboard`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": window.localStorage.getItem("token"),
+        },
+      }
+    );
     const json = await response.json();
     setAllCertificates(json.result);
     setCertificates(json.result);
