@@ -9,21 +9,27 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
-import EditCertificateModal from "./EditCertificateModal";
+import EditProjectModal from "./EditProjectModal";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import PreviewIcon from "@mui/icons-material/Preview";
+
 import Url from "../../../ServerUrl";
-const Certificate = ({
+
+const Project = ({
   id,
-  name,
   image,
+  title,
   description,
-  link,
+  githubLink,
+  liveProjectLink,
+  youtubeVideoLink,
   setIsOpen,
   setSeverity,
   setMessage,
 }) => {
   const [open, setOpen] = useState(false);
-  const [openEditCertificateModal, setOpenEditCertificateModal] =
-    useState(false);
+  const [openEditProjectModal, setOpenEditProjectModal] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -34,16 +40,13 @@ const Certificate = ({
   };
   const handleDelete = async () => {
     try {
-      const response = await fetch(
-        `${Url}/certificates/deleteCertificate/${id}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": window.localStorage.getItem("token"),
-          },
-        }
-      );
+      const response = await fetch(`${Url}/projects/deleteProject/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": window.localStorage.getItem("token"),
+        },
+      });
       const json = await response.json();
       setOpen(false);
       if (response.status === 200) {
@@ -59,18 +62,20 @@ const Certificate = ({
   };
   return (
     <div className="mx-4 my-4">
-      {openEditCertificateModal && (
-        <EditCertificateModal
-          openEditCertificateModal={openEditCertificateModal}
-          setOpenEditCertificateModal={setOpenEditCertificateModal}
+      {openEditProjectModal && (
+        <EditProjectModal
+          openEditProjectModal={openEditProjectModal}
+          setOpenEditProjectModal={setOpenEditProjectModal}
           setIsOpen={setIsOpen}
           setSeverity={setSeverity}
           setMessage={setMessage}
           id={id}
-          name={name}
           image={image}
+          title={title}
           description={description}
-          link={link}
+          githubLink={githubLink}
+          liveProjectLink={liveProjectLink}
+          youtubeVideoLink={youtubeVideoLink}
         />
       )}
 
@@ -82,8 +87,7 @@ const Certificate = ({
       >
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Do you want to delete this certificate (You cannot recover it later)
-            ?
+            Do you want to delete this project (You cannot recover it later) ?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -95,7 +99,7 @@ const Certificate = ({
       </Dialog>
       <ImageListItem key={id}>
         <img
-          alt="Certificate"
+          alt="Project"
           src={image}
           style={{ width: "100%", height: "30vh", aspectRatio: 1 }}
         />
@@ -105,7 +109,7 @@ const Certificate = ({
           component="h6"
           className="mx-2 mt-2"
         >
-          {name}
+          {title}
         </Typography>
         <Typography
           id="modal-modal-title"
@@ -116,18 +120,28 @@ const Certificate = ({
           {description}
         </Typography>
         <Stack direction="row" spacing={2} my={2}>
-          <Link href={link} target="_blank" underline="none">
-            <Button className="" variant="contained" endIcon={<LaunchIcon />}>
-              Watch
-            </Button>
-          </Link>
+          {githubLink !== "" && (
+            <Link href={githubLink} target="_blank" underline="none">
+              <GitHubIcon style={{ color: "black" }} />
+            </Link>
+          )}
+          {youtubeVideoLink !== "" && (
+            <Link href={youtubeVideoLink} target="_blank" underline="none">
+              <YouTubeIcon style={{ color: "red" }} />
+            </Link>
+          )}
+          {liveProjectLink !== "" && (
+            <Link href={liveProjectLink} target="_blank" underline="none">
+              <PreviewIcon style={{ color: "gray" }} />
+            </Link>
+          )}
+        </Stack>
+        <Stack direction="row" spacing={2} my={2}>
           <Button
             variant="contained"
             startIcon={<EditIcon />}
             style={{ backgroundColor: "gray" }}
-            onClick={() =>
-              setOpenEditCertificateModal(!openEditCertificateModal)
-            }
+            onClick={() => setOpenEditProjectModal(!openEditProjectModal)}
           >
             Edit
           </Button>
@@ -145,4 +159,4 @@ const Certificate = ({
   );
 };
 
-export default Certificate;
+export default Project;

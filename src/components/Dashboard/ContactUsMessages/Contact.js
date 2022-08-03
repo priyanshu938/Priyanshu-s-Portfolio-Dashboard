@@ -61,8 +61,8 @@ const Contact = () => {
                         <th>Name</th>
                         <th>Email</th>
                         <th>Message</th>
-                        <th>Date</th>
                         <th>Time</th>
+                        <th>Date</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -72,8 +72,8 @@ const Contact = () => {
                             <td>{message.name}</td>
                             <td>{message.email}</td>
                             <td>{message.message}</td>
-                            <td>{message.date}</td>
                             <td>{message.time}</td>
+                            <td>{message.date}</td>
                           </tr>
                         ))
                       ) : (

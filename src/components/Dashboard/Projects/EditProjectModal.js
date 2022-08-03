@@ -18,50 +18,54 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-
-export default function EditCertificateModal({
-  openEditCertificateModal,
-  setOpenEditCertificateModal,
+const EditProjectModal = ({
+  openEditProjectModal,
+  setOpenEditProjectModal,
   setIsOpen,
   setSeverity,
   setMessage,
   id,
-  name,
   image,
+  title,
   description,
-  link,
-}) {
-  const [updateName, setUpdateName] = useState(name);
+  githubLink,
+  liveProjectLink,
+  youtubeVideoLink,
+}) => {
   const [imageUrl, setImageUrl] = useState(image);
+  const [updateTitle, setUpdateTitle] = useState(title);
   const [updateDescription, setUpdateDescription] = useState(description);
-  const [updateLink, setUpdateLink] = useState(link);
+  const [updateGithubLink, setUpdateGithubLink] = useState(githubLink);
+  const [updateLiveProjectLink, setUpdateLiveProjectLink] =
+    useState(liveProjectLink);
+  const [updateYoutubeVideoLink, setUpdateYoutubeVideoLink] =
+    useState(youtubeVideoLink);
 
   const handleSubmitForm = async (e) => {
     e.preventDefault();
     const data = {
-      name: updateName,
       image: imageUrl,
+      title: updateTitle,
       description: updateDescription,
-      link: updateLink,
+      githubLink: updateGithubLink,
+      liveProjectLink: updateLiveProjectLink,
+      youtubeVideoLink: updateYoutubeVideoLink,
     };
     try {
-      const response = await fetch(
-        `${Url}/certificates/editCertificate/${id}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": window.localStorage.getItem("token"),
-          },
-          body: JSON.stringify(data),
-        }
-      );
+      const response = await fetch(`${Url}/projects/editProject/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": window.localStorage.getItem("token"),
+        },
+        body: JSON.stringify(data),
+      });
       const json = await response.json();
       if (response.status === 200) {
         setIsOpen(true);
         setSeverity("success");
         setMessage(json.message);
-        setOpenEditCertificateModal(!openEditCertificateModal);
+        setOpenEditProjectModal(!openEditProjectModal);
       }
     } catch (error) {
       setIsOpen(true);
@@ -73,31 +77,31 @@ export default function EditCertificateModal({
   return (
     <div>
       <Modal
-        open={openEditCertificateModal}
-        onClose={() => setOpenEditCertificateModal(!openEditCertificateModal)}
+        open={openEditProjectModal}
+        onClose={() => setOpenEditProjectModal(!openEditProjectModal)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h4" component="h4">
-            Edit Certificate
+            Edit Project
           </Typography>
-          <form className="mt-4" onSubmit={handleSubmitForm}>
+          <form className="mt-2" onSubmit={handleSubmitForm}>
             <TextField
               type="text"
               className="ms-2 "
               id="standard-basic"
-              label="Name"
+              label="Project Title"
               variant="standard"
               style={{ width: "30vw" }}
-              value={updateName}
-              onChange={(e) => setUpdateName(e.target.value)}
+              value={updateTitle}
+              onChange={(e) => setUpdateTitle(e.target.value)}
               required
             />
             <br />
             <TextField
               type="url"
-              className="ms-2 my-4"
+              className="ms-2 mt-2"
               value={imageUrl}
               id="standard-basic"
               label="ImageURL"
@@ -109,7 +113,7 @@ export default function EditCertificateModal({
             <br />
             <TextField
               type="text"
-              className="ms-2 "
+              className="ms-2 mt-2 "
               value={updateDescription}
               id="standard-basic"
               label="Description"
@@ -122,14 +126,37 @@ export default function EditCertificateModal({
             <br />
             <TextField
               type="url"
-              className="ms-2 my-4"
-              value={updateLink}
+              className="ms-2 mt-2"
+              value={updateGithubLink}
               id="standard-basic"
-              label="Link"
+              label="Github Link"
               variant="standard"
               style={{ width: "30vw" }}
-              onChange={(e) => setUpdateLink(e.target.value)}
+              onChange={(e) => setUpdateGithubLink(e.target.value)}
               required
+            />
+            <br />
+            <TextField
+              type="url"
+              className="ms-2 mt-2"
+              value={updateLiveProjectLink}
+              id="standard-basic"
+              label="Live Project Link"
+              variant="standard"
+              style={{ width: "30vw" }}
+              onChange={(e) => setUpdateLiveProjectLink(e.target.value)}
+              required
+            />
+            <br />
+            <TextField
+              type="url"
+              className="ms-2 mt-2 mb-4"
+              value={updateYoutubeVideoLink}
+              id="standard-basic"
+              label="Youtube Video Link"
+              variant="standard"
+              style={{ width: "30vw" }}
+              onChange={(e) => setUpdateYoutubeVideoLink(e.target.value)}
             />
             <br />
             <Button
@@ -138,11 +165,13 @@ export default function EditCertificateModal({
               style={{ backgroundColor: "green" }}
               type="submit"
             >
-              Update Certificate
+              Update Project
             </Button>
           </form>
         </Box>
       </Modal>
     </div>
   );
-}
+};
+
+export default EditProjectModal;
