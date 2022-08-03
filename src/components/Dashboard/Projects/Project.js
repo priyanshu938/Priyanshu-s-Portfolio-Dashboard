@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import ImageListItem from "@mui/material/ImageListItem";
 import { Typography, Button, Link } from "@mui/material";
-import LaunchIcon from "@mui/icons-material/Launch";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import Stack from "@mui/material/Stack";
