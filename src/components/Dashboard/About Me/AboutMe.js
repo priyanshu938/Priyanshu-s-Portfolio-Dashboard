@@ -23,11 +23,16 @@ const AboutMe = () => {
       method: "GET",
     });
     const json = await response.json();
-    setMyDetails(json.result[0]);
-    console.log(myDetails);
+    if (response.status === 200) {
+      setMyDetails(json.result[0]);
+      setId(json.result[0]._id);
+      setImage(json.result[0].image);
+      setDescription(json.result[0].description);
+      setLink(json.result[0].link);
+    }
   };
 
-  useEffect(() => getMyDetails, []);
+  useEffect(() => getMyDetails, [isOpenSnackbar]);
 
   return (
     <div className="mt-4">
@@ -63,7 +68,7 @@ const AboutMe = () => {
             />
           </div>
           <div className="col">
-            <form className="mt-4 mb-5">
+            <div className="mt-4 mb-5">
               <label
                 className="ms-2 "
                 style={{ color: "#00b7eb", fontSize: "20px" }}
@@ -107,7 +112,7 @@ const AboutMe = () => {
                   Resume Link
                 </Button>
               </Link>
-            </form>
+            </div>
           </div>
           <div className="row">
             <div className="col-4"></div>
@@ -117,11 +122,7 @@ const AboutMe = () => {
                 startIcon={<EditIcon />}
                 style={{ backgroundColor: "gray", width: "20vw" }}
                 onClick={() => {
-                  setId(myDetails._id);
-                  setImage(myDetails.image);
-                  setDescription(myDetails.description);
-                  setLink(myDetails.link);
-                  setOpenEditAboutMeModal(!openEditAboutMeModal);
+                  setOpenEditAboutMeModal(true);
                 }}
               >
                 Edit
