@@ -5,7 +5,7 @@ import Projects from "./Projects/Projects";
 import Certificates from "./Certificates/Certificates";
 import Works from "./Works/Works";
 import AboutMe from "./About Me/AboutMe";
-import Contact from "./ContactUsMessages/contact";
+import Contact from "./ContactUsMessages/Contact";
 
 const Content = ({ content }) => {
   return (
