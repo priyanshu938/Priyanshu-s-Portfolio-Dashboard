@@ -23,7 +23,6 @@ const Skill = ({ id, image, skill, setIsOpen, setSeverity, setMessage }) => {
     setOpen(false);
   };
   const handleDelete = async () => {
-    console.log(`${url}/skills/deleteSkill/${id}`);
     try {
       const response = await fetch(`${url}/skills/deleteSkill/${id}`, {
         method: "DELETE",
@@ -80,7 +79,7 @@ const Skill = ({ id, image, skill, setIsOpen, setSeverity, setMessage }) => {
       </Dialog>
       <ImageListItem key={id}>
         <img
-        alt="skill"
+          alt="skill"
           src={image}
           style={{ width: "100%", height: "undefined", aspectRatio: 1 }}
         />

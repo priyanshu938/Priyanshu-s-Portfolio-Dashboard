@@ -36,7 +36,9 @@ const AboutMe = () => {
     }
   };
 
-  useEffect(() => {getMyDetails()}, [isOpenSnackbar]);
+  useEffect(() => {
+    getMyDetails();
+  }, [isOpenSnackbar]);
 
   return (
     <div>
