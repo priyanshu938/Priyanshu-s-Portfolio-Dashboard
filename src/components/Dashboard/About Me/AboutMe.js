@@ -27,7 +27,6 @@ const AboutMe = () => {
     });
     const json = await response.json();
     if (response.status === 200) {
-        console.log("hello world");
       setMyDetails(json.result[0]);
       setId(json.result[0]._id);
       setImage(json.result[0].image);
