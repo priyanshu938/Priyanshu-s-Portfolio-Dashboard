@@ -29,8 +29,6 @@ export default function Skills() {
     const json = await response.json();
     setAllSkills(json.result);
     setSkills(json.result);
-    const x=isOpen;
-    setIsOpen(x);
   };
 
   //Below useEffect will be called whenever value of isOpen will be changed
