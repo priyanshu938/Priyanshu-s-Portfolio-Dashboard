@@ -99,8 +99,8 @@ const Projects = () => {
                 height: 450,
                 "&::-webkit-scrollbar": { display: "none" },
               }}
-              cols={2}
-              rowHeight={450}
+              cols={4}
+              rowHeight={500}
             >
               {projects.map((project) => (
                 <Project
