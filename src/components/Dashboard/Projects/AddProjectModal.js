@@ -137,7 +137,6 @@ const AddProjectModal = ({
               variant="standard"
               style={{ width: "30vw" }}
               onChange={(e) => setLiveProjectLink(e.target.value)}
-              required
             />
             <br />
             <TextField
