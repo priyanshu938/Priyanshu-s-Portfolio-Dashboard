@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router";
 import "./Login.css";
 import url from "../../ServerUrl";
 import Snackbar from "../ReusableComponents/Snackbar";
@@ -8,7 +9,8 @@ import LoginPage from "./LoginPage";
 import ForgotPasswordPage from "./ForgotPasswordPage";
 import ChangePasswordPage from "./ChangePasswordPage";
 
-const Login = ({ setIsLoggedIn }) => {
+const Login = () => {
+  let navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [severity, setSeverity] = useState("");
@@ -44,8 +46,8 @@ const Login = ({ setIsLoggedIn }) => {
           password: password,
         });
         if (res.status === 200) {
-          setIsLoggedIn(true);
           window.localStorage.setItem("token", res.data.token);
+          navigate("/dashboard");
         }
       } catch (error) {
         setIsOpen(true);

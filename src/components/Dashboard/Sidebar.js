@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router";
 import {
   Box,
   List,
@@ -22,7 +23,9 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 
-const Sidebar = ({ setIsLoggedIn, content, setContent }) => {
+const Sidebar = ({  content, setContent }) => {
+  let navigate = useNavigate();
+
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -33,7 +36,7 @@ const Sidebar = ({ setIsLoggedIn, content, setContent }) => {
     setOpen(false);
   };
   const handleLogOut = () => {
-    setIsLoggedIn(false);
+    navigate("/");
   };
   return (
     <div style={{ backgroundColor: "#FFFAFA", height: "100vh" }}>
