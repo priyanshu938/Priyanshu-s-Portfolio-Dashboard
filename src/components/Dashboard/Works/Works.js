@@ -41,7 +41,9 @@ const Works = () => {
       : setWorks(allWorks);
   };
   //Below useEffect will be called whenever value of isOpen will be changed
-  useEffect(() => getAllWorks, [isOpen]);
+  useEffect(() => {
+    getAllWorks();
+  }, [isOpen]);
   return (
     <div className="mt-4">
       <Snackbar

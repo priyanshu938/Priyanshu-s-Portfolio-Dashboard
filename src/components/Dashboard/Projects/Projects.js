@@ -41,7 +41,7 @@ const Projects = () => {
       : setProjects(allProjects);
   };
   //Below useEffect will be called whenever value of isOpen will be changed
-  useEffect(() => getAllProjects, [isOpen]);
+  useEffect(() => {getAllProjects()}, [isOpen]);
   return (
     <div className="mt-4">
       <Snackbar

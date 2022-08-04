@@ -44,7 +44,7 @@ const Certificates = () => {
       : setCertificates(allCertificates);
   };
   //Below useEffect will be called whenever value of isOpen will be changed
-  useEffect(() => getAllCertificates, [isOpen]);
+  useEffect(() => {getAllCertificates()}, [isOpen]);
   return (
     <div className="mt-4">
       <Snackbar

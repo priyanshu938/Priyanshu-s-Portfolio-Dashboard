@@ -32,7 +32,7 @@ export default function Skills() {
   };
 
   //Below useEffect will be called whenever value of isOpen will be changed
-  useEffect(() => getAllSkills, [isOpen]);
+  useEffect(() => {getAllSkills()}, [isOpen]);
 
   const handleSearchChange = (e) => {
     const searchVal = e.target.value;

@@ -21,7 +21,7 @@ const Contact = () => {
       setAllMessages(json.result);
     }
   };
-  useEffect(() => getAllMessages, []);
+  useEffect(() => {getAllMessages()}, []);
   const handleSearchChange = (e) => {
     const searchVal = e.target.value;
     searchVal.length > 0
