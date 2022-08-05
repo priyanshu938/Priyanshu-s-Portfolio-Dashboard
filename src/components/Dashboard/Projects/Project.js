@@ -97,11 +97,25 @@ const Project = ({
         </DialogActions>
       </Dialog>
       <ImageListItem key={id}>
-        <img
-          alt="Project"
-          src={image}
-          style={{ width: "100%", height: "30vh", aspectRatio: 1 }}
-        />
+        {youtubeVideoLink ? (
+          <iframe
+            className="iframeSet"
+            height="100%"
+            width="300px"
+            src={youtubeVideoLink}
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        ) : (
+          <img
+            alt="Project"
+            src={image}
+            style={{ width: "100%", height: "30vh", aspectRatio: 1 }}
+          />
+        )}
+
         <Typography
           id="modal-modal-title"
           variant="h6"
