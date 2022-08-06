@@ -18,12 +18,13 @@ import AssuredWorkloadIcon from "@mui/icons-material/AssuredWorkload";
 import CoPresentIcon from "@mui/icons-material/CoPresent";
 import LogoutIcon from "@mui/icons-material/Logout";
 import MessageIcon from "@mui/icons-material/Message";
+import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 
-const Sidebar = ({  content, setContent }) => {
+const Sidebar = ({ content, setContent }) => {
   let navigate = useNavigate();
 
   const [open, setOpen] = useState(false);
@@ -149,6 +150,26 @@ const Sidebar = ({  content, setContent }) => {
           </ListItem>
         </List>
         {
+          //My Videos
+        }
+        <List>
+          <ListItem
+            disablePadding
+            onClick={() => setContent("videos")}
+            style={{
+              backgroundColor: content === "videos" && "skyblue",
+              borderRadius: "5px",
+            }}
+          >
+            <ListItemButton>
+              <ListItemIcon>
+                <VideoLibraryIcon />
+              </ListItemIcon>
+              <ListItemText primary="My Videos" />
+            </ListItemButton>
+          </ListItem>
+        </List>
+        {
           //My Work Experience
         }
         <List>
@@ -168,6 +189,7 @@ const Sidebar = ({  content, setContent }) => {
             </ListItemButton>
           </ListItem>
         </List>
+
         {
           //Contact Us messages
         }
