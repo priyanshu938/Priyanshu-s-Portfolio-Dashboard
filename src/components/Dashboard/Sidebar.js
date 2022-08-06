@@ -40,7 +40,13 @@ const Sidebar = ({ content, setContent }) => {
     navigate("/");
   };
   return (
-    <div style={{ backgroundColor: "#FFFAFA", height: "100vh" }}>
+    <div
+      style={{
+        backgroundColor: "#FFFAFA",
+        height: "100vh",
+        // overflowY: "scroll",// to add scrollbar ,uncomment this later
+      }}
+    >
       <Dialog
         open={open}
         onClose={handleClose}
