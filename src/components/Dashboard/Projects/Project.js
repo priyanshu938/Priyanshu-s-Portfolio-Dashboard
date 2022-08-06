@@ -101,7 +101,7 @@ const Project = ({
           <iframe
             className="iframeSet"
             height="100%"
-            width="300px"
+            width="500px"
             src={youtubeVideoLink}
             title="YouTube video player"
             frameBorder="0"

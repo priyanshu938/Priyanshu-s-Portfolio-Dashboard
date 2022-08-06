@@ -88,7 +88,7 @@ const Video = ({
         <iframe
           className="iframeSet"
           height="100%"
-          width="300px"
+          width="450px"
           src={link}
           title="YouTube video player"
           frameBorder="0"

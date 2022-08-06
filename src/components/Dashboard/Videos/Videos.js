@@ -99,7 +99,7 @@ const Videos = () => {
                 height: 450,
                 "&::-webkit-scrollbar": { display: "none" },
               }}
-              cols={3}
+              cols={2}
               rowHeight={400}
             >
               {videos.map((video) => (
