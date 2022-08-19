@@ -72,7 +72,11 @@ const LoginPage = ({
             />
           </div>
           <div className="d-grid my-3">
-            <button type="submit" className="btn btn-primary">
+            <button
+              type="submit"
+              className="btn"
+              style={{ backgroundColor: "teal", color: "white" }}
+            >
               Login
             </button>
           </div>
