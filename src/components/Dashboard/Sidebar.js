@@ -23,6 +23,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
+import EmailIcon from "@mui/icons-material/Email";
 
 const Sidebar = ({ content, setContent }) => {
   let navigate = useNavigate();
@@ -44,8 +45,8 @@ const Sidebar = ({ content, setContent }) => {
     <div
       style={{
         backgroundColor: "#FFFAFA",
-        height: "100vh",
-        // overflowY: "scroll",// to add scrollbar ,uncomment this later
+        height: "150vh",
+        overflowY: "scroll",// to add scrollbar ,uncomment this later
       }}
     >
       <Dialog
@@ -92,6 +93,26 @@ const Sidebar = ({ content, setContent }) => {
                 <CoPresentIcon />
               </ListItemIcon>
               <ListItemText primary="About me" />
+            </ListItemButton>
+          </ListItem>
+        </List>
+        {
+            //Compose Email
+        }
+        <List>
+          <ListItem
+            disablePadding
+            onClick={() => setContent("compose-email")}
+            style={{
+              backgroundColor: content === "compose-email" && "skyblue",
+              borderRadius: "5px",
+            }}
+          >
+            <ListItemButton>
+              <ListItemIcon>
+                <EmailIcon />
+              </ListItemIcon>
+              <ListItemText primary="Compose Email" />
             </ListItemButton>
           </ListItem>
         </List>
