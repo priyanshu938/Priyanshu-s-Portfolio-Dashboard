@@ -45,7 +45,7 @@ const Sidebar = ({ content, setContent }) => {
     <div
       style={{
         backgroundColor: "#FFFAFA",
-        height: "150vh",
+        height: "160vh",
         overflowY: "scroll",// to add scrollbar ,uncomment this later
       }}
     >

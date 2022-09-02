@@ -270,8 +270,8 @@ const EmailViaForm = () => {
               />
               <br />
               <RichTextEditorComponent
-                height={"100vh"}
-                width="50vw"
+                height={"50vh"}
+                width={"70vw"}
                 ref={(richtexteditor) => {
                   setRteObject(richtexteditor);
                 }}
