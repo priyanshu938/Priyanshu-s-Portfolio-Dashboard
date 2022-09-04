@@ -10,7 +10,8 @@ import Spinner from "../../ReusableComponents/Spinner";
 
 const FrontContent = () => {
   const [myDetails, setMyDetails] = useState([]);
-  const [openEditFrontContentModal, setOpenEditFrontContentModal] = useState(false);
+  const [openEditFrontContentModal, setOpenEditFrontContentModal] =
+    useState(false);
   const [severity, setSeverity] = useState("");
   const [message, setMessage] = useState("");
   const [isOpenSnackbar, setIsOpenSnackbar] = useState(false);
@@ -124,11 +125,15 @@ const FrontContent = () => {
               </div>
               <div className="row">
                 <div className="col-4"></div>
-                <div className=" col">
+                <div className="col">
                   <Button
                     variant="contained"
                     startIcon={<EditIcon />}
-                    style={{ backgroundColor: "gray", width: "20vw" }}
+                    style={{
+                      backgroundColor: "gray",
+                      width: "10vw",
+                      marginLeft: "10px",
+                    }}
                     onClick={() => {
                       setOpenEditFrontContentModal(true);
                     }}
