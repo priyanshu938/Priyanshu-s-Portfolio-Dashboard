@@ -18,9 +18,9 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-const EditAboutMeModal = ({
-  openEditAboutMeModal,
-  setOpenEditAboutMeModal,
+const EditFrontContentModal = ({
+  openEditFrontContentModal,
+  setOpenEditFrontContentModal,
   setIsOpenSnackbar,
   setSeverity,
   setMessage,
@@ -53,7 +53,7 @@ const EditAboutMeModal = ({
         setIsOpenSnackbar(true);
         setSeverity("success");
         setMessage(json.message);
-        setOpenEditAboutMeModal(!openEditAboutMeModal);
+        setOpenEditFrontContentModal(!openEditFrontContentModal);
       }
     } catch (error) {
       setIsOpenSnackbar(true);
@@ -64,8 +64,8 @@ const EditAboutMeModal = ({
   return (
     <div>
       <Modal
-        open={openEditAboutMeModal}
-        onClose={() => setOpenEditAboutMeModal(!openEditAboutMeModal)}
+        open={openEditFrontContentModal}
+        onClose={() => setOpenEditFrontContentModal(!openEditFrontContentModal)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -137,4 +137,4 @@ const EditAboutMeModal = ({
   );
 };
 
-export default EditAboutMeModal;
+export default EditFrontContentModal;
