@@ -34,7 +34,7 @@ const EditTestimonialContentModal = ({
     e.preventDefault();
     const data = {
       description: updateDescription,
-      designation: designation,
+      designation: updateDesignation,
     };
     try {
       const response = await fetch(`${url}/testimonial/editTestimonial/${id}`, {
