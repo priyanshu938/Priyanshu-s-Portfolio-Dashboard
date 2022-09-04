@@ -4,21 +4,21 @@ import Button from "@mui/material/Button";
 import FrontContent from "./FrontContent";
 import TestimonialContent from "./TestimonialContent";
 const AboutMe = () => {
-  const [display, setDisplay] = useState(false);
+  const [display, setDisplay] = useState(true);
   return (
     <div>
       <Box style={{ margin: "10vh", display: "flex" }}>
         <Button
           variant="contained"
           style={{ backgroundColor: "teal", marginRight: "5vw" }}
-          onClick={() => setDisplay(!display)}
+          onClick={() => setDisplay(true)}
         >
           Front Content
         </Button>
         <Button
           variant="contained"
           style={{ backgroundColor: "gray" }}
-          onClick={() => setDisplay(!display)}
+          onClick={() => setDisplay(false)}
         >
           Testimonial Content
         </Button>
