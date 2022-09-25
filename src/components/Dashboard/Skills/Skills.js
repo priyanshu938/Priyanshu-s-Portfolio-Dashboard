@@ -97,7 +97,7 @@ export default function Skills() {
           {skills.length > 0 ? (
             <ImageList
               sx={{
-                width: 1050,
+                width: 1000,
                 height: 400,
                 "&::-webkit-scrollbar": { display: "none" },
               }}
