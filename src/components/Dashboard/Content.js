@@ -8,11 +8,13 @@ import AboutMe from "./About Me/AboutMe";
 import Contact from "./ContactUsMessages/Contact";
 import Videos from "./Videos/Videos";
 import ComposeEmail from "./ComposeEmail/ComposeEmail";
+import Chatbot from "./Chatbot";
 const Content = ({ content }) => {
   return (
     <Box flex={5} justifyContent="center">
       {content === "about-me" && <AboutMe />}
-      {content === "compose-email" && <ComposeEmail/>}
+      {content === "chatbot" && <Chatbot />}
+      {content === "compose-email" && <ComposeEmail />}
       {content === "skills" && <Skills />}
       {content === "projects" && <Projects />}
       {content === "certificates" && <Certificates />}

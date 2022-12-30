@@ -24,6 +24,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import EmailIcon from "@mui/icons-material/Email";
+import SmartToyOutlinedIcon from "@mui/icons-material/SmartToyOutlined";
 
 const Sidebar = ({ content, setContent }) => {
   let navigate = useNavigate();
@@ -46,7 +47,7 @@ const Sidebar = ({ content, setContent }) => {
       style={{
         backgroundColor: "#FFFAFA",
         height: "160vh",
-        overflowY: "scroll",// to add scrollbar ,uncomment this later
+        overflowY: "scroll", // to add scrollbar ,uncomment this later
       }}
     >
       <Dialog
@@ -97,7 +98,27 @@ const Sidebar = ({ content, setContent }) => {
           </ListItem>
         </List>
         {
-            //Compose Email
+          //Chatbot
+        }
+        <List>
+          <ListItem
+            disablePadding
+            onClick={() => setContent("chatbot")}
+            style={{
+              backgroundColor: content === "chatbot" && "skyblue",
+              borderRadius: "5px",
+            }}
+          >
+            <ListItemButton>
+              <ListItemIcon>
+                <SmartToyOutlinedIcon />
+              </ListItemIcon>
+              <ListItemText primary="Chatbot" />
+            </ListItemButton>
+          </ListItem>
+        </List>
+        {
+          //Compose Email
         }
         <List>
           <ListItem
