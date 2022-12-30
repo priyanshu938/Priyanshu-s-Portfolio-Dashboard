@@ -58,14 +58,16 @@ const Chatbot = () => {
               value={message}
               onChange={handleChange}
             />
-            <Typography
-              variant="h6"
-              component="div"
-              gutterBottom
-              className="mt-4"
-            >
-              Ans: {chatbotResponse}
-            </Typography>
+            {chatbotResponse && (
+              <Typography
+                variant="h6"
+                component="div"
+                gutterBottom
+                className="mt-4"
+              >
+                Ans: {chatbotResponse}
+              </Typography>
+            )}
           </form>
         </div>
       )}
