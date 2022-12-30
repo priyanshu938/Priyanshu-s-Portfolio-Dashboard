@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Typography, Button } from "@mui/material";
+import React, { useState } from "react";
+import { Typography } from "@mui/material";
 import url from "../../ServerUrl";
 import Input from "@mui/material/Input";
 import SendIcon from "@mui/icons-material/Send";
