@@ -20,7 +20,7 @@ const OTPPage = ({
     const timer =
       counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
     return () => clearInterval(timer);
-  }, [counter]);
+  }, [counter,setCounter]);
   return (
     <div>
       <div className="Auth-form-container">

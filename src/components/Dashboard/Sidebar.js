@@ -85,8 +85,9 @@ const Sidebar = ({ content, setContent }) => {
             disablePadding
             onClick={() => setContent("about-me")}
             style={{
-              backgroundColor: content === "about-me" && "skyblue",
+              backgroundColor: content === "about-me" && "#3CB043",
               borderRadius: "5px",
+              color: content === "about-me" && "white",
             }}
           >
             <ListItemButton>
@@ -105,8 +106,9 @@ const Sidebar = ({ content, setContent }) => {
             disablePadding
             onClick={() => setContent("chatbot")}
             style={{
-              backgroundColor: content === "chatbot" && "skyblue",
+              backgroundColor: content === "chatbot" && "#3CB043",
               borderRadius: "5px",
+              color: content === "chatbot" && "white",
             }}
           >
             <ListItemButton>
@@ -125,8 +127,9 @@ const Sidebar = ({ content, setContent }) => {
             disablePadding
             onClick={() => setContent("compose-email")}
             style={{
-              backgroundColor: content === "compose-email" && "skyblue",
+              backgroundColor: content === "compose-email" && "#3CB043",
               borderRadius: "5px",
+              color: content === "compose-email" && "white",
             }}
           >
             <ListItemButton>
@@ -145,8 +148,9 @@ const Sidebar = ({ content, setContent }) => {
             disablePadding
             onClick={() => setContent("skills")}
             style={{
-              backgroundColor: content === "skills" && "skyblue",
+              backgroundColor: content === "skills" && "#3CB043",
               borderRadius: "5px",
+              color: content === "skills" && "white",
             }}
           >
             <ListItemButton>
@@ -165,8 +169,9 @@ const Sidebar = ({ content, setContent }) => {
             disablePadding
             onClick={() => setContent("projects")}
             style={{
-              backgroundColor: content === "projects" && "skyblue",
+              backgroundColor: content === "projects"&& "#3CB043",
               borderRadius: "5px",
+              color: content === "projects" && "white",
             }}
           >
             <ListItemButton>
@@ -186,8 +191,9 @@ const Sidebar = ({ content, setContent }) => {
             disablePadding
             onClick={() => setContent("certificates")}
             style={{
-              backgroundColor: content === "certificates" && "skyblue",
+              backgroundColor: content === "certificates" && "#3CB043",
               borderRadius: "5px",
+              color: content === "certificates" && "white",
             }}
           >
             <ListItemButton>
@@ -206,8 +212,9 @@ const Sidebar = ({ content, setContent }) => {
             disablePadding
             onClick={() => setContent("videos")}
             style={{
-              backgroundColor: content === "videos" && "skyblue",
+              backgroundColor: content === "videos" && "#3CB043",
               borderRadius: "5px",
+              color: content === "videos" && "white",
             }}
           >
             <ListItemButton>
@@ -226,8 +233,9 @@ const Sidebar = ({ content, setContent }) => {
             disablePadding
             onClick={() => setContent("works")}
             style={{
-              backgroundColor: content === "works" && "skyblue",
+              backgroundColor: content === "works" && "#3CB043",
               borderRadius: "5px",
+              color: content === "works" && "white",
             }}
           >
             <ListItemButton>
@@ -247,8 +255,9 @@ const Sidebar = ({ content, setContent }) => {
             disablePadding
             onClick={() => setContent("contact")}
             style={{
-              backgroundColor: content === "contact" && "skyblue",
+              backgroundColor: content === "contact"&& "#3CB043",
               borderRadius: "5px",
+              color: content === "contact" && "white",
             }}
           >
             <ListItemButton>

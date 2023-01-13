@@ -85,7 +85,7 @@ const LoginPage = ({
             onClick={handleForgotPasswordClick}
             style={{ cursor: "pointer" }}
           >
-            <a className="link-secondary pe-auto"> Forgot password?</a>
+            <a href="/" className="link-secondary pe-auto"> Forgot password?</a>
           </p>
         </div>
       </form>
