@@ -19,7 +19,7 @@ const PageNotFound = () => {
       <Button
         variant="contained"
         startIcon={<ArrowBackIcon />}
-        style={{ backgroundColor: "teal", marginTop: "10vh" }}
+        style={{ backgroundColor: "#1976D2", marginTop: "10vh" }}
         onClick={() => navigate("/")}
       >
         Go to Home page

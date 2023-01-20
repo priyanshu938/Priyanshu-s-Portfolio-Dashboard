@@ -10,17 +10,21 @@ import Videos from "./Videos/Videos";
 import ComposeEmail from "./ComposeEmail/ComposeEmail";
 import Chatbot from "./Chatbot";
 const Content = ({ content }) => {
+  //to add new content, add the name of the content in the contentArray
+  const contentArray = {
+    "about-me": <AboutMe />,
+    chatbot: <Chatbot />,
+    "compose-email": <ComposeEmail />,
+    skills: <Skills />,
+    projects: <Projects />,
+    certificates: <Certificates />,
+    videos: <Videos />,
+    "work experience": <Works />,
+    messages: <Contact />,
+  };
   return (
     <Box flex={5} justifyContent="center">
-      {content === "about-me" && <AboutMe />}
-      {content === "chatbot" && <Chatbot />}
-      {content === "compose-email" && <ComposeEmail />}
-      {content === "skills" && <Skills />}
-      {content === "projects" && <Projects />}
-      {content === "certificates" && <Certificates />}
-      {content === "videos" && <Videos />}
-      {content === "works" && <Works />}
-      {content === "contact" && <Contact />}
+      {contentArray[content]}
     </Box>
   );
 };

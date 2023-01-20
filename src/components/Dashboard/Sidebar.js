@@ -109,6 +109,8 @@ export default function Sidebar2({ content, setContent }) {
 
   const [open, setOpen] = useState(true);
   const [openDialog, setOpenDialog] = useState(false);
+  
+  //to add any new section, just add that name in contentArray and add the icon in contentIcon object
   const contentArray = [
     "about-me",
     "chatbot",
@@ -117,8 +119,8 @@ export default function Sidebar2({ content, setContent }) {
     "projects",
     "certificates",
     "videos",
-    "works",
-    "contact",
+    "work experience",
+    "messages",
   ];
   const contentIcon = {
     "about-me": <CoPresentIcon />,
@@ -128,8 +130,8 @@ export default function Sidebar2({ content, setContent }) {
     projects: <ArchitectureIcon />,
     certificates: <AssignmentIcon />,
     videos: <VideoLibraryIcon />,
-    works: <AssuredWorkloadIcon />,
-    contact: <MessageIcon />,
+    "work experience": <AssuredWorkloadIcon />,
+    messages: <MessageIcon />,
   };
 
   const handleDrawerOpen = () => {
