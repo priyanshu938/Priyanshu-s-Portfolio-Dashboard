@@ -74,7 +74,7 @@ const OTPPage = ({
               <button
                 type="submit"
                 className="btn"
-                style={{ backgroundColor: "teal", color: "white" }}
+                style={{ backgroundColor: "#1976D2", color: "white" }}
               >
                 Verify otp
               </button>

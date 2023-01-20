@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
-import { styled, useTheme } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
 import MenuIcon from "@mui/icons-material/Menu";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import Content from "./Content";
+import Tooltip from "@mui/material/Tooltip";
+import Zoom from "@mui/material/Zoom";
 import {
   Box,
   List,
@@ -105,7 +105,6 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export default function Sidebar2({ content, setContent }) {
-  const theme = useTheme();
   let navigate = useNavigate();
 
   const [open, setOpen] = useState(true);
@@ -215,13 +214,19 @@ export default function Sidebar2({ content, setContent }) {
                 }}
               >
                 <ListItemButton>
-                  <ListItemIcon
-                    style={{
-                      color: content === item && "white",
-                    }}
+                  <Tooltip
+                    title={item}
+                    placement="bottom"
+                    TransitionComponent={Zoom}
                   >
-                    {contentIcon[item]}
-                  </ListItemIcon>
+                    <ListItemIcon
+                      style={{
+                        color: content === item && "white",
+                      }}
+                    >
+                      {contentIcon[item]}
+                    </ListItemIcon>
+                  </Tooltip>
                   <ListItemText
                     primary={item.charAt(0).toUpperCase() + item.slice(1)}
                   />
@@ -237,7 +242,13 @@ export default function Sidebar2({ content, setContent }) {
             <ListItem disablePadding>
               <ListItemButton>
                 <ListItemIcon>
-                  <LogoutIcon />
+                  <Tooltip
+                    title="logout"
+                    placement="bottom"
+                    TransitionComponent={Zoom}
+                  >
+                    <LogoutIcon />
+                  </Tooltip>
                 </ListItemIcon>
                 <ListItemText primary="Logout" />
               </ListItemButton>

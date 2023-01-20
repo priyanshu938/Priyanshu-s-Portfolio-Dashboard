@@ -76,7 +76,6 @@ const Chatbot = () => {
         noValidate
         autoComplete="off"
         style={{ height: "50vh", width: "60vw" }}
-        className="mx-4 mt-4"
       >
         <Input
           id="input-with-icon-adornment"

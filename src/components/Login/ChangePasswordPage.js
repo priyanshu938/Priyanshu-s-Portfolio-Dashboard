@@ -113,7 +113,7 @@ const ChangePasswordPage = ({
             <button
               type="submit"
               className="btn"
-              style={{ backgroundColor: "teal", color: "white" }}
+              style={{ backgroundColor: "#1976D2", color: "white" }}
             >
               Change Password
             </button>
