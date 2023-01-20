@@ -56,7 +56,7 @@ const Certificates = () => {
       {isLoading ? (
         <Spinner />
       ) : (
-        <div className="mt-4">
+        <div >
           <Snackbar
             isOpen={isOpen}
             severity={severity}
@@ -72,12 +72,9 @@ const Certificates = () => {
               setMessage={setMessage}
             />
           )}
-          <Typography px={2} variant="h4" component="div" gutterBottom>
-            My Certificates
-          </Typography>
           <Input
             type="text"
-            className="mt-1 mx-4"
+            className="mx-4"
             placeholder="Search certificate..."
             onChange={handleSearchChange}
             startAdornment={

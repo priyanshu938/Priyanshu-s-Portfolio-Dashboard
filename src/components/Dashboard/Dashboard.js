@@ -1,11 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Snackbar from "../ReusableComponents/Snackbar";
+import { Box } from "@mui/material";
 import Sidebar from "./Sidebar";
-import Content from "./Content";
-import { Box, Stack } from "@mui/material";
+import { useNavigate } from "react-router";
+
 const Dashboard = () => {
   const [loginSuccessful, setLoginSuccessful] = useState(true);
   const [content, setContent] = useState("about-me");
+  let navigate = useNavigate();
+  const token = window.localStorage.getItem("token");
+  useEffect(() => {
+    if (!token) navigate("/");
+  }, [token, navigate]);
+
+  if (!token) return;
 
   return (
     <Box>
@@ -15,10 +23,7 @@ const Dashboard = () => {
         message="Successfully logged in"
         setIsOpen={setLoginSuccessful}
       />
-      <Stack direction="row" spacing={2} justifyContent="space-between">
-        <Sidebar content={content} setContent={setContent} />
-        <Content content={content} setContent={setContent} />
-      </Stack>
+      <Sidebar content={content} setContent={setContent} />
     </Box>
   );
 };

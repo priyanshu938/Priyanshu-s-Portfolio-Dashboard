@@ -45,7 +45,7 @@ const Skill = ({ id, image, skill, setIsOpen, setSeverity, setMessage }) => {
     }
   };
   return (
-    <div className="my-5 mx-4">
+    <div className="my-5 mx-4 py-4">
       {openEditSkillModal && (
         <EditSkillModal
           openEditSkillModal={openEditSkillModal}

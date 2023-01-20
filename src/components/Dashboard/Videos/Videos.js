@@ -53,7 +53,7 @@ const Videos = () => {
       {isLoading ? (
         <Spinner />
       ) : (
-        <div className="mt-4">
+        <div >
           <Snackbar
             isOpen={isOpen}
             severity={severity}
@@ -69,9 +69,6 @@ const Videos = () => {
               setMessage={setMessage}
             />
           )}
-          <Typography px={2} variant="h4" component="div" gutterBottom>
-            My Videos
-          </Typography>
           <Input
             type="text"
             className="mt-1 mx-4"

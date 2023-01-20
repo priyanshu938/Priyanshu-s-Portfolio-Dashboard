@@ -45,11 +45,7 @@ const Contact = () => {
       {isLoading ? (
         <Spinner />
       ) : (
-        <div className="container mt-4">
-          <Typography px={2} variant="h4" component="div" gutterBottom>
-            Inbox Messages
-          </Typography>
-
+        <div className="container ">
           <Input
             type="text"
             className="mt-1 mx-4 my-4"

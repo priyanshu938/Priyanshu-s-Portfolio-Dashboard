@@ -7,7 +7,7 @@ const AboutMe = () => {
   const [display, setDisplay] = useState(true);
   return (
     <div>
-      <Box style={{ margin: "10vh", display: "flex" }}>
+      <Box style={{ display: "flex" }}>
         <Button
           variant="contained"
           style={{ backgroundColor: "teal", marginRight: "5vw" }}

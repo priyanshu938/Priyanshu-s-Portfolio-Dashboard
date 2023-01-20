@@ -60,7 +60,7 @@ const Project = ({
     }
   };
   return (
-    <div className="mx-4 my-4">
+    <div className="my-4 mr-2">
       {openEditProjectModal && (
         <EditProjectModal
           openEditProjectModal={openEditProjectModal}
@@ -112,7 +112,7 @@ const Project = ({
           <img
             alt="Project"
             src={image}
-            style={{ width: "100%", height: "30vh", aspectRatio: 1 }}
+            style={{height: "30vh", aspectRatio: 1 }}
           />
         )}
 

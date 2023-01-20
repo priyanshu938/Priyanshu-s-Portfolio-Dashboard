@@ -55,7 +55,7 @@ export default function Skills() {
       {isLoading ? (
         <Spinner />
       ) : (
-        <div className=" mt-4">
+        <div>
           <Snackbar
             isOpen={isOpen}
             severity={severity}
@@ -71,13 +71,10 @@ export default function Skills() {
               setMessage={setMessage}
             />
           )}
-          <Typography px={2} variant="h4" component="div" gutterBottom>
-            My Skills
-          </Typography>
 
           <Input
             type="text"
-            className="mt-1 mx-4"
+            className="mx-4"
             placeholder="Search skill..."
             onChange={handleSearchChange}
             startAdornment={
@@ -97,8 +94,7 @@ export default function Skills() {
           {skills.length > 0 ? (
             <ImageList
               sx={{
-                width: 1000,
-                height: 400,
+                height: 500,
                 "&::-webkit-scrollbar": { display: "none" },
               }}
               cols={4}
