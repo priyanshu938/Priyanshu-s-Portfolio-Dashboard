@@ -192,7 +192,7 @@ const EmailViaForm = () => {
               setMessage={setMessage}
             />
           )}
-          <Box style={{ marginTop: "10vh" }}>
+          <Box mx={2}>
             <form onSubmit={handleSubmit}>
               <Box style={{ display: "flex" }}>
                 <Autocomplete

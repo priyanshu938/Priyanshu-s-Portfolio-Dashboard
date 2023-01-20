@@ -58,7 +58,7 @@ const Chatbot = () => {
     }
   };
   return (
-    <div className="mt-4 mx-4">
+    <div className="mx-2">
       <Snackbar
         isOpen={isOpen}
         severity={severity}
@@ -71,9 +71,6 @@ const Chatbot = () => {
         message="Fetching results..."
         setIsOpen={setIsOpenSnackbarChatbot}
       />
-      <Typography px={2} variant="h4" component="div" gutterBottom>
-        My AI Assistant
-      </Typography>
       <form
         onSubmit={handleSubmit}
         noValidate

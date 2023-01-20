@@ -188,7 +188,7 @@ export default function Sidebar2({ content, setContent }) {
             >
               <MenuIcon />
             </IconButton>
-            <Typography px={2} variant="h6" component="div" gutterBottom>
+            <Typography px={2} mt={1} variant="h6" component="div" gutterBottom>
               {content.toUpperCase()}
             </Typography>
           </Toolbar>
