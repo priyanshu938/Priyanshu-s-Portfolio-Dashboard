@@ -77,10 +77,10 @@ const FrontContent = () => {
                 />
               </div>
               <div className="col">
-                <div className="mt-4 mb-5">
+                <div className="mt-4 mb-5 ms-2">
                   <label
                     className="ms-2 "
-                    style={{ color: "#00b7eb", fontSize: "20px" }}
+                    style={{ color: "#1976D2", fontSize: "20px" }}
                   >
                     Name :
                   </label>
@@ -91,13 +91,12 @@ const FrontContent = () => {
                     style={{ width: "40vw" }}
                     type="text"
                     className="ms-2"
-                    value="Hello, I am 
-            Priyanshu Tiwari"
+                    value="Hello, I am Priyanshu Tiwari"
                   />
                   <br />
                   <label
                     className="ms-2 mt-4 "
-                    style={{ color: "#00b7eb", fontSize: "20px" }}
+                    style={{ color: "#1976D2", fontSize: "20px" }}
                   >
                     Description :
                   </label>

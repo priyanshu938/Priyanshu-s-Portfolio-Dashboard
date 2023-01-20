@@ -43,7 +43,7 @@ const TestimonialContent = () => {
       {isLoading ? (
         <Spinner />
       ) : (
-        <div className="mt-4 ms-5">
+        <div className="">
           <Snackbar
             isOpen={isOpenSnackbar}
             severity={severity}
@@ -70,8 +70,8 @@ const TestimonialContent = () => {
               <div className="col">
                 <div className=" mb-5">
                   <label
-                    className="ms-2 "
-                    style={{ color: "#00b7eb", fontSize: "20px" }}
+                    className="  "
+                    style={{ color: "#1976D2", fontSize: "20px" }}
                   >
                     Description :
                   </label>
@@ -82,14 +82,14 @@ const TestimonialContent = () => {
                     style={{ width: "40vw" }}
                     multiline
                     type="text"
-                    className="ms-2 mb-4"
+                    className="  mb-4"
                     value={myDetails.description}
                   />
                   <br />
 
                   <label
-                    className="ms-2"
-                    style={{ color: "#00b7eb", fontSize: "20px" }}
+                    className=" "
+                    style={{ color: "#1976D2", fontSize: "20px" }}
                   >
                     Designation :
                   </label>
@@ -100,7 +100,7 @@ const TestimonialContent = () => {
                     style={{ width: "40vw" }}
                     multiline
                     type="text"
-                    className="ms-2 mb-3 "
+                    className="  mb-3 "
                     value={myDetails.designation}
                   />
                   <br />

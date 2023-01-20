@@ -1,31 +1,70 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import PropTypes from "prop-types";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import FrontContent from "./FrontContent";
 import TestimonialContent from "./TestimonialContent";
-const AboutMe = () => {
-  const [display, setDisplay] = useState(true);
+
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
   return (
-    <div>
-      <Box style={{ display: "flex" }}>
-        <Button
-          variant="contained"
-          style={{ backgroundColor: "teal", marginRight: "5vw" }}
-          onClick={() => setDisplay(true)}
-        >
-          Front Content
-        </Button>
-        <Button
-          variant="contained"
-          style={{ backgroundColor: "gray" }}
-          onClick={() => setDisplay(false)}
-        >
-          Testimonial Content
-        </Button>
-      </Box>
-      {display ? <FrontContent /> : <TestimonialContent />}
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
     </div>
   );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
 };
 
-export default AboutMe;
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
+  };
+}
+
+export default function AboutMe() {
+  const [value, setValue] = useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  return (
+    <Box sx={{ width: "100%" }}>
+      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="basic tabs example"
+        >
+          <Tab label="Front Content" {...a11yProps(0)} />
+          <Tab label="Testimonial Content" {...a11yProps(1)} />
+        </Tabs>
+      </Box>
+      <TabPanel value={value} index={0}>
+        <FrontContent />
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        <TestimonialContent />
+      </TabPanel>
+    </Box>
+  );
+}
