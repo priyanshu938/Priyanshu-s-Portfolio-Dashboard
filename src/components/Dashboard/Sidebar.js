@@ -1,8 +1,19 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
+import { styled, useTheme } from "@mui/material/styles";
+import MuiDrawer from "@mui/material/Drawer";
+import MuiAppBar from "@mui/material/AppBar";
+import MenuIcon from "@mui/icons-material/Menu";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import Content from "./Content";
 import {
   Box,
   List,
+  Toolbar,
+  CssBaseline,
+  Divider,
+  IconButton,
   ListItem,
   ListItemButton,
   ListItemIcon,
@@ -26,33 +37,125 @@ import DialogContentText from "@mui/material/DialogContentText";
 import EmailIcon from "@mui/icons-material/Email";
 import SmartToyOutlinedIcon from "@mui/icons-material/SmartToyOutlined";
 
-const Sidebar = ({ content, setContent }) => {
+const drawerWidth = 240;
+
+const openedMixin = (theme) => ({
+  width: drawerWidth,
+  transition: theme.transitions.create("width", {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.enteringScreen,
+  }),
+  overflowX: "hidden",
+});
+
+const closedMixin = (theme) => ({
+  transition: theme.transitions.create("width", {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  overflowX: "hidden",
+  width: `calc(${theme.spacing(7)} + 1px)`,
+  [theme.breakpoints.up("sm")]: {
+    width: `calc(${theme.spacing(8)} + 1px)`,
+  },
+});
+
+const DrawerHeader = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "flex-end",
+  padding: theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...theme.mixins.toolbar,
+}));
+
+const AppBar = styled(MuiAppBar, {
+  shouldForwardProp: (prop) => prop !== "open",
+})(({ theme, open }) => ({
+  zIndex: theme.zIndex.drawer + 1,
+  transition: theme.transitions.create(["width", "margin"], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  ...(open && {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(["width", "margin"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  }),
+}));
+
+const Drawer = styled(MuiDrawer, {
+  shouldForwardProp: (prop) => prop !== "open",
+})(({ theme, open }) => ({
+  width: drawerWidth,
+  flexShrink: 0,
+  whiteSpace: "nowrap",
+  boxSizing: "border-box",
+  ...(open && {
+    ...openedMixin(theme),
+    "& .MuiDrawer-paper": openedMixin(theme),
+  }),
+  ...(!open && {
+    ...closedMixin(theme),
+    "& .MuiDrawer-paper": closedMixin(theme),
+  }),
+}));
+
+export default function Sidebar2({ content, setContent }) {
+  const theme = useTheme();
   let navigate = useNavigate();
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
+  const [openDialog, setOpenDialog] = useState(false);
+  const contentArray = [
+    "about-me",
+    "chatbot",
+    "compose-email",
+    "skills",
+    "projects",
+    "certificates",
+    "videos",
+    "works",
+    "contact",
+  ];
+  const contentIcon = {
+    "about-me": <CoPresentIcon />,
+    chatbot: <SmartToyOutlinedIcon />,
+    "compose-email": <EmailIcon />,
+    skills: <AccessibilityIcon />,
+    projects: <ArchitectureIcon />,
+    certificates: <AssignmentIcon />,
+    videos: <VideoLibraryIcon />,
+    works: <AssuredWorkloadIcon />,
+    contact: <MessageIcon />,
+  };
 
-  const handleClickOpen = () => {
+  const handleDrawerOpen = () => {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleDrawerClose = () => {
     setOpen(false);
+  };
+  const handleOpenDialog = () => {
+    setOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
   };
   const handleLogOut = () => {
     window.localStorage.removeItem("token");
     navigate("/");
   };
   return (
-    <div
-      style={{
-        backgroundColor: "#FFFAFA",
-        height: "160vh",
-        overflowY: "scroll", // to add scrollbar ,uncomment this later
-      }}
-    >
+    <div>
       <Dialog
-        open={open}
-        onClose={handleClose}
+        open={openDialog}
+        onClose={handleCloseDialog}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
@@ -62,228 +165,90 @@ const Sidebar = ({ content, setContent }) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} autoFocus>
+          <Button onClick={handleCloseDialog} autoFocus>
             No
           </Button>
           <Button onClick={handleLogOut}>Yes</Button>
         </DialogActions>
       </Dialog>
-      <Box
-        flex={1}
-        sx={{ display: { xs: "none", sm: "block" } }}
-        style={{ cursor: "pointer", paddingTop: "30px" }}
-      >
-        <Typography px={2} variant="h6" component="div" gutterBottom>
-          <FlutterDashIcon />
-          My Dashboard
-        </Typography>
-        {
-          //About Me
-        }
-        <List>
-          <ListItem
-            disablePadding
-            onClick={() => setContent("about-me")}
-            style={{
-              backgroundColor: content === "about-me" && "#3CB043",
-              borderRadius: "5px",
-              color: content === "about-me" && "white",
-            }}
-          >
-            <ListItemButton>
-              <ListItemIcon>
-                <CoPresentIcon />
-              </ListItemIcon>
-              <ListItemText primary="About me" />
-            </ListItemButton>
-          </ListItem>
-        </List>
-        {
-          //Chatbot
-        }
-        <List>
-          <ListItem
-            disablePadding
-            onClick={() => setContent("chatbot")}
-            style={{
-              backgroundColor: content === "chatbot" && "#3CB043",
-              borderRadius: "5px",
-              color: content === "chatbot" && "white",
-            }}
-          >
-            <ListItemButton>
-              <ListItemIcon>
-                <SmartToyOutlinedIcon />
-              </ListItemIcon>
-              <ListItemText primary="Chatbot" />
-            </ListItemButton>
-          </ListItem>
-        </List>
-        {
-          //Compose Email
-        }
-        <List>
-          <ListItem
-            disablePadding
-            onClick={() => setContent("compose-email")}
-            style={{
-              backgroundColor: content === "compose-email" && "#3CB043",
-              borderRadius: "5px",
-              color: content === "compose-email" && "white",
-            }}
-          >
-            <ListItemButton>
-              <ListItemIcon>
-                <EmailIcon />
-              </ListItemIcon>
-              <ListItemText primary="Compose Email" />
-            </ListItemButton>
-          </ListItem>
-        </List>
-        {
-          // My Skills
-        }
-        <List>
-          <ListItem
-            disablePadding
-            onClick={() => setContent("skills")}
-            style={{
-              backgroundColor: content === "skills" && "#3CB043",
-              borderRadius: "5px",
-              color: content === "skills" && "white",
-            }}
-          >
-            <ListItemButton>
-              <ListItemIcon>
-                <AccessibilityIcon />
-              </ListItemIcon>
-              <ListItemText primary="My Skills" />
-            </ListItemButton>
-          </ListItem>
-        </List>
-        {
-          //My Projects
-        }
-        <List>
-          <ListItem
-            disablePadding
-            onClick={() => setContent("projects")}
-            style={{
-              backgroundColor: content === "projects"&& "#3CB043",
-              borderRadius: "5px",
-              color: content === "projects" && "white",
-            }}
-          >
-            <ListItemButton>
-              <ListItemIcon>
-                <ArchitectureIcon />
-              </ListItemIcon>
-              <ListItemText primary="My Projects" />
-            </ListItemButton>
-          </ListItem>
-        </List>
 
-        {
-          //My Certificates
-        }
-        <List>
-          <ListItem
-            disablePadding
-            onClick={() => setContent("certificates")}
-            style={{
-              backgroundColor: content === "certificates" && "#3CB043",
-              borderRadius: "5px",
-              color: content === "certificates" && "white",
-            }}
-          >
-            <ListItemButton>
-              <ListItemIcon>
-                <AssignmentIcon />
-              </ListItemIcon>
-              <ListItemText primary="My Certificates" />
-            </ListItemButton>
-          </ListItem>
-        </List>
-        {
-          //My Videos
-        }
-        <List>
-          <ListItem
-            disablePadding
-            onClick={() => setContent("videos")}
-            style={{
-              backgroundColor: content === "videos" && "#3CB043",
-              borderRadius: "5px",
-              color: content === "videos" && "white",
-            }}
-          >
-            <ListItemButton>
-              <ListItemIcon>
-                <VideoLibraryIcon />
-              </ListItemIcon>
-              <ListItemText primary="My Videos" />
-            </ListItemButton>
-          </ListItem>
-        </List>
-        {
-          //My Work Experience
-        }
-        <List>
-          <ListItem
-            disablePadding
-            onClick={() => setContent("works")}
-            style={{
-              backgroundColor: content === "works" && "#3CB043",
-              borderRadius: "5px",
-              color: content === "works" && "white",
-            }}
-          >
-            <ListItemButton>
-              <ListItemIcon>
-                <AssuredWorkloadIcon />
-              </ListItemIcon>
-              <ListItemText primary="Work Experience" />
-            </ListItemButton>
-          </ListItem>
-        </List>
+      <Box sx={{ display: "flex" }}>
+        <CssBaseline />
+        <AppBar position="fixed" open={open}>
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              sx={{
+                marginRight: 5,
+                ...(open && { display: "none" }),
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography px={2} mt={1} variant="h6" component="div" gutterBottom>
+              {content.toUpperCase()}
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <Drawer variant="permanent" open={open}>
+          <DrawerHeader>
+            <IconButton onClick={handleDrawerClose}>
+              <Typography px={2} variant="h6" component="div" gutterBottom>
+                <FlutterDashIcon />
+                My Dashboard
+              </Typography>
+            </IconButton>
+          </DrawerHeader>
+          <Divider />
+          {contentArray.map((item) => (
+            <List>
+              <ListItem
+                disablePadding
+                onClick={() => setContent(item)}
+                style={{
+                  backgroundColor: content === item && "#1976D2",
+                  borderRadius: "5px",
+                  color: content === item && "white",
+                }}
+              >
+                <ListItemButton>
+                  <ListItemIcon
+                    style={{
+                      color: content === item && "white",
+                    }}
+                  >
+                    {contentIcon[item]}
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={item.charAt(0).toUpperCase() + item.slice(1)}
+                  />
+                </ListItemButton>
+              </ListItem>
+            </List>
+          ))}
 
-        {
-          //Contact Us messages
-        }
-        <List>
-          <ListItem
-            disablePadding
-            onClick={() => setContent("contact")}
-            style={{
-              backgroundColor: content === "contact"&& "#3CB043",
-              borderRadius: "5px",
-              color: content === "contact" && "white",
-            }}
-          >
-            <ListItemButton>
-              <ListItemIcon>
-                <MessageIcon />
-              </ListItemIcon>
-              <ListItemText primary="Messages" />
-            </ListItemButton>
-          </ListItem>
-        </List>
-        {
-          //Logout
-        }
-        <List onClick={handleClickOpen}>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <LogoutIcon />
-              </ListItemIcon>
-              <ListItemText primary="Logout" />
-            </ListItemButton>
-          </ListItem>
-        </List>
+          {
+            //Logout
+          }
+          <List onClick={handleOpenDialog}>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <LogoutIcon />
+                </ListItemIcon>
+                <ListItemText primary="Logout" />
+              </ListItemButton>
+            </ListItem>
+          </List>
+        </Drawer>
+        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+          <DrawerHeader />
+          <Content content={content} setContent={setContent} />
+        </Box>
       </Box>
     </div>
   );
-};
-
-export default Sidebar;
+}

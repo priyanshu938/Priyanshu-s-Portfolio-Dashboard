@@ -97,7 +97,7 @@ export default function Skills() {
                 height: 500,
                 "&::-webkit-scrollbar": { display: "none" },
               }}
-              cols={4}
+              cols={3}
               rowHeight={240}
             >
               {skills.map((skill) => (
