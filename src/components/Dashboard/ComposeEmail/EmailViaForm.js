@@ -9,9 +9,8 @@ import Snackbar from "../../ReusableComponents/Snackbar";
 import SnackbarForSendingMail from "../../ReusableComponents/SnackbarForShowingWait";
 import Spinner from "../../ReusableComponents/Spinner";
 import AddEmailContactModal from "./AddEmailContactModal";
-import AddAttachmentsModal from "./AddAttachmentsModal";
-import AttachFileOutlinedIcon from "@mui/icons-material/AttachFileOutlined";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { Upload, Button as ButtonAntd } from "antd";
 
 import AddIcon from "@mui/icons-material/Add";
 import {
@@ -40,9 +39,18 @@ const EmailViaForm = () => {
   const [rteObject, setRteObject] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [openAddEmailContactModal, setAddEmailContactModal] = useState(false);
-  const [openAddAttachmentsModal, setAddAttachmentsModal] = useState(false);
   const [openSnackbarForSendingMail, setOpenSnackbarForSendingMail] =
     useState(false);
+
+  const props = {
+    action: `${Url}/emailViaForm/addEmailAttachments`,
+    multiple: true,
+    listType: "picture",
+    name: "files",
+    headers: {
+      "auth-token": window.localStorage.getItem("token"),
+    },
+  };
 
   const getAllSavedMailContacts = async () => {
     const response = await fetch(`${Url}/emailViaForm/getSavedEmailContacts`, {
@@ -191,18 +199,6 @@ const EmailViaForm = () => {
               setMessage={setMessage}
             />
           )}
-
-          {openAddAttachmentsModal && (
-            <AddAttachmentsModal
-              openAddAttachmentsModal={openAddAttachmentsModal}
-              setAddAttachmentsModal={setAddAttachmentsModal}
-              attachments={attachments}
-              setAttachments={setAttachments}
-              setIsOpen={setIsOpen}
-              setSeverity={setSeverity}
-              setMessage={setMessage}
-            />
-          )}
           <Box mx={2}>
             <form onSubmit={handleSubmit}>
               <Box style={{ display: "flex" }}>
@@ -296,51 +292,56 @@ const EmailViaForm = () => {
 
               <br />
               <Box style={{ display: "flex" }}>
-                {attachments.length > 0 ? (
-                  <div
-                    style={{
-                      textDecoration: "underline",
-                      cursor: "pointer",
-                      color: "gray",
-                    }}
-                  >
-                    <AttachFileOutlinedIcon />
-                    {attachments.length} attachments added successfully!
-                  </div>
-                ) : (
-                  <Box>
-                    <Button
-                      variant="contained"
-                      startIcon={<AddIcon />}
-                      style={{ backgroundColor: "gray" }}
-                      onClick={() =>
-                        setAddAttachmentsModal(!openAddAttachmentsModal)
-                      }
-                    >
-                      Add attachments
-                    </Button>
-                    <Button
-                      variant="contained"
-                      startIcon={<DeleteIcon />}
+                <Box
+                  styles={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <div>
+                    <Upload.Dragger
+                      {...props}
                       style={{
-                        backgroundColor: "red",
-                        height: "6vh",
-                        marginLeft: "5vw",
-                        color: "white",
+                        width: "70vw",
                       }}
-                      onClick={clearCacheData}
+                      onChange={(response) => {
+                        if (response.file.status !== "uploading") {
+                          var path = [];
+                          response.fileList.map((file) => {
+                            path.push({
+                              filename: file.response.attachments[0].filename,
+                              path: file.response.attachments[0].path,
+                            });
+                          });
+                          setAttachments(path);
+                        }
+                      }}
                     >
-                      Clear cached data
-                    </Button>
-                  </Box>
-                )}
+                      Drag files here OR <br />
+                      <ButtonAntd>Click toUpload</ButtonAntd>
+                    </Upload.Dragger>
+                  </div>
+                </Box>
               </Box>
               <br />
+              <Button
+                variant="contained"
+                startIcon={<DeleteIcon />}
+                style={{
+                  backgroundColor: "red",
+                  height: "6vh",
+                  color: "white",
+                }}
+                onClick={clearCacheData}
+              >
+                Clear cached data
+              </Button>
               <Button
                 type="submit"
                 variant="contained"
                 endIcon={<SendIcon />}
-                style={{ backgroundColor: "green", marginTop: "5vh" }}
+                style={{ backgroundColor: "green", marginLeft: "5vw" }}
               >
                 Send
               </Button>
