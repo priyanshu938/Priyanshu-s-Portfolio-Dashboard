@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import ServerUrl from "../../../ServerUrl";
-import { Typography } from "@mui/material";
 import Input from "@mui/material/Input";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
