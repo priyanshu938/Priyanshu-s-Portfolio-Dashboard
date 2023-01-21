@@ -313,6 +313,7 @@ const EmailViaForm = () => {
                               filename: file.response.attachments[0].filename,
                               path: file.response.attachments[0].path,
                             });
+                            return 0;
                           });
                           setAttachments(path);
                         }
