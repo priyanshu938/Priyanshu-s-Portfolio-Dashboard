@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Url from "../../../ServerUrl";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import axios from "axios";
 
 const style = {
   position: "absolute",
@@ -50,29 +51,28 @@ export default function AddAttachmentsModal({
       }
 
       try {
-        const response = await fetch(
-          `${Url}/emailViaForm/addEmailAttachments`,
-          {
-            method: "POST",
+        await axios
+          .post(`${Url}/emailViaForm/addEmailAttachments`, formData, {
             headers: {
+              "Content-Type": "multipart/form-data",
               "auth-token": window.localStorage.getItem("token"),
             },
-            body: formData,
-          }
-        );
-        const json = await response.json();
-        if (response.status === 201) {
-          console.log(json.message);
-          setAttachments(json.attachments);
-          setIsOpen(true);
-          setSeverity("success");
-          setMessage(json.message);
-          setAddAttachmentsModal(!openAddAttachmentsModal);
-        } else {
-          setIsOpen(true);
-          setSeverity("error");
-          setMessage("This email id already exists!");
-        }
+          })
+          .then((res) => {
+            if (res.status === 201) {
+              console.log(res.data.message);
+              setAttachments(res.data.attachments);
+              setIsOpen(true);
+              setSeverity("success");
+              setMessage(res.data.message);
+              setAddAttachmentsModal(!openAddAttachmentsModal);
+            } else {
+              setIsOpen(true);
+              setSeverity("error");
+              setMessage("This email id already exists!");
+            }
+          })
+          .catch((err) => console.log(err));
       } catch (error) {
         setIsOpen(true);
         setSeverity("error");
