@@ -6,7 +6,7 @@ import MuiAlert from "@mui/material/Alert";
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
-const SnackbarForChatbot = ({ severity, message, isOpen, setIsOpen }) => {
+const SnackbarForShowingWait = ({ severity, message, isOpen, setIsOpen }) => {
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -30,4 +30,4 @@ const SnackbarForChatbot = ({ severity, message, isOpen, setIsOpen }) => {
   );
 };
 
-export default SnackbarForChatbot;
+export default SnackbarForShowingWait;

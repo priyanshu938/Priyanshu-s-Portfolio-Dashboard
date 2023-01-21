@@ -6,6 +6,7 @@ import SendIcon from "@mui/icons-material/Send";
 import Url from "../../../ServerUrl";
 import { Button } from "@mui/material";
 import Snackbar from "../../ReusableComponents/Snackbar";
+import SnackbarForSendingMail from "../../ReusableComponents/SnackbarForShowingWait";
 import Spinner from "../../ReusableComponents/Spinner";
 import AddEmailContactModal from "./AddEmailContactModal";
 import AddAttachmentsModal from "./AddAttachmentsModal";
@@ -40,6 +41,8 @@ const EmailViaForm = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [openAddEmailContactModal, setAddEmailContactModal] = useState(false);
   const [openAddAttachmentsModal, setAddAttachmentsModal] = useState(false);
+  const [openSnackbarForSendingMail, setOpenSnackbarForSendingMail] =
+    useState(false);
 
   const getAllSavedMailContacts = async () => {
     const response = await fetch(`${Url}/emailViaForm/getSavedEmailContacts`, {
@@ -69,6 +72,7 @@ const EmailViaForm = () => {
         attachments: attachments,
       };
       try {
+        setOpenSnackbarForSendingMail(true);
         const response = await fetch(`${Url}/emailViaForm/sendEmail`, {
           method: "POST",
           headers: {
@@ -86,6 +90,7 @@ const EmailViaForm = () => {
         setAttachments([...a]);
         setRteObject("");
         setMailContactsFetchedFromServer([]);
+        setOpenSnackbarForSendingMail(false);
         setSeverity("success");
         setMessage(json.message);
         setIsOpen(true);
@@ -169,6 +174,12 @@ const EmailViaForm = () => {
             severity={severity}
             message={message}
             setIsOpen={setIsOpen}
+          />
+          <SnackbarForSendingMail
+            isOpen={openSnackbarForSendingMail}
+            severity="info"
+            message="Sending mail..."
+            setIsOpen={setOpenSnackbarForSendingMail}
           />
 
           {openAddEmailContactModal && (

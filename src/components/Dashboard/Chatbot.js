@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { Typography } from "@mui/material";
 import url from "../../ServerUrl";
 import Input from "@mui/material/Input";
 import SendIcon from "@mui/icons-material/Send";
 import InputAdornment from "@mui/material/InputAdornment";
-import SnackbarForChatbot from "../ReusableComponents/SnackbarForChatbot";
+import SnackbarForChatbot from "../ReusableComponents/SnackbarForShowingWait";
 import Snackbar from "../ReusableComponents/Snackbar";
 import ContentPasteOutlinedIcon from "@mui/icons-material/ContentPasteOutlined";
 import CodeEditor from "@uiw/react-textarea-code-editor";

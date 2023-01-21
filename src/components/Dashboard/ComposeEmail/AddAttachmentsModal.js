@@ -36,11 +36,12 @@ export default function AddAttachmentsModal({
 
     if (files.length > 0) {
       const formData = new FormData();
-
+      let size = 0;
       for (let i = 0; i < files.length; i++) {
-        if (files[i].size > 1048576) {
+        size += files[i].size;
+        if (size > 52428800) {
           setSeverity("error");
-          setMessage("File size should be less than 10MB");
+          setMessage("Total file size should be less than 50MB!");
           setIsOpen(true);
           return;
         }
