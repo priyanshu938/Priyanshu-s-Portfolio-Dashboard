@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import PropTypes from "prop-types";
+import LinearProgress from "@mui/material/LinearProgress";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Url from "../../../ServerUrl";
@@ -29,6 +31,23 @@ export default function AddAttachmentsModal({
   setMessage,
 }) {
   const [files, setFiles] = useState("");
+  const [fileUploadProgress, setFileUploadProgress] = useState(0);
+
+  function LinearProgressWithLabel(props) {
+    return (
+      <Box sx={{ display: "flex", alignItems: "center" }}>
+        <Box sx={{ width: "100%", mr: 1 }}>
+          <LinearProgress variant="determinate" {...props} />
+        </Box>
+        <Box sx={{ minWidth: 35 }}>
+          <Typography variant="body2" color="text.secondary">{`${Math.round(
+            props.value
+          )}%`}</Typography>
+        </Box>
+      </Box>
+    );
+  }
+
   const uploadFileHandler = (event) => {
     setFiles(event.target.files);
   };
@@ -56,6 +75,12 @@ export default function AddAttachmentsModal({
             headers: {
               "Content-Type": "multipart/form-data",
               "auth-token": window.localStorage.getItem("token"),
+            },
+            onUploadProgress: function (progressEvent) {
+              var percentCompleted = Math.round(
+                (progressEvent.loaded * 100) / progressEvent.total
+              );
+              setFileUploadProgress(percentCompleted);
             },
           })
           .then((res) => {
@@ -105,6 +130,10 @@ export default function AddAttachmentsModal({
               multiple
               onChange={uploadFileHandler}
             />
+            {files.length > 0 && (
+              <LinearProgressWithLabel value={fileUploadProgress} className="my-4" />
+            )}
+
             <Button
               variant="contained"
               startIcon={<CloudUploadIcon />}
