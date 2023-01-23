@@ -6,18 +6,8 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Modal from "@mui/material/Modal";
 import Url from "../../../ServerUrl";
+import style from '../../ReusableComponents/modalStyle'
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 500,
-  bgcolor: "white",
-  border: "solid #000",
-  boxShadow: 24,
-  p: 4,
-};
 
 export default function AddEmailContactModal({
   openAddEmailContactModal,

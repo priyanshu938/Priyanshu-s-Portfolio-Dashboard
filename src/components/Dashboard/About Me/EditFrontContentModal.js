@@ -6,18 +6,8 @@ import Modal from "@mui/material/Modal";
 import { MdSecurityUpdateGood } from "react-icons/md";
 import TextField from "@mui/material/TextField";
 import url from "../../../ServerUrl";
+import style from "../../ReusableComponents/modalStyle";
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 500,
-  bgcolor: "white",
-  border: "solid #000",
-  boxShadow: 24,
-  p: 4,
-};
 const EditFrontContentModal = ({
   openEditFrontContentModal,
   setOpenEditFrontContentModal,
@@ -32,6 +22,7 @@ const EditFrontContentModal = ({
   const [updateDescription, setUpdateDescription] = useState(description);
   const [updateLink, setUpdateLink] = useState(link);
   const [imageUrl, setImageUrl] = useState(image);
+
   const handleSubmitForm = async (e) => {
     e.preventDefault();
     const data = {

@@ -37,8 +37,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import EmailIcon from "@mui/icons-material/Email";
 import SmartToyOutlinedIcon from "@mui/icons-material/SmartToyOutlined";
 import Switch from "@mui/material/Switch";
-import { useTheme } from '@mui/material/styles';
-
+import { useTheme } from "@mui/material/styles";
 
 const drawerWidth = 240;
 
@@ -153,9 +152,14 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-export default function Sidebar2({ content, setContent,darkMode,setDarkMode }) {
+export default function Sidebar2({
+  content,
+  setContent,
+  darkMode,
+  setDarkMode,
+}) {
   let navigate = useNavigate();
-  const theme=useTheme();
+  const theme = useTheme();
 
   const [open, setOpen] = useState(true);
   const [openDialog, setOpenDialog] = useState(false);
@@ -242,7 +246,12 @@ export default function Sidebar2({ content, setContent,darkMode,setDarkMode }) {
             <Typography px={2} mt={1} variant="h6" component="div" gutterBottom>
               {content.toUpperCase()}
             </Typography>
-            <MaterialUISwitch sx={{ m: 1 }} defaultChecked theme={theme} onChange={()=>setDarkMode(!darkMode)}/>
+            <MaterialUISwitch
+              sx={{ m: 1 }}
+              defaultChecked
+              theme={theme}
+              onChange={() => setDarkMode(!darkMode)}
+            />
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>

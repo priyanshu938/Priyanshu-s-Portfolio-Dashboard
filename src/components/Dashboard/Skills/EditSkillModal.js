@@ -6,18 +6,9 @@ import Modal from "@mui/material/Modal";
 import { MdSecurityUpdateGood } from "react-icons/md";
 import TextField from "@mui/material/TextField";
 import url from "../../../ServerUrl";
+import style from '../../ReusableComponents/modalStyle'
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 500,
-  bgcolor: "#1b1811",
-  border: "solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+
 
 export default function EditSkillModal({
   openEditSkillModal,
