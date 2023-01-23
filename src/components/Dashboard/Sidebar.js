@@ -243,15 +243,33 @@ export default function Sidebar2({
             >
               <MenuIcon />
             </IconButton>
-            <Typography px={2} mt={1} variant="h6" component="div" gutterBottom>
+            <Typography
+              px={2}
+              mt={1}
+              variant="h6"
+              component="div"
+              gutterBottom
+              sx={{ flexGrow: 1 }}
+            >
               {content.toUpperCase()}
             </Typography>
-            <MaterialUISwitch
-              sx={{ m: 1 }}
-              defaultChecked
-              theme={theme}
-              onChange={() => setDarkMode(!darkMode)}
-            />
+            <Tooltip
+              title={
+                darkMode
+                  ? "Click to change to Day mode"
+                  : "Click to change to Night mode"
+              }
+              placement="bottom"
+              arrow
+              TransitionComponent={Zoom}
+            >
+              <MaterialUISwitch
+                sx={{ m: 1 }}
+                defaultChecked
+                theme={theme}
+                onChange={() => setDarkMode(!darkMode)}
+              />
+            </Tooltip>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -280,6 +298,7 @@ export default function Sidebar2({
                     title={item}
                     placement="bottom"
                     TransitionComponent={Zoom}
+                    arrow
                   >
                     <ListItemIcon
                       style={{
