@@ -4,9 +4,19 @@ import "./App.css";
 import Login from "./components/Login/Login";
 import Dashboard from "./components/Dashboard/Dashboard";
 import PageNotFound from "./PageNotFound";
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
 
 function App() {
   return (
+     <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
     <div>
       <Router>
         <Routes>
@@ -16,6 +26,7 @@ function App() {
         </Routes>
       </Router>
     </div>
+    </ThemeProvider>
   );
 }
 
