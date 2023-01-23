@@ -3,7 +3,7 @@ import ServerUrl from "../../../ServerUrl";
 import Input from "@mui/material/Input";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
-import { Col, Row, Table } from "antd";
+import { Col, Row, Table, Input as InputAntd, Button } from "antd";
 
 const Contact = () => {
   const [messages, setMessages] = useState([]);
@@ -52,7 +52,7 @@ const Contact = () => {
           </InputAdornment>
         }
       />
-      <Row gutter={10} style={{ marginTop: 10 }}>
+      <Row gutter={10} style={{ margin: 10 }}>
         <Col span={22}>
           <Table
             loading={isLoading}
@@ -84,6 +84,60 @@ const Contact = () => {
                 title: "Date",
                 dataIndex: "date",
                 sorter: (a, b) => a.date > b.date,
+                filterDropdown: ({
+                  setSelectedKeys,
+                  selectedKeys,
+                  confirm,
+                  clearFilters,
+                }) => {
+                  return (
+                    <>
+                      <InputAntd
+                        autofocus
+                        placeholder="Type text here"
+                        value={selectedKeys[0]}
+                        onChange={(e) => {
+                          setSelectedKeys(
+                            e.target.value ? [e.target.value] : []
+                          );
+                        }}
+                        onPressEnter={(e) => {
+                          confirm();
+                        }}
+                        onBlur={() => {
+                          confirm();
+                        }}
+                      ></InputAntd>
+                      <Button
+                        style={{ margin: 6 }}
+                        type="primary"
+                        onClick={() => {
+                          confirm();
+                        }}
+                      >
+                        Search
+                      </Button>
+                      <Button
+                        danger
+                        onClick={() => {
+                          clearFilters();
+                          confirm();
+                        }}
+                      >
+                        Reset
+                      </Button>
+                    </>
+                  );
+                },
+                filterIcon: () => {
+                  return <SearchIcon />;
+                },
+                onFilter: (value, record) => {
+                  return record.date
+                    .toString()
+                    .toLowerCase()
+                    .includes(value.toLowerCase());
+                },
               },
             ]}
           />
