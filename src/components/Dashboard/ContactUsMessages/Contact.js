@@ -3,7 +3,7 @@ import ServerUrl from "../../../ServerUrl";
 import Input from "@mui/material/Input";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
-import Spinner from "../../ReusableComponents/Spinner";
+import { Col, Row, Table } from "antd";
 
 const Contact = () => {
   const [messages, setMessages] = useState([]);
@@ -41,61 +41,54 @@ const Contact = () => {
   };
   return (
     <div>
-      {isLoading ? (
-        <Spinner />
-      ) : (
-        <div className="container ">
-          <Input
-            type="text"
-            className="mt-1 mx-4 my-4"
-            placeholder="Search..."
-            onChange={handleSearchChange}
-            startAdornment={
-              <InputAdornment position="start">
-                <SearchIcon className="text-secondary" />
-              </InputAdornment>
-            }
+      <Input
+        type="text"
+        className="mt-1 mx-4 my-4"
+        placeholder="Search..."
+        onChange={handleSearchChange}
+        startAdornment={
+          <InputAdornment position="start">
+            <SearchIcon className="text-secondary" />
+          </InputAdornment>
+        }
+      />
+      <Row gutter={10} style={{ marginTop: 10 }}>
+        <Col span={22}>
+          <Table
+            loading={isLoading}
+            pagination={true}
+            dataSource={messages}
+            columns={[
+              {
+                key: "name",
+                title: "Name",
+                dataIndex: "name",
+              },
+              {
+                key: "email",
+                title: "Email Id",
+                dataIndex: "email",
+              },
+              {
+                key: "message",
+                title: "Message",
+                dataIndex: "message",
+              },
+              {
+                key: "time",
+                title: "Time",
+                dataIndex: "time",
+              },
+              {
+                key: "date",
+                title: "Date",
+                dataIndex: "date",
+                sorter: (a, b) => a.date > b.date,
+              },
+            ]}
           />
-          <div className="row" style={{ height: "75vh", overflow: "scroll" }}>
-            <div className="col-md-12">
-              <div className="card">
-                <div className="card-body">
-                  <div className="table-responsive">
-                    <table className="table table-striped">
-                      <thead>
-                        <tr>
-                          <th>Name</th>
-                          <th>Email</th>
-                          <th>Message</th>
-                          <th>Time</th>
-                          <th>Date</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {messages.length > 0 ? (
-                          messages.map((message) => (
-                            <tr key={message._id}>
-                              <td>{message.name}</td>
-                              <td>{message.email}</td>
-                              <td>{message.message}</td>
-                              <td>{message.time}</td>
-                              <td>{message.date}</td>
-                            </tr>
-                          ))
-                        ) : (
-                          <tr>
-                            <td colSpan="5">No messages</td>
-                          </tr>
-                        )}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+        </Col>
+      </Row>
     </div>
   );
 };
