@@ -112,7 +112,7 @@ const Project = ({
           <img
             alt="Project"
             src={image}
-            style={{height: "30vh", aspectRatio: 1 }}
+            style={{ height: "30vh", aspectRatio: 1 }}
           />
         )}
 
@@ -135,7 +135,7 @@ const Project = ({
         <Stack direction="row" spacing={2} my={2}>
           {githubLink !== "" && (
             <Link href={githubLink} target="_blank" underline="none">
-              <GitHubIcon style={{ color: "black" }} />
+              <GitHubIcon style={{}} />
             </Link>
           )}
           {youtubeVideoLink !== "" && (
