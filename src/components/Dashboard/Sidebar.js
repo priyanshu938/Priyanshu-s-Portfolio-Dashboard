@@ -337,7 +337,7 @@ export default function Sidebar2({
         </Drawer>
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <DrawerHeader />
-          <Content content={content} setContent={setContent} />
+          <Content content={content} setContent={setContent} darkMode={darkMode}/>
         </Box>
       </Box>
     </div>

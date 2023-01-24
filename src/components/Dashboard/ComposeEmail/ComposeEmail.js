@@ -2,10 +2,10 @@ import React from "react";
 import { Box } from "@mui/material";
 import EmailViaForm from "./EmailViaForm";
 
-const ComposeEmail = () => {
+const ComposeEmail = ({darkMode}) => {
   return (
     <Box>
-      <EmailViaForm />
+      <EmailViaForm darkMode={darkMode}/>
     </Box>
   );
 };
