@@ -1,23 +1,8 @@
 import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
-import { MdSecurityUpdateGood } from "react-icons/md";
-import TextField from "@mui/material/TextField";
+import { Modal, Form, Input } from "antd";
+import TextArea from "antd/es/input/TextArea";
 import url from "../../../ServerUrl";
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 500,
-  bgcolor: "white",
-  border: "solid #000",
-  boxShadow: 24,
-  p: 4,
-};
 const EditFrontContentModal = ({
   openEditFrontContentModal,
   setOpenEditFrontContentModal,
@@ -29,15 +14,26 @@ const EditFrontContentModal = ({
   description,
   link,
 }) => {
-  const [updateDescription, setUpdateDescription] = useState(description);
-  const [updateLink, setUpdateLink] = useState(link);
-  const [imageUrl, setImageUrl] = useState(image);
-  const handleSubmitForm = async (e) => {
-    e.preventDefault();
+  const [fields, setFields] = useState([
+    {
+      name: ["image"],
+      value: image,
+    },
+    {
+      name: ["description"],
+      value: description,
+    },
+    {
+      name: ["link"],
+      value: link,
+    },
+  ]);
+
+  const handleSubmitForm = async (values) => {
     const data = {
-      image: imageUrl,
-      description: updateDescription,
-      link: updateLink,
+      image: values.image,
+      description: values.description,
+      link: values.link,
     };
     try {
       const response = await fetch(`${url}/resume/editResume/${id}`, {
@@ -65,73 +61,38 @@ const EditFrontContentModal = ({
     <div>
       <Modal
         open={openEditFrontContentModal}
-        onClose={() => setOpenEditFrontContentModal(!openEditFrontContentModal)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        onCancel={() => setOpenEditFrontContentModal(false)}
+        okButtonProps={{
+          form: "edit-front-content-form",
+          key: "submit",
+          htmlType: "submit",
+        }}
+        centered
       >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h4" component="h4">
-            Edit Details
-          </Typography>
-          <form className="mt-4" onSubmit={handleSubmitForm}>
-            <TextField
-              id="standard-basic"
-              label="Name"
-              variant="standard"
-              style={{ width: "30vw" }}
-              type="text"
-              className="ms-2"
-              value="Hello, I am 
-          Priyanshu Tiwari"
-            />
-            <br />
-            <TextField
-              id="standard-basic"
-              label="Description"
-              variant="standard"
-              style={{ width: "30vw" }}
-              type="text"
-              className="ms-2 mt-2"
-              multiline
-              value={updateDescription}
-              onChange={(e) => setUpdateDescription(e.target.value)}
-              required
-            />
-            <br />
-            <TextField
-              id="standard-basic"
-              label="ImageURL"
-              variant="standard"
-              style={{ width: "30vw" }}
-              type="url"
-              className="ms-2 mt-2"
-              value={imageUrl}
-              onChange={(e) => setImageUrl(e.target.value)}
-              required
-            />
-            <br />
-            <TextField
-              id="standard-basic"
-              label="Resume Link"
-              variant="standard"
-              style={{ width: "30vw" }}
-              type="url"
-              className="ms-2 mt-2 mb-4"
-              value={updateLink}
-              onChange={(e) => setUpdateLink(e.target.value)}
-              required
-            />
-            <br />
-            <Button
-              variant="contained"
-              startIcon={<MdSecurityUpdateGood />}
-              style={{ backgroundColor: "green" }}
-              type="submit"
-            >
-              Update details
-            </Button>
-          </form>
-        </Box>
+        <Form
+          id="edit-front-content-form"
+          fields={fields}
+          onFieldsChange={(_, allFields) => {
+            setFields(allFields);
+          }}
+          onFinish={(values) => {
+            handleSubmitForm(values);
+          }}
+          layout="vertical"
+        >
+          <Form.Item label="Name">
+            <Input defaultValue="Hello, I am Priyanshu Tiwari" disabled />
+          </Form.Item>
+          <Form.Item name="image" label="Image Url">
+            <Input type="url" required />
+          </Form.Item>
+          <Form.Item name="description" label="Description">
+            <TextArea rows={4} type="text" required />
+          </Form.Item>
+          <Form.Item name="link" label="Url">
+            <Input type="url" required />
+          </Form.Item>
+        </Form>
       </Modal>
     </div>
   );

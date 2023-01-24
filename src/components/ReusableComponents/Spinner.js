@@ -1,9 +1,16 @@
 import React from "react";
-import loading from "./loading.gif";
+import { Spin } from "antd";
 const Spinner = () => {
   return (
-    <div className="text-center" style={{ marginTop: "50vh" }}>
-      <img src={loading} alt="loading" />
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+      }}
+    >
+      <Spin size="large" />
     </div>
   );
 };

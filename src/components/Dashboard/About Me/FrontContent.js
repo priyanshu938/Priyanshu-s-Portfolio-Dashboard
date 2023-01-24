@@ -7,6 +7,7 @@ import LaunchIcon from "@mui/icons-material/Launch";
 import url from "../../../ServerUrl";
 import Snackbar from "../../ReusableComponents/Snackbar";
 import Spinner from "../../ReusableComponents/Spinner";
+import { Image } from "antd";
 
 const FrontContent = () => {
   const [myDetails, setMyDetails] = useState([]);
@@ -70,10 +71,11 @@ const FrontContent = () => {
           <div className="container">
             <div className="row">
               <div className="col-4">
-                <img
+                <Image
                   src={myDetails.image}
                   alt="not found"
-                  style={{ height: "50vh" }}
+                  width={300}
+                  style={{ marginTop: "5vh" }}
                 />
               </div>
               <div className="col">
@@ -128,8 +130,8 @@ const FrontContent = () => {
                   <Button
                     variant="contained"
                     startIcon={<EditIcon />}
+                    color="info"
                     style={{
-                      backgroundColor: "gray",
                       width: "10vw",
                       marginLeft: "10px",
                     }}

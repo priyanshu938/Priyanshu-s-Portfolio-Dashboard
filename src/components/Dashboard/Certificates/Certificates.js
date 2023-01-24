@@ -86,7 +86,7 @@ const Certificates = () => {
           <Button
             variant="contained"
             startIcon={<AddIcon />}
-            style={{ backgroundColor: "green" }}
+            color='success'
             onClick={() => setOpenAddCertificateModal(!openAddCertificateModal)}
           >
             Add a Certificate

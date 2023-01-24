@@ -124,7 +124,7 @@ const Certificate = ({
           <Button
             variant="contained"
             startIcon={<EditIcon />}
-            style={{ backgroundColor: "gray" }}
+            color='info'
             onClick={() =>
               setOpenEditCertificateModal(!openEditCertificateModal)
             }
@@ -134,7 +134,7 @@ const Certificate = ({
           <Button
             variant="contained"
             endIcon={<DeleteIcon />}
-            style={{ backgroundColor: "red" }}
+            color='error'
             onClick={handleClickOpen}
           >
             Delete

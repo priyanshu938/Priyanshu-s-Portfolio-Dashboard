@@ -1,23 +1,6 @@
-import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import AddIcon from "@mui/icons-material/Add";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
-import Modal from "@mui/material/Modal";
+import React from "react";
 import Url from "../../../ServerUrl";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 500,
-  bgcolor: "white",
-  border: "solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+import { Modal, Form, Input } from "antd";
 
 export default function AddEmailContactModal({
   openAddEmailContactModal,
@@ -26,12 +9,9 @@ export default function AddEmailContactModal({
   setSeverity,
   setMessage,
 }) {
-  const [email, setEmail] = useState("");
-
-  const handleSubmitForm = async (e) => {
-    e.preventDefault();
+  const handleSubmitForm = async (values) => {
     const data = {
-      email: email,
+      email: values.email,
     };
     try {
       const response = await fetch(`${Url}/emailViaForm/addEmailContact`, {
@@ -64,37 +44,25 @@ export default function AddEmailContactModal({
     <div>
       <Modal
         open={openAddEmailContactModal}
-        onClose={() => setAddEmailContactModal(!openAddEmailContactModal)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        onCancel={() => setAddEmailContactModal(false)}
+        okButtonProps={{
+          form: "add-email-form",
+          key: "submit",
+          htmlType: "submit",
+        }}
+        centered
       >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h4" component="h4">
-            Add Email
-          </Typography>
-          <form className="mt-4" onSubmit={handleSubmitForm}>
-            <TextField
-              type="email"
-              className="ms-2 "
-              id="standard-basic"
-              label="Write Email id"
-              variant="standard"
-              style={{ width: "30vw", marginBottom: "5vh" }}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <br />
-
-            <Button
-              variant="contained"
-              startIcon={<AddIcon />}
-              style={{ backgroundColor: "green" }}
-              type="submit"
-            >
-              Add Email
-            </Button>
-          </form>
-        </Box>
+        <Form
+          id="add-email-form"
+          onFinish={(values) => {
+            handleSubmitForm(values);
+          }}
+          layout="vertical"
+        >
+          <Form.Item name="email" label="Add Email">
+            <Input type="email" placeholder="abc@email.com" required />
+          </Form.Item>
+        </Form>
       </Modal>
     </div>
   );

@@ -1,23 +1,6 @@
-import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import AddIcon from "@mui/icons-material/Add";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
-import Modal from "@mui/material/Modal";
+import React from "react";
 import Url from "../../../ServerUrl";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 500,
-  bgcolor: "white",
-  border: "solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+import { Modal, Form, Input } from "antd";
 
 export default function AddCertificateModal({
   openAddCertificateModal,
@@ -26,18 +9,13 @@ export default function AddCertificateModal({
   setSeverity,
   setMessage,
 }) {
-  const [name, setName] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-  const [description, setDescription] = useState("");
-  const [link, setLink] = useState("");
-
-  const handleSubmitForm = async (e) => {
-    e.preventDefault();
+  const { TextArea } = Input;
+  const handleSubmitForm = async (values) => {
     const data = {
-      name: name,
-      image: imageUrl,
-      description: description,
-      link: link,
+      name: values.name,
+      image: values.image,
+      description: values.description,
+      link: values.link,
     };
     try {
       const response = await fetch(`${Url}/certificates/addCertificate`, {
@@ -66,70 +44,34 @@ export default function AddCertificateModal({
     <div>
       <Modal
         open={openAddCertificateModal}
-        onClose={() => setOpenAddCertificateModal(!openAddCertificateModal)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        onCancel={() => setOpenAddCertificateModal(false)}
+        okButtonProps={{
+          form: "add-certificate-form",
+          key: "submit",
+          htmlType: "submit",
+        }}
+        centered
       >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h4" component="h4">
-            Add a Certificate
-          </Typography>
-          <form className="mt-4" onSubmit={handleSubmitForm}>
-            <TextField
-              type="text"
-              className="ms-2 "
-              id="standard-basic"
-              label="Name"
-              variant="standard"
-              style={{ width: "30vw" }}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-            <br />
-            <TextField
-              type="url"
-              className="ms-2 my-4"
-              id="standard-basic"
-              label="ImageURL"
-              variant="standard"
-              style={{ width: "30vw" }}
-              onChange={(e) => setImageUrl(e.target.value)}
-              required
-            />{" "}
-            <br />
-            <TextField
-              type="textarea"
-              className="ms-2 mt-2"
-              id="standard-basic"
-              label="Description"
-              variant="standard"
-              multiline
-              style={{ width: "30vw" }}
-              onChange={(e) => setDescription(e.target.value)}
-              required
-            />
-            <br />
-            <TextField
-              type="url"
-              className="ms-2 my-4"
-              id="standard-basic"
-              label="Link"
-              variant="standard"
-              style={{ width: "30vw" }}
-              onChange={(e) => setLink(e.target.value)}
-              required
-            />
-            <br />
-            <Button
-              variant="contained"
-              startIcon={<AddIcon />}
-              style={{ backgroundColor: "green" }}
-              type="submit"
-            >
-              Add a Certificate
-            </Button>
-          </form>
-        </Box>
+        <Form
+          id="add-certificate-form"
+          onFinish={(values) => {
+            handleSubmitForm(values);
+          }}
+          layout="vertical"
+        >
+          <Form.Item name="name" label="Name">
+            <Input type="text" required />
+          </Form.Item>
+          <Form.Item name="image" label="Image Url">
+            <Input type="url" required />
+          </Form.Item>
+          <Form.Item name="description" label="Description">
+            <TextArea rows={4} type="text" required />
+          </Form.Item>
+          <Form.Item name="link" label="Url">
+            <Input type="url" required />
+          </Form.Item>
+        </Form>
       </Modal>
     </div>
   );

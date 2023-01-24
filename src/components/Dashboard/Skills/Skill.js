@@ -95,7 +95,7 @@ const Skill = ({ id, image, skill, setIsOpen, setSeverity, setMessage }) => {
           <Button
             variant="contained"
             startIcon={<EditIcon />}
-            style={{ backgroundColor: "gray" }}
+            color='info'
             onClick={() => setOpenEditSkillModal(!openEditSkillModal)}
           >
             Edit
@@ -103,7 +103,7 @@ const Skill = ({ id, image, skill, setIsOpen, setSeverity, setMessage }) => {
           <Button
             variant="contained"
             endIcon={<DeleteIcon />}
-            style={{ backgroundColor: "red" }}
+            color='error'
             onClick={handleClickOpen}
           >
             Delete

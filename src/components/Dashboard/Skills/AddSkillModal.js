@@ -1,23 +1,6 @@
-import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import AddIcon from "@mui/icons-material/Add";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
+import React from "react";
 import url from "../../../ServerUrl";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 500,
-  bgcolor: "white",
-  border: "solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+import { Modal, Form, Input } from "antd";
 
 export default function AddSkillModal({
   openAddSkillModal,
@@ -26,14 +9,11 @@ export default function AddSkillModal({
   setSeverity,
   setMessage,
 }) {
-  const [skill, setSkill] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-
-  const handleSubmitForm = async (e) => {
-    e.preventDefault();
+  const handleSubmitForm = async (values) => {
+    console.log(values);
     const data = {
-      skill: skill,
-      image: imageUrl,
+      skill: values.skill,
+      image: values.image,
     };
     try {
       const response = await fetch(`${url}/skills/addSkill`, {
@@ -62,48 +42,28 @@ export default function AddSkillModal({
     <div>
       <Modal
         open={openAddSkillModal}
-        onClose={() => setOpenAddSkillModal(!openAddSkillModal)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        onCancel={() => setOpenAddSkillModal(false)}
+        okButtonProps={{
+          form: "add-skill-form",
+          key: "submit",
+          htmlType: "submit",
+        }}
+        centered
       >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h4" component="h4">
-            Add a Skill
-          </Typography>
-          <form className="mt-4" onSubmit={handleSubmitForm}>
-            <TextField
-              id="standard-basic"
-              label="Skill name"
-              variant="standard"
-              style={{ width: "30vw" }}
-              type="text"
-              className="ms-2 "
-              onChange={(e) => setSkill(e.target.value)}
-              required
-            />
-            <br />
-            <TextField
-              id="standard-basic"
-              label="ImageURL"
-              variant="standard"
-              style={{ width: "30vw" }}
-              type="url"
-              className="ms-2 my-4"
-              onChange={(e) => setImageUrl(e.target.value)}
-              required
-            />
-            <br />
-
-            <Button
-              variant="contained"
-              startIcon={<AddIcon />}
-              style={{ backgroundColor: "green" }}
-              type="submit"
-            >
-              Add skill
-            </Button>
-          </form>
-        </Box>
+        <Form
+          id="add-skill-form"
+          onFinish={(values) => {
+            handleSubmitForm(values);
+          }}
+          layout="vertical"
+        >
+          <Form.Item name="skill" label="Skill name">
+            <Input type="text" required />
+          </Form.Item>
+          <Form.Item name="image" label="Image Url">
+            <Input type="url" required />
+          </Form.Item>
+        </Form>
       </Modal>
     </div>
   );

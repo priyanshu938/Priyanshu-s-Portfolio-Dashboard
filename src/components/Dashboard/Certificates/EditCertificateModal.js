@@ -1,23 +1,6 @@
 import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
-import { MdSecurityUpdateGood } from "react-icons/md";
-import TextField from "@mui/material/TextField";
 import Url from "../../../ServerUrl";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 500,
-  bgcolor: "white",
-  border: "solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+import { Modal, Form, Input } from "antd";
 
 export default function EditCertificateModal({
   openEditCertificateModal,
@@ -31,18 +14,31 @@ export default function EditCertificateModal({
   description,
   link,
 }) {
-  const [updateName, setUpdateName] = useState(name);
-  const [imageUrl, setImageUrl] = useState(image);
-  const [updateDescription, setUpdateDescription] = useState(description);
-  const [updateLink, setUpdateLink] = useState(link);
-
-  const handleSubmitForm = async (e) => {
-    e.preventDefault();
+  const { TextArea } = Input;
+  const [fields, setFields] = useState([
+    {
+      name: ["name"],
+      value: name,
+    },
+    {
+      name: ["image"],
+      value: image,
+    },
+    {
+      name: ["description"],
+      value: description,
+    },
+    {
+      name: ["link"],
+      value: link,
+    },
+  ]);
+  const handleSubmitForm = async (values) => {
     const data = {
-      name: updateName,
-      image: imageUrl,
-      description: updateDescription,
-      link: updateLink,
+      name: values.name,
+      image: values.image,
+      description: values.description,
+      link: values.link,
     };
     try {
       const response = await fetch(
@@ -74,74 +70,38 @@ export default function EditCertificateModal({
     <div>
       <Modal
         open={openEditCertificateModal}
-        onClose={() => setOpenEditCertificateModal(!openEditCertificateModal)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        onCancel={() => setOpenEditCertificateModal(false)}
+        okButtonProps={{
+          form: "edit-certificate-form",
+          key: "submit",
+          htmlType: "submit",
+        }}
+        centered
       >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h4" component="h4">
-            Edit Certificate
-          </Typography>
-          <form className="mt-4" onSubmit={handleSubmitForm}>
-            <TextField
-              type="text"
-              className="ms-2 "
-              id="standard-basic"
-              label="Name"
-              variant="standard"
-              style={{ width: "30vw" }}
-              value={updateName}
-              onChange={(e) => setUpdateName(e.target.value)}
-              required
-            />
-            <br />
-            <TextField
-              type="url"
-              className="ms-2 my-4"
-              value={imageUrl}
-              id="standard-basic"
-              label="ImageURL"
-              variant="standard"
-              style={{ width: "30vw" }}
-              onChange={(e) => setImageUrl(e.target.value)}
-              required
-            />{" "}
-            <br />
-            <TextField
-              type="text"
-              className="ms-2 "
-              value={updateDescription}
-              id="standard-basic"
-              label="Description"
-              variant="standard"
-              style={{ width: "30vw" }}
-              onChange={(e) => setUpdateDescription(e.target.value)}
-              multiline
-              required
-            />
-            <br />
-            <TextField
-              type="url"
-              className="ms-2 my-4"
-              value={updateLink}
-              id="standard-basic"
-              label="Link"
-              variant="standard"
-              style={{ width: "30vw" }}
-              onChange={(e) => setUpdateLink(e.target.value)}
-              required
-            />
-            <br />
-            <Button
-              variant="contained"
-              startIcon={<MdSecurityUpdateGood />}
-              style={{ backgroundColor: "green" }}
-              type="submit"
-            >
-              Update Certificate
-            </Button>
-          </form>
-        </Box>
+        <Form
+          id="edit-certificate-form"
+          fields={fields}
+          onFieldsChange={(_, allFields) => {
+            setFields(allFields);
+          }}
+          onFinish={(values) => {
+            handleSubmitForm(values);
+          }}
+          layout="vertical"
+        >
+          <Form.Item name="name" label="Name">
+            <Input type="text" required />
+          </Form.Item>
+          <Form.Item name="image" label="Image Url">
+            <Input type="url" required />
+          </Form.Item>
+          <Form.Item name="description" label="Description">
+            <TextArea rows={4} type="text" required />
+          </Form.Item>
+          <Form.Item name="link" label="Url">
+            <Input type="url" required />
+          </Form.Item>
+        </Form>
       </Modal>
     </div>
   );

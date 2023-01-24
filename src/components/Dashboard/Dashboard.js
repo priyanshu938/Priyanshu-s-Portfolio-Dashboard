@@ -4,7 +4,7 @@ import { Box } from "@mui/material";
 import Sidebar from "./Sidebar";
 import { useNavigate } from "react-router";
 
-const Dashboard = () => {
+const Dashboard = ({darkMode,setDarkMode}) => {
   const [loginSuccessful, setLoginSuccessful] = useState(true);
   const [content, setContent] = useState("about-me");
   let navigate = useNavigate();
@@ -23,7 +23,7 @@ const Dashboard = () => {
         message="Successfully logged in"
         setIsOpen={setLoginSuccessful}
       />
-      <Sidebar content={content} setContent={setContent} />
+      <Sidebar content={content} setContent={setContent} darkMode={darkMode} setDarkMode={setDarkMode} />
     </Box>
   );
 };
