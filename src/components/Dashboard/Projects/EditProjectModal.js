@@ -107,7 +107,7 @@ const EditProjectModal = ({
             <Input type="url" required />
           </Form.Item>
           <Form.Item name="description" label="Description">
-            <TextArea rows={2} type="text" required />
+            <TextArea rows={4} type="text" required />
           </Form.Item>
           <Form.Item name="githubLink" label="Github url">
             <Input type="url" required />

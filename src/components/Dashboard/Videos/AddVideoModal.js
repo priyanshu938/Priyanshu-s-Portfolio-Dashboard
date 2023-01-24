@@ -1,14 +1,7 @@
-import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import AddIcon from "@mui/icons-material/Add";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
-import Modal from "@mui/material/Modal";
+import React from "react";
 import Url from "../../../ServerUrl";
-import style from '../../ReusableComponents/modalStyle'
-
-
+import { Modal, Form, Input } from "antd";
+import TextArea from "antd/es/input/TextArea";
 
 export default function AddVideoModal({
   openAddVideoModal,
@@ -17,16 +10,11 @@ export default function AddVideoModal({
   setSeverity,
   setMessage,
 }) {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [link, setLink] = useState("");
-
-  const handleSubmitForm = async (e) => {
-    e.preventDefault();
+  const handleSubmitForm = async (values) => {
     const data = {
-      title: title,
-      description: description,
-      link: link,
+      title: values.title,
+      description: values.description,
+      link: values.link,
     };
     try {
       const response = await fetch(`${Url}/videos/addVideo`, {
@@ -55,59 +43,31 @@ export default function AddVideoModal({
     <div>
       <Modal
         open={openAddVideoModal}
-        onClose={() => setOpenAddVideoModal(!openAddVideoModal)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        onCancel={() => setOpenAddVideoModal(false)}
+        okButtonProps={{
+          form: "add-video-form",
+          key: "submit",
+          htmlType: "submit",
+        }}
+        centered
       >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h4" component="h4">
-            Add a Video
-          </Typography>
-          <form className="mt-4" onSubmit={handleSubmitForm}>
-            <TextField
-              type="text"
-              className="ms-2 "
-              id="standard-basic"
-              label="Title"
-              variant="standard"
-              style={{ width: "30vw" }}
-              onChange={(e) => setTitle(e.target.value)}
-              required
-            />
-            <br />
-            <TextField
-              type="textarea"
-              className="ms-2 mt-2"
-              id="standard-basic"
-              label="Description"
-              variant="standard"
-              multiline
-              style={{ width: "30vw" }}
-              onChange={(e) => setDescription(e.target.value)}
-              required
-            />
-            <br />
-            <TextField
-              type="url"
-              className="ms-2 my-4"
-              id="standard-basic"
-              label="Link"
-              variant="standard"
-              style={{ width: "30vw" }}
-              onChange={(e) => setLink(e.target.value)}
-              required
-            />
-            <br />
-            <Button
-              variant="contained"
-              startIcon={<AddIcon />}
-              color='success'
-              type="submit"
-            >
-              Add a Video
-            </Button>
-          </form>
-        </Box>
+        <Form
+          id="add-video-form"
+          onFinish={(values) => {
+            handleSubmitForm(values);
+          }}
+          layout="vertical"
+        >
+          <Form.Item name="title" label="Title">
+            <Input type="text" required />
+          </Form.Item>
+          <Form.Item name="description" label="Description">
+            <TextArea rows={4} type="text" required />
+          </Form.Item>
+          <Form.Item name="link" label="Url">
+            <Input type="url" required />
+          </Form.Item>
+        </Form>
       </Modal>
     </div>
   );

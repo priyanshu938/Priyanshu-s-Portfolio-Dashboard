@@ -1,13 +1,7 @@
 import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
-import { MdSecurityUpdateGood } from "react-icons/md";
-import TextField from "@mui/material/TextField";
 import Url from "../../../ServerUrl";
-import style from '../../ReusableComponents/modalStyle'
-
+import { Modal, Form, Input } from "antd";
+import TextArea from "antd/es/input/TextArea";
 
 export default function EditVideoModal({
   openEditVideoModal,
@@ -20,16 +14,25 @@ export default function EditVideoModal({
   description,
   link,
 }) {
-  const [updateTitle, setUpdateTitle] = useState(title);
-  const [updateDescription, setUpdateDescription] = useState(description);
-  const [updateLink, setUpdateLink] = useState(link);
-
-  const handleSubmitForm = async (e) => {
-    e.preventDefault();
+  const [fields, setFields] = useState([
+    {
+      name: ["title"],
+      value: title,
+    },
+    {
+      name: ["description"],
+      value: description,
+    },
+    {
+      name: ["link"],
+      value: link,
+    },
+  ]);
+  const handleSubmitForm = async (values) => {
     const data = {
-      title: updateTitle,
-      description: updateDescription,
-      link: updateLink,
+      title: values.title,
+      description: values.description,
+      link: values.link,
     };
     try {
       const response = await fetch(`${Url}/videos/editVideo/${id}`, {
@@ -58,62 +61,35 @@ export default function EditVideoModal({
     <div>
       <Modal
         open={openEditVideoModal}
-        onClose={() => setOpenEditVideoModal(!openEditVideoModal)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        onCancel={() => setOpenEditVideoModal(false)}
+        okButtonProps={{
+          form: "edit-video-form",
+          key: "submit",
+          htmlType: "submit",
+        }}
+        centered
       >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h4" component="h4">
-            Edit Video
-          </Typography>
-          <form className="mt-4" onSubmit={handleSubmitForm}>
-            <TextField
-              type="text"
-              className="ms-2 "
-              id="standard-basic"
-              label="Name"
-              variant="standard"
-              style={{ width: "30vw" }}
-              value={updateTitle}
-              onChange={(e) => setUpdateTitle(e.target.value)}
-              required
-            />
-            <br />
-            <TextField
-              type="text"
-              className="ms-2 "
-              value={updateDescription}
-              id="standard-basic"
-              label="Description"
-              variant="standard"
-              style={{ width: "30vw" }}
-              onChange={(e) => setUpdateDescription(e.target.value)}
-              multiline
-              required
-            />
-            <br />
-            <TextField
-              type="url"
-              className="ms-2 my-4"
-              value={updateLink}
-              id="standard-basic"
-              label="Link"
-              variant="standard"
-              style={{ width: "30vw" }}
-              onChange={(e) => setUpdateLink(e.target.value)}
-              required
-            />
-            <br />
-            <Button
-              variant="contained"
-              startIcon={<MdSecurityUpdateGood />}
-              color='success'
-              type="submit"
-            >
-              Update Video
-            </Button>
-          </form>
-        </Box>
+        <Form
+          id="edit-video-form"
+          fields={fields}
+          onFieldsChange={(_, allFields) => {
+            setFields(allFields);
+          }}
+          onFinish={(values) => {
+            handleSubmitForm(values);
+          }}
+          layout="vertical"
+        >
+          <Form.Item name="title" label="Title">
+            <Input type="text" required />
+          </Form.Item>
+          <Form.Item name="description" label="Description">
+            <TextArea rows={4} type="text" required />
+          </Form.Item>
+          <Form.Item name="link" label="Url">
+            <Input type="url" required />
+          </Form.Item>
+        </Form>
       </Modal>
     </div>
   );

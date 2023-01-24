@@ -66,7 +66,7 @@ export default function AddCertificateModal({
             <Input type="url" required />
           </Form.Item>
           <Form.Item name="description" label="Description">
-            <TextArea rows={2} type="text" required />
+            <TextArea rows={4} type="text" required />
           </Form.Item>
           <Form.Item name="link" label="Url">
             <Input type="url" required />
