@@ -1,13 +1,6 @@
-import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import { MdSecurityUpdateGood } from "react-icons/md";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
-import Modal from "@mui/material/Modal";
+import React from "react";
 import Url from "../../../ServerUrl";
-import style from '../../ReusableComponents/modalStyle'
-
+import { Modal, Form, Input } from "antd";
 
 const AddProjectModal = ({
   openAddProjectModal,
@@ -16,22 +9,15 @@ const AddProjectModal = ({
   setSeverity,
   setMessage,
 }) => {
-  const [imageUrl, setImageUrl] = useState("");
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [githubLink, setGithubLink] = useState("");
-  const [youtubeVideoLink, setYoutubeVideoLink] = useState("");
-  const [liveProjectLink, setLiveProjectLink] = useState("");
-
-  const handleSubmitForm = async (e) => {
-    e.preventDefault();
+  const { TextArea } = Input;
+  const handleSubmitForm = async (values) => {
     const data = {
-      title: title,
-      image: imageUrl,
-      description: description,
-      githubLink: githubLink,
-      youtubeVideoLink: youtubeVideoLink,
-      liveProjectLink: liveProjectLink,
+      title: values.title,
+      image: values.image,
+      description: values.description,
+      githubLink: values.githubLink,
+      youtubeVideoLink: values.youtubeVideoLink,
+      liveProjectLink: values.liveProjectLink,
     };
     try {
       const response = await fetch(`${Url}/projects/addProject`, {
@@ -60,96 +46,41 @@ const AddProjectModal = ({
     <div>
       <Modal
         open={openAddProjectModal}
-        onClose={() => setOpenAddProjectModal(!openAddProjectModal)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        onCancel={() => setOpenAddProjectModal(false)}
+        okButtonProps={{
+          form: "add-project-form",
+          key: "submit",
+          htmlType: "submit",
+        }}
+        style={{ marginTop: "12vh", marginBottom: "5vh" }}
+        centered
       >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h4" component="h4">
-            Add a Project
-          </Typography>
-          <form className="mt-2" onSubmit={handleSubmitForm}>
-            <TextField
-              type="text"
-              className="ms-2 "
-              id="standard-basic"
-              label="Project Title"
-              variant="standard"
-              style={{ width: "30vw" }}
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              required
-            />
-            <br />
-            <TextField
-              type="url"
-              className="ms-2 mt-2"
-              value={imageUrl}
-              id="standard-basic"
-              label="ImageURL"
-              variant="standard"
-              style={{ width: "30vw" }}
-              onChange={(e) => setImageUrl(e.target.value)}
-              required
-            />{" "}
-            <br />
-            <TextField
-              type="text"
-              className="ms-2 mt-2 "
-              value={description}
-              id="standard-basic"
-              label="Description"
-              variant="standard"
-              style={{ width: "30vw" }}
-              onChange={(e) => setDescription(e.target.value)}
-              multiline
-              required
-            />
-            <br />
-            <TextField
-              type="url"
-              className="ms-2 mt-2"
-              value={githubLink}
-              id="standard-basic"
-              label="Github Link"
-              variant="standard"
-              style={{ width: "30vw" }}
-              onChange={(e) => setGithubLink(e.target.value)}
-              required
-            />
-            <br />
-            <TextField
-              type="url"
-              className="ms-2 mt-2"
-              value={liveProjectLink}
-              id="standard-basic"
-              label="Live Project Link"
-              variant="standard"
-              style={{ width: "30vw" }}
-              onChange={(e) => setLiveProjectLink(e.target.value)}
-            />
-            <br />
-            <TextField
-              type="url"
-              className="ms-2 mt-2 mb-4"
-              value={youtubeVideoLink}
-              id="standard-basic"
-              label="Youtube Video Link"
-              variant="standard"
-              style={{ width: "30vw" }}
-              onChange={(e) => setYoutubeVideoLink(e.target.value)}
-            />
-            <br />
-            <Button
-              variant="contained"
-              startIcon={<MdSecurityUpdateGood />}
-              color='success'
-              type="submit"
-            >
-              Add Project
-            </Button>
-          </form>
-        </Box>
+        <Form
+          id="add-project-form"
+          onFinish={(values) => {
+            handleSubmitForm(values);
+          }}
+          layout="vertical"
+        >
+          <Form.Item name="title" label="Project title">
+            <Input type="text" required />
+          </Form.Item>
+          <Form.Item name="image" label="Image Url">
+            <Input type="url" required />
+          </Form.Item>
+          <Form.Item name="description" label="Description">
+            <TextArea rows={2} type="text" required />
+          </Form.Item>
+          <Form.Item name="githubLink" label="Github url">
+            <Input type="url" required />
+          </Form.Item>
+          <Form.Item name="youtubeVideoLink" label="Youtube video url">
+            <Input type="url" />
+          </Form.Item>
+          <Form.Item name="liveProjectLink" label="Live project url">
+            <Input type="url" />
+          </Form.Item>
+        </Form>
       </Modal>
     </div>
   );

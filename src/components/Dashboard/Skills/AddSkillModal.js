@@ -9,13 +9,11 @@ export default function AddSkillModal({
   setSeverity,
   setMessage,
 }) {
-  
-
   const handleSubmitForm = async (values) => {
     console.log(values);
     const data = {
       skill: values.skill,
-      image: values.image_url,
+      image: values.image,
     };
     try {
       const response = await fetch(`${url}/skills/addSkill`, {
@@ -45,11 +43,15 @@ export default function AddSkillModal({
       <Modal
         open={openAddSkillModal}
         onCancel={() => setOpenAddSkillModal(false)}
-        okButtonProps={{form:'add-skill-form', key: 'submit', htmlType: 'submit'}}
+        okButtonProps={{
+          form: "add-skill-form",
+          key: "submit",
+          htmlType: "submit",
+        }}
         centered
       >
         <Form
-        id='add-skill-form'
+          id="add-skill-form"
           onFinish={(values) => {
             handleSubmitForm(values);
           }}
@@ -58,7 +60,7 @@ export default function AddSkillModal({
           <Form.Item name="skill" label="Skill name">
             <Input type="text" required />
           </Form.Item>
-          <Form.Item name="image_url" label="Image Url">
+          <Form.Item name="image" label="Image Url">
             <Input type="url" required />
           </Form.Item>
         </Form>

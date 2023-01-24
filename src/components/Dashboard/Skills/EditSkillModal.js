@@ -15,7 +15,7 @@ export default function EditSkillModal({
   const handleSubmitForm = async (values) => {
     const data = {
       skill: values.skill,
-      image: values.image_url,
+      image: values.image,
     };
     try {
       const response = await fetch(`${url}/skills/editSkill/${id}`, {
@@ -45,7 +45,7 @@ export default function EditSkillModal({
       value: skill,
     },
     {
-      name: ["image_url"],
+      name: ["image"],
       value: image,
     },
   ]);
@@ -75,7 +75,7 @@ export default function EditSkillModal({
           <Form.Item name="skill" label="Skill name">
             <Input type="text" required />
           </Form.Item>
-          <Form.Item name="image_url" label="Image Url">
+          <Form.Item name="image" label="Image Url">
             <Input type="url" required />
           </Form.Item>
         </Form>
