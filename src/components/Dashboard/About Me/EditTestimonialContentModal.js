@@ -1,14 +1,7 @@
 import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
-import { MdSecurityUpdateGood } from "react-icons/md";
-import TextField from "@mui/material/TextField";
+import { Modal, Form, Input } from "antd";
+import TextArea from "antd/es/input/TextArea";
 import url from "../../../ServerUrl";
-import style from '../../ReusableComponents/modalStyle'
-
-
 
 const EditTestimonialContentModal = ({
   openEditTestimonialContentModal,
@@ -20,13 +13,20 @@ const EditTestimonialContentModal = ({
   description,
   designation,
 }) => {
-  const [updateDescription, setUpdateDescription] = useState(description);
-  const [updateDesignation, setUpdateDesignation] = useState(designation);
-  const handleSubmitForm = async (e) => {
-    e.preventDefault();
+  const [fields, setFields] = useState([
+    {
+      name: ["description"],
+      value: description,
+    },
+    {
+      name: ["designation"],
+      value: designation,
+    },
+  ]);
+  const handleSubmitForm = async (values) => {
     const data = {
-      description: updateDescription,
-      designation: updateDesignation,
+      description: values.description,
+      designation: values.designation,
     };
     try {
       const response = await fetch(`${url}/testimonial/editTestimonial/${id}`, {
@@ -54,53 +54,32 @@ const EditTestimonialContentModal = ({
     <div>
       <Modal
         open={openEditTestimonialContentModal}
-        onClose={() =>
-          setOpenEditTestimonialContentModal(!openEditTestimonialContentModal)
-        }
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        onCancel={() => setOpenEditTestimonialContentModal(false)}
+        okButtonProps={{
+          form: "edit-testimonial-content-form",
+          key: "submit",
+          htmlType: "submit",
+        }}
+        centered
       >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h4" component="h4">
-            Edit Testimonial
-          </Typography>
-          <form className="mt-4" onSubmit={handleSubmitForm}>
-            <TextField
-              id="standard-basic"
-              label="Description"
-              variant="standard"
-              style={{ width: "30vw" }}
-              type="text"
-              className="ms-2 mt-2"
-              multiline
-              value={updateDescription}
-              onChange={(e) => setUpdateDescription(e.target.value)}
-              required
-            />
-            <br />
-
-            <TextField
-              id="standard-basic"
-              label="Designation"
-              variant="standard"
-              style={{ width: "30vw" }}
-              type="text"
-              className="ms-2 mt-2 mb-4"
-              value={updateDesignation}
-              onChange={(e) => setUpdateDesignation(e.target.value)}
-              required
-            />
-            <br />
-            <Button
-              variant="contained"
-              startIcon={<MdSecurityUpdateGood />}
-              color='success'
-              type="submit"
-            >
-              Update testimonial
-            </Button>
-          </form>
-        </Box>
+        <Form
+          id="edit-testimonial-content-form"
+          fields={fields}
+          onFieldsChange={(_, allFields) => {
+            setFields(allFields);
+          }}
+          onFinish={(values) => {
+            handleSubmitForm(values);
+          }}
+          layout="vertical"
+        >
+          <Form.Item name="description" label="Description">
+            <TextArea rows={5} type="text" required />
+          </Form.Item>
+          <Form.Item name="designation" label="Designation">
+            <Input type="text" required />
+          </Form.Item>
+        </Form>
       </Modal>
     </div>
   );
