@@ -1,14 +1,6 @@
 import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
-import { MdSecurityUpdateGood } from "react-icons/md";
-import TextField from "@mui/material/TextField";
 import url from "../../../ServerUrl";
-import style from '../../ReusableComponents/modalStyle'
-
-
+import { Modal, Form, Input } from "antd";
 
 export default function EditSkillModal({
   openEditSkillModal,
@@ -20,14 +12,10 @@ export default function EditSkillModal({
   image,
   skill,
 }) {
-  const [updateSkill, setUpdateSkill] = useState(skill);
-  const [imageUrl, setImageUrl] = useState(image);
-
-  const handleSubmitForm = async (e) => {
-    e.preventDefault();
+  const handleSubmitForm = async (values) => {
     const data = {
-      skill: updateSkill,
-      image: imageUrl,
+      skill: values.skill,
+      image: values.image_url,
     };
     try {
       const response = await fetch(`${url}/skills/editSkill/${id}`, {
@@ -51,54 +39,46 @@ export default function EditSkillModal({
       setMessage("Internal Server Error!");
     }
   };
-
+  const [fields, setFields] = useState([
+    {
+      name: ["skill"],
+      value: skill,
+    },
+    {
+      name: ["image_url"],
+      value: image,
+    },
+  ]);
   return (
     <div>
       <Modal
         open={openEditSkillModal}
-        onClose={() => setOpenEditSkillModal(!openEditSkillModal)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        onCancel={() => setOpenEditSkillModal(false)}
+        okButtonProps={{
+          form: "edit-skill-form",
+          key: "submit",
+          htmlType: "submit",
+        }}
+        centered
       >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h4" component="h4">
-            Edit Skill
-          </Typography>
-          <form className="mt-4" onSubmit={handleSubmitForm}>
-            <TextField
-              id="standard-basic"
-              label="Skill name"
-              variant="standard"
-              style={{ width: "30vw" }}
-              type="text"
-              className="ms-2"
-              value={updateSkill}
-              onChange={(e) => setUpdateSkill(e.target.value)}
-              required
-            />
-            <br />
-            <TextField
-              id="standard-basic"
-              label="ImageURL"
-              variant="standard"
-              style={{ width: "30vw" }}
-              type="url"
-              className="ms-2 my-4"
-              value={imageUrl}
-              onChange={(e) => setImageUrl(e.target.value)}
-              required
-            />
-            <br />
-            <Button
-              variant="contained"
-              startIcon={<MdSecurityUpdateGood />}
-              color='success'
-              type="submit"
-            >
-              Update skill
-            </Button>
-          </form>
-        </Box>
+        <Form
+          id="edit-skill-form"
+          fields={fields}
+          onFieldsChange={(_, allFields) => {
+            setFields(allFields);
+          }}
+          onFinish={(values) => {
+            handleSubmitForm(values);
+          }}
+          layout="vertical"
+        >
+          <Form.Item name="skill" label="Skill name">
+            <Input type="text" required />
+          </Form.Item>
+          <Form.Item name="image_url" label="Image Url">
+            <Input type="url" required />
+          </Form.Item>
+        </Form>
       </Modal>
     </div>
   );
