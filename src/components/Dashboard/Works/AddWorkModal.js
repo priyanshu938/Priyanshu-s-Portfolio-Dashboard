@@ -1,13 +1,6 @@
-import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import AddIcon from "@mui/icons-material/Add";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
-import Modal from "@mui/material/Modal";
+import React from "react";
 import Url from "../../../ServerUrl";
-import style from '../../ReusableComponents/modalStyle'
-
+import { Modal, Form, Input } from "antd";
 
 export default function AddWorkModal({
   openAddWorkModal,
@@ -16,18 +9,13 @@ export default function AddWorkModal({
   setSeverity,
   setMessage,
 }) {
-  const [name, setName] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-  const [description, setDescription] = useState("");
-  const [url, setUrl] = useState("");
-
-  const handleSubmitForm = async (e) => {
-    e.preventDefault();
+  const { TextArea } = Input;
+  const handleSubmitForm = async (values) => {
     const data = {
-      name: name,
-      image: imageUrl,
-      description: description,
-      url: url,
+      name: values.name,
+      image: values.image,
+      description: values.description,
+      url: values.url,
     };
     try {
       const response = await fetch(`${Url}/works/addWork`, {
@@ -56,70 +44,34 @@ export default function AddWorkModal({
     <div>
       <Modal
         open={openAddWorkModal}
-        onClose={() => setOpenAddWorkModal(!openAddWorkModal)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        onCancel={() => setOpenAddWorkModal(false)}
+        okButtonProps={{
+          form: "add-work-form",
+          key: "submit",
+          htmlType: "submit",
+        }}
+        centered
       >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h4" component="h4">
-            Add Work Experience
-          </Typography>
-          <form className="mt-4" onSubmit={handleSubmitForm}>
-            <TextField
-              id="standard-basic"
-              label="Name"
-              variant="standard"
-              style={{ width: "30vw" }}
-              type="text"
-              className="ms-2 "
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-            <br />
-            <TextField
-              id="standard-basic"
-              label="Image"
-              variant="standard"
-              style={{ width: "30vw" }}
-              type="url"
-              className="ms-2 my-4"
-              onChange={(e) => setImageUrl(e.target.value)}
-              required
-            />{" "}
-            <br />
-            <TextField
-              id="standard-basic"
-              label="Description"
-              variant="standard"
-              style={{ width: "30vw" }}
-              type="text"
-              className="ms-2 "
-              onChange={(e) => setDescription(e.target.value)}
-              multiline
-              required
-            />
-            <br />
-            <TextField
-              id="standard-basic"
-              label="Link"
-              variant="standard"
-              style={{ width: "30vw" }}
-              type="url"
-              className="ms-2 my-4"
-              onChange={(e) => setUrl(e.target.value)}
-              required
-            />
-            <br />
-            <Button
-              variant="contained"
-              startIcon={<AddIcon />}
-              color='success'
-              type="submit"
-            >
-              Add Work Experience
-            </Button>
-          </form>
-        </Box>
+        <Form
+          id="add-work-form"
+          onFinish={(values) => {
+            handleSubmitForm(values);
+          }}
+          layout="vertical"
+        >
+          <Form.Item name="name" label="Name">
+            <Input type="text" required />
+          </Form.Item>
+          <Form.Item name="image" label="Image Url">
+            <Input type="url" required />
+          </Form.Item>
+          <Form.Item name="description" label="Description">
+            <TextArea rows={4} type="text" required />
+          </Form.Item>
+          <Form.Item name="url" label="Url">
+            <Input type="url" required />
+          </Form.Item>
+        </Form>
       </Modal>
     </div>
   );
