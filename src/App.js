@@ -9,7 +9,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import "antd/dist/reset.css";
 import { ConfigProvider, theme } from "antd";
 function App() {
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
   return (
     <ThemeProvider
       theme={createTheme({
