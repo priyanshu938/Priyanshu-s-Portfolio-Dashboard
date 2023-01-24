@@ -143,7 +143,7 @@ const AddProjectModal = ({
             <Button
               variant="contained"
               startIcon={<MdSecurityUpdateGood />}
-              style={{ backgroundColor: "green" }}
+              color='success'
               type="submit"
             >
               Add Project

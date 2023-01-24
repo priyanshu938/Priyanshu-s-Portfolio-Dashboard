@@ -83,7 +83,7 @@ const Works = () => {
           <Button
             variant="contained"
             startIcon={<AddIcon />}
-            style={{ backgroundColor: "green" }}
+            color='success'
             onClick={() => setOpenAddWorkModal(!openAddWorkModal)}
           >
             Add work experience

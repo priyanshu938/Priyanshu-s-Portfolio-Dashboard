@@ -101,7 +101,7 @@ export default function AddVideoModal({
             <Button
               variant="contained"
               startIcon={<AddIcon />}
-              style={{ backgroundColor: "green" }}
+              color='success'
               type="submit"
             >
               Add a Video

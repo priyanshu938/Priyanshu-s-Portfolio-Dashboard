@@ -113,7 +113,7 @@ export default function AddWorkModal({
             <Button
               variant="contained"
               startIcon={<AddIcon />}
-              style={{ backgroundColor: "green" }}
+              color='success'
               type="submit"
             >
               Add Work Experience

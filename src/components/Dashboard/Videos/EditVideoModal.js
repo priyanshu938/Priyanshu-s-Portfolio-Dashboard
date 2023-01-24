@@ -107,7 +107,7 @@ export default function EditVideoModal({
             <Button
               variant="contained"
               startIcon={<MdSecurityUpdateGood />}
-              style={{ backgroundColor: "green" }}
+              color='success'
               type="submit"
             >
               Update Video

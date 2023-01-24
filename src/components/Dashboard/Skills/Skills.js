@@ -86,7 +86,7 @@ export default function Skills() {
           <Button
             variant="contained"
             startIcon={<AddIcon />}
-            style={{ backgroundColor: "green" }}
+            color='success'
             onClick={() => setOpenAddSkillModal(!openAddSkillModal)}
           >
             Add skill

@@ -111,7 +111,8 @@ const TestimonialContent = () => {
                   <Button
                     variant="contained"
                     startIcon={<EditIcon />}
-                    style={{ backgroundColor: "gray", width: "10vw" }}
+                    color='info'
+                    style={{  width: "10vw" }}
                     onClick={() => {
                       setOpenEditTestimonialContentModal(true);
                     }}

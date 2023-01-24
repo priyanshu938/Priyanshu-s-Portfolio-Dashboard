@@ -116,7 +116,7 @@ const EditFrontContentModal = ({
             <Button
               variant="contained"
               startIcon={<MdSecurityUpdateGood />}
-              style={{ backgroundColor: "green" }}
+              color='success'
               type="submit"
             >
               Update details

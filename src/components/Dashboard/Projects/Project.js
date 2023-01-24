@@ -135,17 +135,17 @@ const Project = ({
         <Stack direction="row" spacing={2} my={2}>
           {githubLink !== "" && (
             <Link href={githubLink} target="_blank" underline="none">
-              <GitHubIcon style={{}} />
+              <GitHubIcon color='primary'/>
             </Link>
           )}
           {youtubeVideoLink !== "" && (
             <Link href={youtubeVideoLink} target="_blank" underline="none">
-              <YouTubeIcon style={{ color: "red" }} />
+              <YouTubeIcon color='error' />
             </Link>
           )}
           {liveProjectLink !== "" && (
             <Link href={liveProjectLink} target="_blank" underline="none">
-              <PreviewIcon style={{ color: "gray" }} />
+              <PreviewIcon color='warning' />
             </Link>
           )}
         </Stack>
@@ -153,7 +153,7 @@ const Project = ({
           <Button
             variant="contained"
             startIcon={<EditIcon />}
-            style={{ backgroundColor: "gray" }}
+            color='info'
             onClick={() => setOpenEditProjectModal(!openEditProjectModal)}
           >
             Edit
@@ -161,7 +161,7 @@ const Project = ({
           <Button
             variant="contained"
             endIcon={<DeleteIcon />}
-            style={{ backgroundColor: "red" }}
+            color='error'
             onClick={handleClickOpen}
           >
             Delete

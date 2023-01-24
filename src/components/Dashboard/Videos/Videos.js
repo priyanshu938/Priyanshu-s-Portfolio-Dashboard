@@ -83,7 +83,7 @@ const Videos = () => {
           <Button
             variant="contained"
             startIcon={<AddIcon />}
-            style={{ backgroundColor: "green" }}
+            color='success'
             onClick={() => setOpenAddVideoModal(!openAddVideoModal)}
           >
             Add a Video

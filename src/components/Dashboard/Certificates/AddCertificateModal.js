@@ -113,7 +113,7 @@ export default function AddCertificateModal({
             <Button
               variant="contained"
               startIcon={<AddIcon />}
-              style={{ backgroundColor: "green" }}
+              color='success'
               type="submit"
             >
               Add a Certificate

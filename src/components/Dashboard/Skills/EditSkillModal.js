@@ -92,7 +92,7 @@ export default function EditSkillModal({
             <Button
               variant="contained"
               startIcon={<MdSecurityUpdateGood />}
-              style={{ backgroundColor: "green" }}
+              color='success'
               type="submit"
             >
               Update skill

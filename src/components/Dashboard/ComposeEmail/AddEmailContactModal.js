@@ -78,7 +78,7 @@ export default function AddEmailContactModal({
             <Button
               variant="contained"
               startIcon={<AddIcon />}
-              style={{ backgroundColor: "green" }}
+              color='success'
               type="submit"
             >
               Add Email

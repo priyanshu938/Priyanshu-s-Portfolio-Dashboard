@@ -128,8 +128,8 @@ const FrontContent = () => {
                   <Button
                     variant="contained"
                     startIcon={<EditIcon />}
+                    color='info'
                     style={{
-                      backgroundColor: "gray",
                       width: "10vw",
                       marginLeft: "10px",
                     }}

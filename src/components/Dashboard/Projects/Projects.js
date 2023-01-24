@@ -83,7 +83,7 @@ const Projects = () => {
           <Button
             variant="contained"
             startIcon={<AddIcon />}
-            style={{ backgroundColor: "green" }}
+            color='success'
             onClick={() => setOpenAddProjectModal(!openAddProjectModal)}
           >
             Add a Project

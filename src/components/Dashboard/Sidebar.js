@@ -265,7 +265,6 @@ export default function Sidebar2({
             >
               <MaterialUISwitch
                 sx={{ m: 1 }}
-                defaultChecked
                 theme={theme}
                 onChange={() => setDarkMode(!darkMode)}
               />
