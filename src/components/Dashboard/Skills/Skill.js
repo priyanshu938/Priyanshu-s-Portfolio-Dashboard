@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import ImageListItem from "@mui/material/ImageListItem";
 import { Typography, Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import Stack from "@mui/material/Stack";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import { CardActionArea, CardActions } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -45,7 +47,7 @@ const Skill = ({ id, image, skill, setIsOpen, setSeverity, setMessage }) => {
     }
   };
   return (
-    <div className="my-5 mx-4 py-4">
+    <div className="mx-4 my-4">
       {openEditSkillModal && (
         <EditSkillModal
           openEditSkillModal={openEditSkillModal}
@@ -77,39 +79,34 @@ const Skill = ({ id, image, skill, setIsOpen, setSeverity, setMessage }) => {
           <Button onClick={handleDelete}>Yes</Button>
         </DialogActions>
       </Dialog>
-      <ImageListItem key={id}>
-        <img
-          alt="skill"
-          src={image}
-          style={{ width: "100%", height: "undefined", aspectRatio: 1 }}
-        />
-        <Typography
-          id="modal-modal-title"
-          variant="h6"
-          component="h6"
-          className="mx-2 mt-2"
-        >
-          Skill : {skill}
-        </Typography>
-        <Stack direction="row" spacing={2} my={2}>
-          <Button
-            variant="contained"
-            startIcon={<EditIcon />}
-            color='info'
-            onClick={() => setOpenEditSkillModal(!openEditSkillModal)}
-          >
-            Edit
-          </Button>
-          <Button
-            variant="contained"
-            endIcon={<DeleteIcon />}
-            color='error'
-            onClick={handleClickOpen}
-          >
-            Delete
-          </Button>
-        </Stack>
-      </ImageListItem>
+      <Card sx={{ maxWidth: 300 }} key={id}>
+        <CardActionArea>
+          <CardMedia component="img" height="200" image={image} alt={skill} />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              {skill}
+            </Typography>
+            <CardActions>
+              <Button
+                variant="contained"
+                startIcon={<EditIcon />}
+                color="info"
+                onClick={() => setOpenEditSkillModal(!openEditSkillModal)}
+              >
+                Edit
+              </Button>
+              <Button
+                variant="contained"
+                endIcon={<DeleteIcon />}
+                color="error"
+                onClick={handleClickOpen}
+              >
+                Delete
+              </Button>
+            </CardActions>
+          </CardContent>
+        </CardActionArea>
+      </Card>
     </div>
   );
 };

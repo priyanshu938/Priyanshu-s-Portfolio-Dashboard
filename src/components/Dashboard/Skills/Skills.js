@@ -94,11 +94,9 @@ export default function Skills() {
           {skills.length > 0 ? (
             <ImageList
               sx={{
-                height: 500,
                 "&::-webkit-scrollbar": { display: "none" },
               }}
-              cols={4}
-              rowHeight={240}
+              cols={3}
             >
               {skills.map((skill) => (
                 <Skill
