@@ -8,9 +8,12 @@ import { Button } from "@mui/material";
 import Snackbar from "../../ReusableComponents/Snackbar";
 import SnackbarForSendingMail from "../../ReusableComponents/SnackbarForShowingWait";
 import Spinner from "../../ReusableComponents/Spinner";
+import DeleteEmailContactModal from "./DeleteEmailContactModal";
 import AddEmailContactModal from "./AddEmailContactModal";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Upload, Button as ButtonAntd } from "antd";
+import Tooltip from "@mui/material/Tooltip";
+import Zoom from "@mui/material/Zoom";
 
 import AddIcon from "@mui/icons-material/Add";
 import {
@@ -39,6 +42,8 @@ const EmailViaForm = () => {
   const [rteObject, setRteObject] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [openAddEmailContactModal, setAddEmailContactModal] = useState(false);
+  const [openDeleteEmailContactModal, setDeleteEmailContactModal] = useState(false);
+
   const [openSnackbarForSendingMail, setOpenSnackbarForSendingMail] =
     useState(false);
 
@@ -199,6 +204,16 @@ const EmailViaForm = () => {
               setMessage={setMessage}
             />
           )}
+          {openDeleteEmailContactModal && (
+            <DeleteEmailContactModal
+              openDeleteEmailContactModal={openDeleteEmailContactModal}
+              setDeleteEmailContactModal={setDeleteEmailContactModal}
+              setIsOpen={setIsOpen}
+              setSeverity={setSeverity}
+              setMessage={setMessage}
+              mailContacts={mailContactsFetchedFromServer}
+            />
+          )}
           <Box mx={2}>
             <form onSubmit={handleSubmit}>
               <Box style={{ display: "flex" }}>
@@ -224,7 +239,7 @@ const EmailViaForm = () => {
                   color="success"
                   style={{
                     height: "8vh",
-                    marginLeft: "5vw",
+                    marginLeft: "3vw",
                   }}
                   onClick={() =>
                     setAddEmailContactModal(!openAddEmailContactModal)
@@ -232,6 +247,22 @@ const EmailViaForm = () => {
                 >
                   Add Email Contact
                 </Button>
+                <Tooltip
+                  title={"Delete email contact"}
+                  placement="bottom"
+                  arrow
+                  TransitionComponent={Zoom}
+                >
+                  <DeleteIcon
+                    color="error"
+                    fontSize="large"
+                    style={{marginTop:'1vh',marginLeft:'2vw'}}
+
+                    onClick={() =>
+                      setDeleteEmailContactModal(!openDeleteEmailContactModal)
+                    }
+                  />
+                </Tooltip>
               </Box>
               <Box style={{ display: "flex" }}>
                 <Autocomplete
