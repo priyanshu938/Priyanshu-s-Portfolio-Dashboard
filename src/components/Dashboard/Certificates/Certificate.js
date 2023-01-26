@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-import ImageListItem from "@mui/material/ImageListItem";
-import { Typography, Button, Link } from "@mui/material";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import { CardActionArea, CardActions } from "@mui/material";
+import { Typography, Button, Link, Grid } from "@mui/material";
 import LaunchIcon from "@mui/icons-material/Launch";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
@@ -58,7 +61,7 @@ const Certificate = ({
     }
   };
   return (
-    <div className="mx-4 my-4">
+    <Grid item xs={12} sm={12} md={6} lg={6} my={2}>
       {openEditCertificateModal && (
         <EditCertificateModal
           openEditCertificateModal={openEditCertificateModal}
@@ -93,55 +96,57 @@ const Certificate = ({
           <Button onClick={handleDelete}>Yes</Button>
         </DialogActions>
       </Dialog>
-      <ImageListItem key={id}>
-        <img
-          alt="Certificate"
-          src={image}
-          style={{ width: "100%", height: "30vh", aspectRatio: 1 }}
-        />
-        <Typography
-          id="modal-modal-title"
-          variant="h6"
-          component="h6"
-          className="mx-2 mt-2"
-        >
-          {name}
-        </Typography>
-        <Typography
-          id="modal-modal-title"
-          variant="p"
-          component="p"
-          className="mx-2 mt-2"
-        >
-          {description}
-        </Typography>
-        <Stack direction="row" spacing={2} my={2}>
-          <Link href={link} target="_blank" underline="none">
-            <Button className="" variant="contained" endIcon={<LaunchIcon />}>
-              Watch
-            </Button>
-          </Link>
-          <Button
-            variant="contained"
-            startIcon={<EditIcon />}
-            color='info'
-            onClick={() =>
-              setOpenEditCertificateModal(!openEditCertificateModal)
-            }
-          >
-            Edit
-          </Button>
-          <Button
-            variant="contained"
-            endIcon={<DeleteIcon />}
-            color='error'
-            onClick={handleClickOpen}
-          >
-            Delete
-          </Button>
-        </Stack>
-      </ImageListItem>
-    </div>
+      <Card sx={{ maxWidth: 500 }} key={id}>
+        <CardActionArea>
+          <CardMedia component="img" height="250" image={image} alt={name} />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              {name}
+            </Typography>
+            <Typography gutterBottom variant="p" component="div">
+              {description}
+            </Typography>
+            <CardActions>
+              <Grid container spacing={3}>
+                <Grid item>
+                  <Link href={link} target="_blank" underline="none">
+                    <Button
+                      className=""
+                      variant="contained"
+                      endIcon={<LaunchIcon />}
+                    >
+                      Watch
+                    </Button>
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Button
+                    variant="contained"
+                    startIcon={<EditIcon />}
+                    color="info"
+                    onClick={() =>
+                      setOpenEditCertificateModal(!openEditCertificateModal)
+                    }
+                  >
+                    Edit
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button
+                    variant="contained"
+                    startIcon={<DeleteIcon />}
+                    color="error"
+                    onClick={handleClickOpen}
+                  >
+                    Delete
+                  </Button>
+                </Grid>
+              </Grid>
+            </CardActions>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+    </Grid>
   );
 };
 

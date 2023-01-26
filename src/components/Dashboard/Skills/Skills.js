@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import ImageList from "@mui/material/ImageList";
 import Skill from "./Skill";
 import url from "../../../ServerUrl";
 import { Typography, Button, Grid } from "@mui/material";

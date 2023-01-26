@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import ImageList from "@mui/material/ImageList";
 import Certificate from "./Certificate";
 import url from "../../../ServerUrl";
-import { Typography, Button } from "@mui/material";
+import { Typography, Button, Grid } from "@mui/material";
 import Input from "@mui/material/Input";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
@@ -56,7 +55,7 @@ const Certificates = () => {
       {isLoading ? (
         <Spinner />
       ) : (
-        <div >
+        <div>
           <Snackbar
             isOpen={isOpen}
             severity={severity}
@@ -86,22 +85,14 @@ const Certificates = () => {
           <Button
             variant="contained"
             startIcon={<AddIcon />}
-            color='success'
+            color="success"
             onClick={() => setOpenAddCertificateModal(!openAddCertificateModal)}
           >
             Add a Certificate
           </Button>
 
           {certificates.length > 0 ? (
-            <ImageList
-              sx={{
-                width: 1000,
-                height: 450,
-                "&::-webkit-scrollbar": { display: "none" },
-              }}
-              cols={2}
-              rowHeight={400}
-            >
+            <Grid container spacing={3} my={2}>
               {certificates.map((certificate) => (
                 <Certificate
                   key={certificate._id}
@@ -115,7 +106,7 @@ const Certificates = () => {
                   setMessage={setMessage}
                 />
               ))}
-            </ImageList>
+            </Grid>
           ) : (
             <Typography px={2} my={4} variant="h6" component="div" gutterBottom>
               No certificate found !

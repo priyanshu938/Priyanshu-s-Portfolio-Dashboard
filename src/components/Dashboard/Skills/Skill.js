@@ -97,7 +97,7 @@ const Skill = ({ id, image, skill, setIsOpen, setSeverity, setMessage }) => {
               </Button>
               <Button
                 variant="contained"
-                endIcon={<DeleteIcon />}
+                startIcon={<DeleteIcon />}
                 color="error"
                 onClick={handleClickOpen}
               >
