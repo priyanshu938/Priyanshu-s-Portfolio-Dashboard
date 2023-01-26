@@ -1,6 +1,6 @@
 import React from "react";
 import Url from "../../../ServerUrl";
-import { Modal, Table, Button } from "antd";
+import { Modal, Table, Button, Popconfirm } from "antd";
 
 const DeleteEmailContactModal = ({
   openDeleteEmailContactModal,
@@ -41,7 +41,7 @@ const DeleteEmailContactModal = ({
   };
   return (
     <Modal
-    title="Delete email contact"
+      title="Delete email contact"
       open={openDeleteEmailContactModal}
       onCancel={() => setDeleteEmailContactModal(false)}
       onOk={() => setDeleteEmailContactModal(false)}
@@ -59,15 +59,19 @@ const DeleteEmailContactModal = ({
           {
             title: "Actions",
             render: (value) => (
-              <Button
-                type="primary"
-                danger
-                onClick={() => {
+              <Popconfirm
+                title="Delete"
+                description="Are you sure to delete this contact?"
+                onConfirm={() => {
                   deleteMailContactFromServer(value._id);
                 }}
+                okText="Yes"
+                cancelText="No"
               >
-                Delete
-              </Button>
+                <Button type="primary" danger>
+                  Delete
+                </Button>
+              </Popconfirm>
             ),
           },
         ]}
