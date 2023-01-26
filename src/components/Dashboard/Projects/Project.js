@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-import ImageListItem from "@mui/material/ImageListItem";
-import { Typography, Button, Link } from "@mui/material";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import { CardActionArea, CardActions } from "@mui/material";
+import { Typography, Button, Link, Grid } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import Stack from "@mui/material/Stack";
@@ -60,7 +63,7 @@ const Project = ({
     }
   };
   return (
-    <div className="my-4 mr-2">
+    <Grid item xs={12} sm={12} md={6} lg={6} my={2}>
       {openEditProjectModal && (
         <EditProjectModal
           openEditProjectModal={openEditProjectModal}
@@ -96,79 +99,87 @@ const Project = ({
           <Button onClick={handleDelete}>Yes</Button>
         </DialogActions>
       </Dialog>
-      <ImageListItem key={id}>
-        {youtubeVideoLink ? (
-          <iframe
-            className="iframeSet"
-            height="100%"
-            width="500px"
-            src={youtubeVideoLink}
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
-        ) : (
-          <img
-            alt="Project"
-            src={image}
-            style={{ height: "30vh", aspectRatio: 1 }}
-          />
-        )}
 
-        <Typography
-          id="modal-modal-title"
-          variant="h6"
-          component="h6"
-          className="mx-2 mt-2"
-        >
-          {title}
-        </Typography>
-        <Typography
-          id="modal-modal-title"
-          variant="p"
-          component="p"
-          className="mx-2 mt-2"
-        >
-          {description}
-        </Typography>
-        <Stack direction="row" spacing={2} my={2}>
-          {githubLink !== "" && (
-            <Link href={githubLink} target="_blank" underline="none">
-              <GitHubIcon color='primary'/>
-            </Link>
+      <Card sx={{ maxWidth: 500 }} key={id}>
+        <CardActionArea>
+          {youtubeVideoLink ? (
+            <iframe
+              className="iframeSet"
+              height="250px"
+              width="500px"
+              src={youtubeVideoLink}
+              title="YouTube video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          ) : (
+            <CardMedia component="img" height="300" image={image} alt={title} />
           )}
-          {youtubeVideoLink !== "" && (
-            <Link href={youtubeVideoLink} target="_blank" underline="none">
-              <YouTubeIcon color='error' />
-            </Link>
-          )}
-          {liveProjectLink !== "" && (
-            <Link href={liveProjectLink} target="_blank" underline="none">
-              <PreviewIcon color='warning' />
-            </Link>
-          )}
-        </Stack>
-        <Stack direction="row" spacing={2} my={2}>
-          <Button
-            variant="contained"
-            startIcon={<EditIcon />}
-            color='info'
-            onClick={() => setOpenEditProjectModal(!openEditProjectModal)}
-          >
-            Edit
-          </Button>
-          <Button
-            variant="contained"
-            endIcon={<DeleteIcon />}
-            color='error'
-            onClick={handleClickOpen}
-          >
-            Delete
-          </Button>
-        </Stack>
-      </ImageListItem>
-    </div>
+
+          <CardContent>
+            <Typography
+              id="modal-modal-title"
+              variant="h5"
+              component="h5"
+              className="mx-2 mt-2"
+            >
+              {title}
+            </Typography>
+            <Typography
+              id="modal-modal-title"
+              variant="p"
+              component="p"
+              className="mx-2 mt-2"
+            >
+              {description}
+            </Typography>
+            <Stack direction="row" spacing={2} my={2}>
+              {githubLink !== "" && (
+                <Link href={githubLink} target="_blank" underline="none">
+                  <GitHubIcon color="primary" />
+                </Link>
+              )}
+              {youtubeVideoLink !== "" && (
+                <Link href={youtubeVideoLink} target="_blank" underline="none">
+                  <YouTubeIcon color="error" />
+                </Link>
+              )}
+              {liveProjectLink !== "" && (
+                <Link href={liveProjectLink} target="_blank" underline="none">
+                  <PreviewIcon color="warning" />
+                </Link>
+              )}
+            </Stack>
+            <CardActions>
+              <Grid container spacing={3}>
+                <Grid item>
+                  <Button
+                    variant="contained"
+                    startIcon={<EditIcon />}
+                    color="info"
+                    onClick={() =>
+                      setOpenEditProjectModal(!openEditProjectModal)
+                    }
+                  >
+                    Edit
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button
+                    variant="contained"
+                    startIcon={<DeleteIcon />}
+                    color="error"
+                    onClick={handleClickOpen}
+                  >
+                    Delete
+                  </Button>
+                </Grid>
+              </Grid>
+            </CardActions>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+    </Grid>
   );
 };
 

@@ -256,7 +256,7 @@ const EmailViaForm = () => {
                   <DeleteIcon
                     color="error"
                     fontSize="large"
-                    style={{marginTop:'1vh',marginLeft:'2vw'}}
+                    style={{marginTop:'1vh',marginLeft:'2vw',cursor:'pointer'}}
 
                     onClick={() =>
                       setDeleteEmailContactModal(!openDeleteEmailContactModal)

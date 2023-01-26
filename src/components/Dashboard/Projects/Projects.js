@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import ImageList from "@mui/material/ImageList";
 import Project from "./Project";
 import url from "../../../ServerUrl";
-import { Typography, Button } from "@mui/material";
+import { Typography, Button, Grid } from "@mui/material";
 import Input from "@mui/material/Input";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
@@ -83,21 +82,14 @@ const Projects = () => {
           <Button
             variant="contained"
             startIcon={<AddIcon />}
-            color='success'
+            color="success"
             onClick={() => setOpenAddProjectModal(!openAddProjectModal)}
           >
             Add a Project
           </Button>
 
           {projects.length > 0 ? (
-            <ImageList
-              sx={{
-                height: 500,
-                "&::-webkit-scrollbar": { display: "none" },
-              }}
-              cols={2}
-              rowHeight={500}
-            >
+            <Grid container spacing={3} my={2}>
               {projects.map((project) => (
                 <Project
                   key={project._id}
@@ -113,7 +105,7 @@ const Projects = () => {
                   setMessage={setMessage}
                 />
               ))}
-            </ImageList>
+            </Grid>
           ) : (
             <Typography px={2} my={4} variant="h6" component="div" gutterBottom>
               No Project found !
