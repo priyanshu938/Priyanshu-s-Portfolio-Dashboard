@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import ImageListItem from "@mui/material/ImageListItem";
-import { Typography, Button } from "@mui/material";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import { CardActionArea, CardActions } from "@mui/material";
+import { Typography, Button, Grid } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import Stack from "@mui/material/Stack";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -52,7 +53,7 @@ const Video = ({
     }
   };
   return (
-    <div className="mx-4 my-4">
+    <Grid item xs={12} sm={12} md={6} lg={6} my={2}>
       {openEditVideoModal && (
         <EditVideoModal
           openEditVideoModal={openEditVideoModal}
@@ -84,53 +85,64 @@ const Video = ({
           <Button onClick={handleDelete}>Yes</Button>
         </DialogActions>
       </Dialog>
-      <ImageListItem key={id}>
-        <iframe
-          className="iframeSet"
-          height="100%"
-          width="450px"
-          src={link}
-          title="YouTube video player"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
-        <Typography
-          id="modal-modal-title"
-          variant="h6"
-          component="h6"
-          className="mx-2 mt-2"
-        >
-          {title}
-        </Typography>
-        <Typography
-          id="modal-modal-title"
-          variant="p"
-          component="p"
-          className="mx-2 mt-2"
-        >
-          {description}
-        </Typography>
-        <Stack direction="row" spacing={2} my={2}>
-          <Button
-            variant="contained"
-            startIcon={<EditIcon />}
-            color='info'
-            onClick={() => setOpenEditVideoModal(!openEditVideoModal)}
-          >
-            Edit
-          </Button>
-          <Button
-            variant="contained"
-            endIcon={<DeleteIcon />}
-            color='error'
-            onClick={handleClickOpen}
-          >
-            Delete
-          </Button>
-        </Stack>
-      </ImageListItem>
-    </div>
+
+      <Card sx={{ maxWidth: 500 }} key={id}>
+        <CardActionArea>
+          <iframe
+            className="iframeSet"
+            height="250px"
+            width="500px"
+            src={link}
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+
+          <CardContent>
+            <Typography
+              id="modal-modal-title"
+              variant="h5"
+              component="h5"
+              className="mx-2 mt-2"
+            >
+              {title}
+            </Typography>
+            <Typography
+              id="modal-modal-title"
+              variant="p"
+              component="p"
+              className="mx-2 mt-2"
+            >
+              {description}
+            </Typography>
+            <CardActions>
+              <Grid container spacing={3}>
+                <Grid item>
+                  <Button
+                    variant="contained"
+                    startIcon={<EditIcon />}
+                    color="info"
+                    onClick={() => setOpenEditVideoModal(!openEditVideoModal)}
+                  >
+                    Edit
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button
+                    variant="contained"
+                    startIcon={<DeleteIcon />}
+                    color="error"
+                    onClick={handleClickOpen}
+                  >
+                    Delete
+                  </Button>
+                </Grid>
+              </Grid>
+            </CardActions>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+    </Grid>
   );
 };
 

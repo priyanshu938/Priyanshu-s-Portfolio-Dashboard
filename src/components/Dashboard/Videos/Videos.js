@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import ImageList from "@mui/material/ImageList";
 import Video from "./Video";
 import url from "../../../ServerUrl";
-import { Typography, Button } from "@mui/material";
+import { Typography, Button, Grid } from "@mui/material";
 import Input from "@mui/material/Input";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
@@ -53,7 +52,7 @@ const Videos = () => {
       {isLoading ? (
         <Spinner />
       ) : (
-        <div >
+        <div>
           <Snackbar
             isOpen={isOpen}
             severity={severity}
@@ -83,22 +82,14 @@ const Videos = () => {
           <Button
             variant="contained"
             startIcon={<AddIcon />}
-            color='success'
+            color="success"
             onClick={() => setOpenAddVideoModal(!openAddVideoModal)}
           >
             Add a Video
           </Button>
 
           {videos.length > 0 ? (
-            <ImageList
-              sx={{
-                width: 1000,
-                height: 450,
-                "&::-webkit-scrollbar": { display: "none" },
-              }}
-              cols={2}
-              rowHeight={500}
-            >
+            <Grid container spacing={3} my={2}>
               {videos.map((video) => (
                 <Video
                   key={video._id}
@@ -111,7 +102,7 @@ const Videos = () => {
                   setMessage={setMessage}
                 />
               ))}
-            </ImageList>
+            </Grid>
           ) : (
             <Typography px={2} my={4} variant="h6" component="div" gutterBottom>
               No video found !
