@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Typography, Button } from "@mui/material";
+import { Typography, Button, Grid } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import Card from "@mui/material/Card";
@@ -47,7 +47,7 @@ const Skill = ({ id, image, skill, setIsOpen, setSeverity, setMessage }) => {
     }
   };
   return (
-    <div className="mx-4 my-4">
+    <Grid item xs={12} sm={6} md={4} lg={3}>
       {openEditSkillModal && (
         <EditSkillModal
           openEditSkillModal={openEditSkillModal}
@@ -79,9 +79,9 @@ const Skill = ({ id, image, skill, setIsOpen, setSeverity, setMessage }) => {
           <Button onClick={handleDelete}>Yes</Button>
         </DialogActions>
       </Dialog>
-      <Card sx={{ maxWidth: 300 }} key={id}>
+      <Card sx={{ maxWidth: 345 }} key={id}>
         <CardActionArea>
-          <CardMedia component="img" height="200" image={image} alt={skill} />
+          <CardMedia component="img" height="250" image={image} alt={skill} />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
               {skill}
@@ -107,7 +107,7 @@ const Skill = ({ id, image, skill, setIsOpen, setSeverity, setMessage }) => {
           </CardContent>
         </CardActionArea>
       </Card>
-    </div>
+    </Grid>
   );
 };
 

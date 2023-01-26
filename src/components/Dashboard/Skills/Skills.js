@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ImageList from "@mui/material/ImageList";
 import Skill from "./Skill";
 import url from "../../../ServerUrl";
-import { Typography, Button } from "@mui/material";
+import { Typography, Button, Grid } from "@mui/material";
 import Input from "@mui/material/Input";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
@@ -86,18 +86,13 @@ export default function Skills() {
           <Button
             variant="contained"
             startIcon={<AddIcon />}
-            color='success'
+            color="success"
             onClick={() => setOpenAddSkillModal(!openAddSkillModal)}
           >
             Add skill
           </Button>
           {skills.length > 0 ? (
-            <ImageList
-              sx={{
-                "&::-webkit-scrollbar": { display: "none" },
-              }}
-              cols={3}
-            >
+            <Grid container spacing={3} my={2}>
               {skills.map((skill) => (
                 <Skill
                   key={skill._id}
@@ -109,7 +104,7 @@ export default function Skills() {
                   setMessage={setMessage}
                 />
               ))}
-            </ImageList>
+            </Grid>
           ) : (
             <Typography px={2} my={4} variant="h6" component="div" gutterBottom>
               No skills found
