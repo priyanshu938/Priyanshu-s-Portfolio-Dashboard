@@ -42,7 +42,8 @@ const EmailViaForm = () => {
   const [rteObject, setRteObject] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [openAddEmailContactModal, setAddEmailContactModal] = useState(false);
-  const [openDeleteEmailContactModal, setDeleteEmailContactModal] = useState(false);
+  const [openDeleteEmailContactModal, setDeleteEmailContactModal] =
+    useState(false);
 
   const [openSnackbarForSendingMail, setOpenSnackbarForSendingMail] =
     useState(false);
@@ -256,8 +257,11 @@ const EmailViaForm = () => {
                   <DeleteIcon
                     color="error"
                     fontSize="large"
-                    style={{marginTop:'1vh',marginLeft:'2vw',cursor:'pointer'}}
-
+                    style={{
+                      marginTop: "1vh",
+                      marginLeft: "2vw",
+                      cursor: "pointer",
+                    }}
                     onClick={() =>
                       setDeleteEmailContactModal(!openDeleteEmailContactModal)
                     }
@@ -350,7 +354,7 @@ const EmailViaForm = () => {
                         }
                       }}
                     >
-                      Drag files here OR <br />
+                      Drag files here <br /> OR <br />
                       <ButtonAntd>Click toUpload</ButtonAntd>
                     </Upload.Dragger>
                   </div>

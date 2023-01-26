@@ -41,6 +41,7 @@ const ChangePasswordPage = ({
               type={visibilityChangePassword ? "text" : "password"}
               className="mt-2"
               placeholder="Enter password"
+              required
               onChange={(e) => setPassword(e.target.value)}
               startAdornment={
                 <InputAdornment position="start">
@@ -76,6 +77,7 @@ const ChangePasswordPage = ({
               type={visibilityChangePasswordConfirm ? "text" : "password"}
               className=" mt-2"
               placeholder="Confirm password"
+              required
               onChange={(e) => setConfirmPassword(e.target.value)}
               startAdornment={
                 <InputAdornment position="start">

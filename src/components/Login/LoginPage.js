@@ -27,6 +27,7 @@ const LoginPage = ({
               type="email"
               className="mt-1"
               placeholder="Enter email"
+              required
               onChange={(e) => setEmail(e.target.value)}
               startAdornment={
                 <InputAdornment position="start">
@@ -42,6 +43,7 @@ const LoginPage = ({
               type={visibilityLoginPassword ? "text" : "password"}
               className=" mt-1"
               placeholder="Enter password"
+              required
               onChange={(e) => setPassword(e.target.value)}
               startAdornment={
                 <InputAdornment position="start">

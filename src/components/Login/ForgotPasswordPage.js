@@ -33,6 +33,7 @@ const ForgotPasswordPage = ({
               type="email"
               className="mt-2"
               placeholder="Enter email"
+              required
               onChange={(e) => setEmail(e.target.value)}
               startAdornment={
                 <InputAdornment position="start">

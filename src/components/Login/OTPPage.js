@@ -45,6 +45,7 @@ const OTPPage = ({
                 type="text"
                 className=" mt-2"
                 placeholder="Enter otp"
+                required
                 onChange={(e) => setOtp(e.target.value)}
                 startAdornment={
                   <InputAdornment position="start">
