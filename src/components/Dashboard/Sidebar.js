@@ -152,7 +152,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-export default function Sidebar2({
+export default function Sidebar({
   content,
   setContent,
   darkMode,
@@ -281,8 +281,8 @@ export default function Sidebar2({
             </IconButton>
           </DrawerHeader>
           <Divider />
-          {contentArray.map((item) => (
-            <List>
+          {contentArray.map((item, index) => (
+            <List key={index}>
               <ListItem
                 disablePadding
                 onClick={() => setContent(item)}
@@ -337,7 +337,11 @@ export default function Sidebar2({
         </Drawer>
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <DrawerHeader />
-          <Content content={content} setContent={setContent} darkMode={darkMode}/>
+          <Content
+            content={content}
+            setContent={setContent}
+            darkMode={darkMode}
+          />
         </Box>
       </Box>
     </div>

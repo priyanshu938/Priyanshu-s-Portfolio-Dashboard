@@ -57,6 +57,7 @@ const DeleteEmailContactModal = ({
             dataIndex: "email",
           },
           {
+            key: "actions",
             title: "Actions",
             render: (value) => (
               <Popconfirm

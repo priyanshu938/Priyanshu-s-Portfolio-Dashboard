@@ -355,7 +355,7 @@ const EmailViaForm = () => {
                       }}
                     >
                       Drag files here <br /> OR <br />
-                      <ButtonAntd>Click toUpload</ButtonAntd>
+                      <ButtonAntd>Click to Upload</ButtonAntd>
                     </Upload.Dragger>
                   </div>
                 </Box>

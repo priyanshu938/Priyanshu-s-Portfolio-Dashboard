@@ -102,7 +102,7 @@ const Certificate = ({
             <Typography gutterBottom variant="h5" component="div">
               {name}
             </Typography>
-            <Typography gutterBottom variant="p" component="div">
+            <Typography gutterBottom variant="span" component="div">
               {description}
             </Typography>
             <CardActions>
