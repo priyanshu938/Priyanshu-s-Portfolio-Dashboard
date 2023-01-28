@@ -9,6 +9,8 @@ const EditFrontContentModal = ({
   setIsOpenSnackbar,
   setSeverity,
   setMessage,
+  callUseEffect,
+  setCallUseEffect,
   id,
   image,
   description,
@@ -50,6 +52,7 @@ const EditFrontContentModal = ({
         setSeverity("success");
         setMessage(json.message);
         setOpenEditFrontContentModal(!openEditFrontContentModal);
+        setCallUseEffect(!callUseEffect);
       }
     } catch (error) {
       setIsOpenSnackbar(true);

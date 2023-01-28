@@ -6,6 +6,8 @@ import url from "../../../ServerUrl";
 const EditTestimonialContentModal = ({
   openEditTestimonialContentModal,
   setOpenEditTestimonialContentModal,
+  callUseEffect,
+  setCallUseEffect,
   setIsOpenSnackbar,
   setSeverity,
   setMessage,
@@ -43,6 +45,7 @@ const EditTestimonialContentModal = ({
         setSeverity("success");
         setMessage(json.message);
         setOpenEditTestimonialContentModal(!openEditTestimonialContentModal);
+        setCallUseEffect(!callUseEffect);
       }
     } catch (error) {
       setIsOpenSnackbar(true);

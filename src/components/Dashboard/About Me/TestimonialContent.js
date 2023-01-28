@@ -18,6 +18,7 @@ const TestimonialContent = () => {
   const [description, setDescription] = useState("");
   const [designation, setDesignation] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [callUseEffect, setCallUseEffect] = useState(false);
 
   const getMyDetails = async () => {
     setIsLoading(true);
@@ -36,7 +37,7 @@ const TestimonialContent = () => {
 
   useEffect(() => {
     getMyDetails();
-  }, [isOpenSnackbar]);
+  }, [callUseEffect]);
 
   return (
     <div>
@@ -56,6 +57,8 @@ const TestimonialContent = () => {
               setOpenEditTestimonialContentModal={
                 setOpenEditTestimonialContentModal
               }
+              callUseEffect={callUseEffect}
+              setCallUseEffect={setCallUseEffect}
               setIsOpenSnackbar={setIsOpenSnackbar}
               setSeverity={setSeverity}
               setMessage={setMessage}
@@ -111,8 +114,8 @@ const TestimonialContent = () => {
                   <Button
                     variant="contained"
                     startIcon={<EditIcon />}
-                    color='info'
-                    style={{  width: "10vw" }}
+                    color="info"
+                    style={{ width: "10vw" }}
                     onClick={() => {
                       setOpenEditTestimonialContentModal(true);
                     }}

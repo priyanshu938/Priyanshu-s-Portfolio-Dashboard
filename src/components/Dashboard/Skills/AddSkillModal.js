@@ -10,7 +10,6 @@ export default function AddSkillModal({
   setMessage,
 }) {
   const handleSubmitForm = async (values) => {
-    console.log(values);
     const data = {
       skill: values.skill,
       image: values.image,

@@ -21,6 +21,7 @@ const FrontContent = () => {
   const [description, setDescription] = useState("");
   const [link, setLink] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [callUseEffect, setCallUseEffect] = useState(false);
 
   const getMyDetails = async () => {
     setIsLoading(true);
@@ -40,7 +41,7 @@ const FrontContent = () => {
 
   useEffect(() => {
     getMyDetails();
-  }, [isOpenSnackbar]);
+  }, [callUseEffect]);
 
   return (
     <div>
@@ -61,6 +62,8 @@ const FrontContent = () => {
               setIsOpenSnackbar={setIsOpenSnackbar}
               setSeverity={setSeverity}
               setMessage={setMessage}
+              callUseEffect={callUseEffect}
+              setCallUseEffect={setCallUseEffect}
               id={id}
               image={image}
               description={description}
