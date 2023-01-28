@@ -18,6 +18,7 @@ const Works = () => {
   const [message, setMessage] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [callUseEffect, setCallUseEffect] = useState(false);
 
   const getAllWorks = async () => {
     setIsLoading(true);
@@ -46,7 +47,7 @@ const Works = () => {
   //Below useEffect will be called whenever value of isOpen will be changed
   useEffect(() => {
     getAllWorks();
-  }, [isOpen]);
+  }, [callUseEffect]);
   return (
     <div>
       {isLoading ? (
@@ -66,6 +67,8 @@ const Works = () => {
               setIsOpen={setIsOpen}
               setSeverity={setSeverity}
               setMessage={setMessage}
+              setCallUseEffect={setCallUseEffect}
+              callUseEffect={callUseEffect}
             />
           )}
           <Input
@@ -101,6 +104,8 @@ const Works = () => {
                   setIsOpen={setIsOpen}
                   setSeverity={setSeverity}
                   setMessage={setMessage}
+                  setCallUseEffect={setCallUseEffect}
+                  callUseEffect={callUseEffect}
                 />
               ))}
             </Grid>

@@ -22,6 +22,8 @@ const Work = ({
   setIsOpen,
   setSeverity,
   setMessage,
+  callUseEffect,
+  setCallUseEffect,
 }) => {
   const [open, setOpen] = useState(false);
   const [openEditWorkModal, setOpenEditWorkModal] = useState(false);
@@ -48,6 +50,7 @@ const Work = ({
         setIsOpen(true);
         setSeverity("success");
         setMessage(json.message);
+        setCallUseEffect(!callUseEffect);
       }
     } catch (error) {
       setIsOpen(true);
@@ -69,6 +72,8 @@ const Work = ({
           image={image}
           description={description}
           url={url}
+          callUseEffect={callUseEffect}
+          setCallUseEffect={setCallUseEffect}
         />
       )}
 

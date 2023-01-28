@@ -8,6 +8,8 @@ export default function AddWorkModal({
   setIsOpen,
   setSeverity,
   setMessage,
+  callUseEffect,
+  setCallUseEffect,
 }) {
   const { TextArea } = Input;
   const handleSubmitForm = async (values) => {
@@ -32,6 +34,7 @@ export default function AddWorkModal({
         setSeverity("success");
         setMessage(json.message);
         setOpenAddWorkModal(!openAddWorkModal);
+        setCallUseEffect(!callUseEffect);
       }
     } catch (error) {
       setIsOpen(true);

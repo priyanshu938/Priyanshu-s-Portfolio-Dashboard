@@ -13,6 +13,8 @@ export default function EditWorkModal({
   image,
   description,
   url,
+  callUseEffect,
+  setCallUseEffect,
 }) {
   const { TextArea } = Input;
   const [fields, setFields] = useState([
@@ -55,6 +57,7 @@ export default function EditWorkModal({
         setSeverity("success");
         setMessage(json.message);
         setOpenEditWorkModal(!openEditWorkModal);
+        setCallUseEffect(!callUseEffect);
       }
     } catch (error) {
       setIsOpen(true);
