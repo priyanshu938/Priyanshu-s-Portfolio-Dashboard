@@ -5,7 +5,7 @@ import App from "./App";
 
 import { registerLicense } from "@syncfusion/ej2-base";
 registerLicense(
-  "ORg4AjUWIQA/Gnt2VVhiQlFadVlJXGFWfVJpTGpQdk5xdV9DaVZUTWY/P1ZhSXxRdkxhXH5acnFWQGlaWEY="
+  process.env.REACT_APP_SYNC_FUSION_LICENSE_KEY,
 );
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
