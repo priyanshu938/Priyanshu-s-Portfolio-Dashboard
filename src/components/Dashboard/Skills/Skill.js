@@ -13,7 +13,16 @@ import DialogContentText from "@mui/material/DialogContentText";
 import EditSkillModal from "./EditSkillModal";
 import url from "../../../ServerUrl";
 
-const Skill = ({ id, image, skill, setIsOpen, setSeverity, setMessage }) => {
+const Skill = ({
+  id,
+  image,
+  skill,
+  setIsOpen,
+  setSeverity,
+  setMessage,
+  callUseEffect,
+  setCallUseEffect,
+}) => {
   const [open, setOpen] = useState(false);
   const [openEditSkillModal, setOpenEditSkillModal] = useState(false);
 
@@ -39,6 +48,7 @@ const Skill = ({ id, image, skill, setIsOpen, setSeverity, setMessage }) => {
         setIsOpen(true);
         setSeverity("success");
         setMessage(json.message);
+        setCallUseEffect(!callUseEffect);
       }
     } catch (error) {
       setIsOpen(true);
@@ -58,6 +68,8 @@ const Skill = ({ id, image, skill, setIsOpen, setSeverity, setMessage }) => {
           id={id}
           image={image}
           skill={skill}
+          callUseEffect={callUseEffect}
+          setCallUseEffect={setCallUseEffect}
         />
       )}
 

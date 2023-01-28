@@ -8,6 +8,8 @@ export default function AddSkillModal({
   setIsOpen,
   setSeverity,
   setMessage,
+  callUseEffect,
+  setCallUseEffect,
 }) {
   const handleSubmitForm = async (values) => {
     const data = {
@@ -29,6 +31,7 @@ export default function AddSkillModal({
         setSeverity("success");
         setMessage(json.message);
         setOpenAddSkillModal(!openAddSkillModal);
+        setCallUseEffect(!callUseEffect);
       }
     } catch (error) {
       setIsOpen(true);

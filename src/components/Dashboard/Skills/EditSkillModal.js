@@ -11,6 +11,8 @@ export default function EditSkillModal({
   id,
   image,
   skill,
+  callUseEffect,
+  setCallUseEffect,
 }) {
   const handleSubmitForm = async (values) => {
     const data = {
@@ -32,6 +34,7 @@ export default function EditSkillModal({
         setSeverity("success");
         setMessage(json.message);
         setOpenEditSkillModal(!openEditSkillModal);
+        setCallUseEffect(!callUseEffect);
       }
     } catch (error) {
       setIsOpen(true);

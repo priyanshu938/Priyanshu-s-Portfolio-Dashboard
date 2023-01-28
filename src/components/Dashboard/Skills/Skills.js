@@ -18,6 +18,7 @@ export default function Skills() {
   const [message, setMessage] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [callUseEffect, setCallUseEffect] = useState(false);
 
   const getAllSkills = async () => {
     setIsLoading(true);
@@ -37,7 +38,7 @@ export default function Skills() {
   //Below useEffect will be called whenever value of isOpen will be changed
   useEffect(() => {
     getAllSkills();
-  }, [isOpen]);
+  }, [callUseEffect]);
 
   const handleSearchChange = (e) => {
     const searchVal = e.target.value;
@@ -68,6 +69,8 @@ export default function Skills() {
               setIsOpen={setIsOpen}
               setSeverity={setSeverity}
               setMessage={setMessage}
+              callUseEffect={callUseEffect}
+              setCallUseEffect={setCallUseEffect}
             />
           )}
 
@@ -101,6 +104,8 @@ export default function Skills() {
                   setIsOpen={setIsOpen}
                   setSeverity={setSeverity}
                   setMessage={setMessage}
+                  callUseEffect={callUseEffect}
+                  setCallUseEffect={setCallUseEffect}
                 />
               ))}
             </Grid>
