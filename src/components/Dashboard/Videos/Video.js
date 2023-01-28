@@ -19,6 +19,8 @@ const Video = ({
   setIsOpen,
   setSeverity,
   setMessage,
+  callUseEffect,
+  setCallUseEffect,
 }) => {
   const [open, setOpen] = useState(false);
   const [openEditVideoModal, setOpenEditVideoModal] = useState(false);
@@ -45,6 +47,7 @@ const Video = ({
         setIsOpen(true);
         setSeverity("success");
         setMessage(json.message);
+        setCallUseEffect(!callUseEffect);
       }
     } catch (error) {
       setIsOpen(true);
@@ -65,6 +68,8 @@ const Video = ({
           title={title}
           description={description}
           link={link}
+          callUseEffect={callUseEffect}
+          setCallUseEffect={setCallUseEffect}
         />
       )}
       <Dialog

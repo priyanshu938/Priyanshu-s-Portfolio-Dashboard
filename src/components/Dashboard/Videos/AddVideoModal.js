@@ -9,6 +9,8 @@ export default function AddVideoModal({
   setIsOpen,
   setSeverity,
   setMessage,
+  callUseEffect,
+  setCallUseEffect,
 }) {
   const handleSubmitForm = async (values) => {
     const data = {
@@ -31,6 +33,7 @@ export default function AddVideoModal({
         setSeverity("success");
         setMessage(json.message);
         setOpenAddVideoModal(!openAddVideoModal);
+        setCallUseEffect(!callUseEffect);
       }
     } catch (error) {
       setIsOpen(true);

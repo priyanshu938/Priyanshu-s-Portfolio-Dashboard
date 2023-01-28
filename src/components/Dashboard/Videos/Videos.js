@@ -18,6 +18,7 @@ const Videos = () => {
   const [message, setMessage] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [callUseEffect, setCallUseEffect] = useState(false);
 
   const getAllVideos = async () => {
     setIsLoading(true);
@@ -46,7 +47,7 @@ const Videos = () => {
   //Below useEffect will be called whenever value of isOpen will be changed
   useEffect(() => {
     getAllVideos();
-  }, [isOpen]);
+  }, [callUseEffect]);
   return (
     <div>
       {isLoading ? (
@@ -66,6 +67,8 @@ const Videos = () => {
               setIsOpen={setIsOpen}
               setSeverity={setSeverity}
               setMessage={setMessage}
+              setCallUseEffect={setCallUseEffect}
+              callUseEffect={callUseEffect}
             />
           )}
           <Input
@@ -100,6 +103,8 @@ const Videos = () => {
                   setIsOpen={setIsOpen}
                   setSeverity={setSeverity}
                   setMessage={setMessage}
+                  setCallUseEffect={setCallUseEffect}
+                  callUseEffect={callUseEffect}
                 />
               ))}
             </Grid>

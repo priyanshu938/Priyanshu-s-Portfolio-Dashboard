@@ -13,6 +13,8 @@ export default function EditVideoModal({
   title,
   description,
   link,
+  callUseEffect,
+  setCallUseEffect,
 }) {
   const [fields, setFields] = useState([
     {
@@ -49,6 +51,7 @@ export default function EditVideoModal({
         setSeverity("success");
         setMessage(json.message);
         setOpenEditVideoModal(!openEditVideoModal);
+        setCallUseEffect(!callUseEffect);
       }
     } catch (error) {
       setIsOpen(true);
