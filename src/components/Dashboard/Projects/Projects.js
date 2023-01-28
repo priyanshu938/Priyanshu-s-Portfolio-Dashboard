@@ -18,6 +18,7 @@ const Projects = () => {
   const [message, setMessage] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [callUseEffect, setCallUseEffect] = useState(false);
 
   const getAllProjects = async () => {
     setIsLoading(true);
@@ -46,7 +47,7 @@ const Projects = () => {
   //Below useEffect will be called whenever value of isOpen will be changed
   useEffect(() => {
     getAllProjects();
-  }, [isOpen]);
+  }, [callUseEffect]);
   return (
     <div>
       {isLoading ? (
@@ -66,6 +67,8 @@ const Projects = () => {
               setIsOpen={setIsOpen}
               setSeverity={setSeverity}
               setMessage={setMessage}
+              callUseEffect={callUseEffect}
+              setCallUseEffect={setCallUseEffect}
             />
           )}
           <Input
@@ -103,6 +106,8 @@ const Projects = () => {
                   setIsOpen={setIsOpen}
                   setSeverity={setSeverity}
                   setMessage={setMessage}
+                  callUseEffect={callUseEffect}
+                  setCallUseEffect={setCallUseEffect}
                 />
               ))}
             </Grid>

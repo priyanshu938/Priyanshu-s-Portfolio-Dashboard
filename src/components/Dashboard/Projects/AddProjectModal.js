@@ -8,6 +8,8 @@ const AddProjectModal = ({
   setIsOpen,
   setSeverity,
   setMessage,
+  callUseEffect,
+  setCallUseEffect,
 }) => {
   const { TextArea } = Input;
   const handleSubmitForm = async (values) => {
@@ -34,6 +36,7 @@ const AddProjectModal = ({
         setSeverity("success");
         setMessage(json.message);
         setOpenAddProjectModal(!openAddProjectModal);
+        setCallUseEffect(!callUseEffect);
       }
     } catch (error) {
       setIsOpen(true);

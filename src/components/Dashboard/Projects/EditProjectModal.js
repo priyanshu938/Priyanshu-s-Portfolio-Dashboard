@@ -15,6 +15,8 @@ const EditProjectModal = ({
   githubLink,
   liveProjectLink,
   youtubeVideoLink,
+  callUseEffect,
+  setCallUseEffect,
 }) => {
   const { TextArea } = Input;
   const [fields, setFields] = useState([
@@ -68,6 +70,7 @@ const EditProjectModal = ({
         setSeverity("success");
         setMessage(json.message);
         setOpenEditProjectModal(!openEditProjectModal);
+        setCallUseEffect(!callUseEffect);
       }
     } catch (error) {
       setIsOpen(true);

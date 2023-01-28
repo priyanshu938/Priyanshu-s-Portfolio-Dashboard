@@ -29,6 +29,8 @@ const Project = ({
   setIsOpen,
   setSeverity,
   setMessage,
+  callUseEffect,
+  setCallUseEffect,
 }) => {
   const [open, setOpen] = useState(false);
   const [openEditProjectModal, setOpenEditProjectModal] = useState(false);
@@ -55,6 +57,7 @@ const Project = ({
         setIsOpen(true);
         setSeverity("success");
         setMessage(json.message);
+        setCallUseEffect(!callUseEffect);
       }
     } catch (error) {
       setIsOpen(true);
@@ -78,6 +81,8 @@ const Project = ({
           githubLink={githubLink}
           liveProjectLink={liveProjectLink}
           youtubeVideoLink={youtubeVideoLink}
+          callUseEffect={callUseEffect}
+          setCallUseEffect={setCallUseEffect}
         />
       )}
 
