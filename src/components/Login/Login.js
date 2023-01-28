@@ -90,7 +90,6 @@ const Login = () => {
           setMessage("User does not exist!");
         }
       } catch (error) {
-        console.log(error);
         setIsOpen(true);
         setSeverity("error");
         setMessage("Internal Server Error!");
@@ -119,7 +118,6 @@ const Login = () => {
         setMessage(res.data.message);
       }
     } catch (error) {
-      console.log(error);
       setIsOpen(true);
       setSeverity("error");
       setMessage("OTP expired!");
@@ -158,7 +156,6 @@ const Login = () => {
           setPassword("");
         }
       } catch (error) {
-        console.log(error);
         setIsOpen(true);
         setSeverity("error");
         setMessage("Wrong otp!");

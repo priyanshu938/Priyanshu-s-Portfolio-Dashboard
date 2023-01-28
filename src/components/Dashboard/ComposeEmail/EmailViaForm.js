@@ -75,7 +75,6 @@ const EmailViaForm = () => {
   }, [isOpen]);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(attachments);
     if (sendMailTo.length > 0) {
       const data = {
         email: `${sendMailTo}`,
