@@ -13,6 +13,8 @@ export default function EditCertificateModal({
   image,
   description,
   link,
+  callUseEffect,
+  setCallUseEffect,
 }) {
   const { TextArea } = Input;
   const [fields, setFields] = useState([
@@ -58,6 +60,7 @@ export default function EditCertificateModal({
         setSeverity("success");
         setMessage(json.message);
         setOpenEditCertificateModal(!openEditCertificateModal);
+        setCallUseEffect(!callUseEffect);
       }
     } catch (error) {
       setIsOpen(true);

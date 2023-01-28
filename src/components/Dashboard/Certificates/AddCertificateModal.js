@@ -8,6 +8,8 @@ export default function AddCertificateModal({
   setIsOpen,
   setSeverity,
   setMessage,
+  callUseEffect,
+  setCallUseEffect,
 }) {
   const { TextArea } = Input;
   const handleSubmitForm = async (values) => {
@@ -32,6 +34,7 @@ export default function AddCertificateModal({
         setSeverity("success");
         setMessage(json.message);
         setOpenAddCertificateModal(!openAddCertificateModal);
+        setCallUseEffect(!callUseEffect);
       }
     } catch (error) {
       setIsOpen(true);

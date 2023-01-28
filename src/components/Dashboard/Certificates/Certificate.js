@@ -22,6 +22,8 @@ const Certificate = ({
   setIsOpen,
   setSeverity,
   setMessage,
+  callUseEffect,
+  setCallUseEffect,
 }) => {
   const [open, setOpen] = useState(false);
   const [openEditCertificateModal, setOpenEditCertificateModal] =
@@ -52,6 +54,7 @@ const Certificate = ({
         setIsOpen(true);
         setSeverity("success");
         setMessage(json.message);
+        setCallUseEffect(!callUseEffect);
       }
     } catch (error) {
       setIsOpen(true);
@@ -73,6 +76,8 @@ const Certificate = ({
           image={image}
           description={description}
           link={link}
+          callUseEffect={callUseEffect}
+          setCallUseEffect={setCallUseEffect}
         />
       )}
 

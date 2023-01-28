@@ -18,6 +18,7 @@ const Certificates = () => {
   const [message, setMessage] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [callUseEffect, setCallUseEffect] = useState(false);
 
   const getAllCertificates = async () => {
     setIsLoading(true);
@@ -49,7 +50,7 @@ const Certificates = () => {
   //Below useEffect will be called whenever value of isOpen will be changed
   useEffect(() => {
     getAllCertificates();
-  }, [isOpen]);
+  }, [callUseEffect]);
   return (
     <div>
       {isLoading ? (
@@ -69,6 +70,8 @@ const Certificates = () => {
               setIsOpen={setIsOpen}
               setSeverity={setSeverity}
               setMessage={setMessage}
+              setCallUseEffect={setCallUseEffect}
+              callUseEffect={callUseEffect}
             />
           )}
           <Input
@@ -104,6 +107,8 @@ const Certificates = () => {
                   setIsOpen={setIsOpen}
                   setSeverity={setSeverity}
                   setMessage={setMessage}
+                  setCallUseEffect={setCallUseEffect}
+                  callUseEffect={callUseEffect}
                 />
               ))}
             </Grid>
