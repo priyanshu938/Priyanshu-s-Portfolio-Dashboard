@@ -204,6 +204,7 @@ export default function Sidebar({
   };
   const handleLogOut = () => {
     window.localStorage.removeItem("token");
+    setDarkMode(false);
     navigate("/");
   };
   return (
