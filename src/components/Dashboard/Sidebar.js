@@ -35,6 +35,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import EmailIcon from "@mui/icons-material/Email";
+import DataObjectIcon from "@mui/icons-material/DataObject";
 import SmartToyOutlinedIcon from "@mui/icons-material/SmartToyOutlined";
 import Switch from "@mui/material/Switch";
 import { useTheme } from "@mui/material/styles";
@@ -168,6 +169,7 @@ export default function Sidebar({
   const contentArray = [
     "about-me",
     "chatbot",
+    "compiler",
     "compose-email",
     "skills",
     "projects",
@@ -179,6 +181,7 @@ export default function Sidebar({
   const contentIcon = {
     "about-me": <CoPresentIcon />,
     chatbot: <SmartToyOutlinedIcon />,
+    compiler: <DataObjectIcon />,
     "compose-email": <EmailIcon />,
     skills: <AccessibilityIcon />,
     projects: <ArchitectureIcon />,

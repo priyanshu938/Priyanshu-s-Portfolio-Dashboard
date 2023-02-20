@@ -9,12 +9,14 @@ import Contact from "./ContactUsMessages/Contact";
 import Videos from "./Videos/Videos";
 import ComposeEmail from "./ComposeEmail/ComposeEmail";
 import Chatbot from "./Chatbot";
-const Content = ({ content,darkMode }) => {
+import Compiler from "./Compiler/Compiler";
+const Content = ({ content, darkMode }) => {
   //to add new content, add the name of the content in the contentArray
   const contentArray = {
     "about-me": <AboutMe />,
     chatbot: <Chatbot />,
-    "compose-email": <ComposeEmail darkMode={darkMode}/>,
+    compiler: <Compiler />,
+    "compose-email": <ComposeEmail darkMode={darkMode} />,
     skills: <Skills />,
     projects: <Projects />,
     certificates: <Certificates />,

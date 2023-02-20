@@ -14,3 +14,12 @@ code {
 body::-webkit-scrollbar {
   width: 0 !important;
 }
+[data-color-mode*="dark"],
+[data-color-mode*="dark"] body {
+  --color-canvas-subtle: #161b22;
+}
+
+[data-color-mode*="light"],
+[data-color-mode*="light"] body {
+  --color-canvas-subtle: #f6f8fa;
+}
