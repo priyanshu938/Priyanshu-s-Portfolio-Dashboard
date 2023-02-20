@@ -6,32 +6,21 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import CodeEditor from "@uiw/react-textarea-code-editor";
+import Editor from "@monaco-editor/react";
 import SendIcon from "@mui/icons-material/Send";
 import { Button } from "@mui/material";
-import TextField from "@mui/material/TextField";
 import Snackbar from "../../ReusableComponents/Snackbar";
 import SnackbarForCompiling from "../../ReusableComponents/SnackbarForShowingWait";
 
 const Compiler = () => {
   const [language, setLanguage] = useState("Java");
 
-  const languageArray = [
-    "Java",
-    "Python",
-    "C++",
-    "C",
-    "GoLang",
-    "C#",
-    "Javascript",
-  ];
+  const languageArray = ["Java", "Python", "C++", "C", "Javascript"];
   const languageArrayExtension = {
     Java: "java",
     Python: "py",
     "C++": "cpp",
     C: "c",
-    GoLang: "go",
-    "C#": "cs",
     Javascript: "js",
   };
 
@@ -53,27 +42,13 @@ int main() {
         printf("Hello, world!");
         return 0;
         }`,
-    GoLang: `package main
-    import "fmt"
-    func main() {
-        fmt.Println("Hello, world!")
-        }
-        `,
-    "C#": `using System;
-    namespace HelloWorld
-    {
-        class Hello {
-            static void Main() {
-                Console.WriteLine("Hello, world!");
-                }
-            }
-        }
-                `,
     Javascript: `console.log("Hello, world!");`,
   };
   const [code, setCode] = useState(languageDefaultCode[language]);
   const [consoleInputs, setConsoleInputs] = useState(" ");
-  const [outputBoxValue, setOutputBoxValue] = useState(" ");
+  const [outputBoxValue, setOutputBoxValue] = useState(
+    "Your output will appear here... "
+  );
   const [compilingSnackbar, setCompilingSnackbar] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [severity, setSeverity] = useState("");
@@ -117,6 +92,12 @@ int main() {
         }
       });
   };
+
+  function handleEditorChange(value, event) {
+    console.log("here is the current model value:", value);
+    setCode(value);
+  }
+
   return (
     <div>
       <Snackbar
@@ -173,41 +154,51 @@ int main() {
             </Button>
           </div>
         </FormControl>
-        <div data-color-mode="dark">
-          <CodeEditor
+        <div style={{ marginBlock: "5vh" }}>
+          <Editor
+            height="60vh"
+            width="90%"
+            language={language === "C++" ? "cpp" : language.toLowerCase()}
             value={languageDefaultCode[language]}
-            language={languageArrayExtension[language]}
-            onChange={(event) => setCode(event.target.value)}
-            style={{
-              fontSize: 20,
-              height: "50vh",
-              width: "90%",
-              overflowY: "scroll",
-              marginBlock: "5vh",
-              fontFamily:
-                "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
-            }}
+            theme="vs-dark"
+            onChange={handleEditorChange}
           />
         </div>
-        <TextField
-          label="Console inputs"
-          multiline
+        <label for="textarea">Console inputs:</label>
+        <br />
+        <textarea
           rows={3}
+          cols="95"
           value={consoleInputs}
           onChange={(e) => setConsoleInputs(e.target.value)}
-          style={{ marginBlock: "1rem", width: "90%" }}
+          style={{
+            backgroundColor: "#1e1e1e",
+            color: "white",
+            padding: "1rem",
+            overflow: "auto",
+            borderRadius: "5px",
+            marginBlock: "10px",
+          }}
         />
         <br />
-        <TextField
+        <label for="textarea">Output:</label>
+        <br />
+        <textarea
           label="Output"
-          multiline
-          rows={5}
-          InputProps={{
-            readOnly: true,
-          }}
+          rows="5"
+          cols="95"
           value={outputBoxValue}
-          style={{ marginBlock: "1rem", width: "90%" }}
-        />
+          readonly
+          style={{
+            caretColor: "transparent",
+            backgroundColor: "#1e1e1e",
+            color: "white",
+            padding: "1rem",
+            overflow: "auto",
+            borderRadius: "5px",
+            marginBlock: "10px",
+          }}
+        ></textarea>
       </Box>
     </div>
   );
