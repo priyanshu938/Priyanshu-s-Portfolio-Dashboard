@@ -12,7 +12,6 @@ import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Snackbar from "../../ReusableComponents/Snackbar";
 import SnackbarForCompiling from "../../ReusableComponents/SnackbarForShowingWait";
-import "@uiw/react-textarea-code-editor/dist.css";
 
 const Compiler = () => {
   const [language, setLanguage] = useState("Java");
@@ -73,7 +72,7 @@ int main() {
     Javascript: `console.log("Hello, world!");`,
   };
   const [code, setCode] = useState(languageDefaultCode[language]);
-  const [consoleInputs, setConsoleInputs] = useState("");
+  const [consoleInputs, setConsoleInputs] = useState(" ");
   const [outputBoxValue, setOutputBoxValue] = useState(" ");
   const [compilingSnackbar, setCompilingSnackbar] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
