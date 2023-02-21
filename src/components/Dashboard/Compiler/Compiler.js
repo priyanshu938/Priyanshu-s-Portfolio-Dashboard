@@ -73,7 +73,6 @@ int main() {
 
     axios(config)
       .then(function (response) {
-        console.table(response.data);
         const output = response?.data?.output;
         const error = response?.data?.error;
         setOutputBoxValue(output ? output : error);
@@ -93,8 +92,7 @@ int main() {
       });
   };
 
-  function handleEditorChange(value, event) {
-    console.log("here is the current model value:", value);
+  function handleEditorChange(value) {
     setCode(value);
   }
 
@@ -148,7 +146,7 @@ int main() {
               variant="contained"
               color="success"
               endIcon={<SendIcon />}
-              style={{ flexBasis: "15%" }}
+              style={{ flexBasis: "8rem", height: "3rem" }}
             >
               Run code
             </Button>

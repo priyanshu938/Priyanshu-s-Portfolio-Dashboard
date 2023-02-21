@@ -238,7 +238,7 @@ const EmailViaForm = () => {
                   startIcon={<AddIcon />}
                   color="success"
                   style={{
-                    height: "8vh",
+                    height: "3rem",
                     marginLeft: "3vw",
                   }}
                   onClick={() =>
@@ -365,7 +365,7 @@ const EmailViaForm = () => {
                 startIcon={<DeleteIcon />}
                 color="error"
                 style={{
-                  height: "6vh",
+                  height: "2.5rem",
                 }}
                 onClick={clearCacheData}
               >
@@ -376,7 +376,7 @@ const EmailViaForm = () => {
                 variant="contained"
                 color="success"
                 endIcon={<SendIcon />}
-                style={{ marginLeft: "5vw" }}
+                style={{ marginLeft: "5vw", height: "2.5rem" }}
               >
                 Send
               </Button>
