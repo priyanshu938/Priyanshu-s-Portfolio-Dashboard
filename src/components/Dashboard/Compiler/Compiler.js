@@ -36,7 +36,7 @@ const Compiler = () => {
     C: cpp(),
     Javascript: javascript(),
   };
-  const languageDefaultCode = {
+  const [languageDefaultCode, setLanguageDefaultCode] = useState({
     Java: `public class HelloWorld {
         public static void main(String[] args) {
             System.out.println("Hello, world!");
@@ -55,12 +55,22 @@ int main() {
         return 0;
         }`,
     Javascript: `console.log("Hello, world!");`,
-  };
+  });
   const [code, setCode] = useState(languageDefaultCode[language]);
-  const [consoleInputs, setConsoleInputs] = useState(" ");
-  const [outputBoxValue, setOutputBoxValue] = useState(
-    "Your output will appear here... "
-  );
+  const [consoleInputs, setConsoleInputs] = useState({
+    Java: " ",
+    Python: " ",
+    "C++": " ",
+    C: " ",
+    Javascript: " ",
+  });
+  const [outputBoxValue, setOutputBoxValue] = useState({
+    Java: "Your output will appear here... ",
+    Python: "Your output will appear here... ",
+    "C++": "Your output will appear here... ",
+    C: "Your output will appear here... ",
+    Javascript: "Your output will appear here... ",
+  });
   const [compilingSnackbar, setCompilingSnackbar] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [severity, setSeverity] = useState("");
@@ -72,7 +82,7 @@ int main() {
     var data = qs.stringify({
       code: code,
       language: languageArrayExtension[language],
-      input: consoleInputs,
+      input: consoleInputs[language],
     });
     var config = {
       method: "post",
@@ -87,7 +97,10 @@ int main() {
       .then(function (response) {
         const output = response?.data?.output;
         const error = response?.data?.error;
-        setOutputBoxValue(output ? output : error);
+        setOutputBoxValue({
+          ...outputBoxValue,
+          [language]: output ? output : error,
+        });
         setCompilingSnackbar(false);
       })
       .catch(function (error) {
@@ -172,7 +185,13 @@ int main() {
             height="65vh"
             width="50vw"
             extensions={[extensionsEditor[language]]}
-            onChange={(value) => setCode(value)}
+            onChange={(value) => {
+              setCode(value);
+              setLanguageDefaultCode({
+                ...languageDefaultCode,
+                [language]: value,
+              });
+            }}
             theme={draculaInit({
               settings: {
                 caret: "#c6c6c6",
@@ -197,8 +216,13 @@ int main() {
             <textarea
               rows="3"
               cols="30"
-              value={consoleInputs}
-              onChange={(e) => setConsoleInputs(e.target.value)}
+              value={consoleInputs[language]}
+              onChange={(e) => {
+                setConsoleInputs({
+                  ...consoleInputs,
+                  [language]: e.target.value,
+                });
+              }}
               style={{
                 backgroundColor: "#1e1e1e",
                 color: "white",
@@ -212,7 +236,7 @@ int main() {
               label="Output"
               rows="7"
               cols="30"
-              value={outputBoxValue}
+              value={outputBoxValue[language]}
               readOnly
               style={{
                 caretColor: "transparent",
