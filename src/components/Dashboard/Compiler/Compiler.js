@@ -6,11 +6,17 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import Editor from "@monaco-editor/react";
 import SendIcon from "@mui/icons-material/Send";
 import { Button } from "@mui/material";
 import Snackbar from "../../ReusableComponents/Snackbar";
 import SnackbarForCompiling from "../../ReusableComponents/SnackbarForShowingWait";
+import CodeMirror from "@uiw/react-codemirror";
+import { draculaInit } from "@uiw/codemirror-theme-dracula";
+import { tags as t } from "@lezer/highlight";
+import { java } from "@codemirror/lang-java";
+import { python } from "@codemirror/lang-python";
+import { cpp } from "@codemirror/lang-cpp";
+import { javascript } from "@codemirror/lang-javascript";
 
 const Compiler = () => {
   const [language, setLanguage] = useState("Java");
@@ -23,7 +29,13 @@ const Compiler = () => {
     C: "c",
     Javascript: "js",
   };
-
+  const extensionsEditor = {
+    Java: java(),
+    Python: python(),
+    "C++": cpp(),
+    C: cpp(),
+    Javascript: javascript(),
+  };
   const languageDefaultCode = {
     Java: `public class HelloWorld {
         public static void main(String[] args) {
@@ -152,16 +164,23 @@ int main() {
             </Button>
           </div>
         </FormControl>
-        <div style={{ marginBlock: "5vh" }}>
-          <Editor
-            height="60vh"
-            width="90%"
-            language={language === "C++" ? "cpp" : language.toLowerCase()}
-            value={languageDefaultCode[language]}
-            theme="vs-dark"
-            onChange={handleEditorChange}
-          />
-        </div>
+        <CodeMirror
+          value={languageDefaultCode[language]}
+          height="300px"
+          width="90%"
+          extensions={[extensionsEditor[language]]}
+          theme={draculaInit({
+            settings: {
+              caret: "#c6c6c6",
+              fontFamily: "monospace",
+            },
+            styles: [{ tag: t.comment, color: "#6272a4" }],
+          })}
+          onChange={handleEditorChange}
+          style={{
+            marginBlock: "2rem",
+          }}
+        />
         <label for="textarea">Console inputs:</label>
         <br />
         <textarea

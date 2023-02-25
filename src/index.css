@@ -14,3 +14,7 @@ code {
 body::-webkit-scrollbar {
   width: 0 !important;
 }
+/* codemirror editor on focus outline removed */
+.cm-editor.cm-focused {
+  outline: none;
+}
