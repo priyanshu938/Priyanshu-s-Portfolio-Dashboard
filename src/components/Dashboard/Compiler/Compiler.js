@@ -104,10 +104,6 @@ int main() {
       });
   };
 
-  function handleEditorChange(value) {
-    setCode(value);
-  }
-
   return (
     <div>
       <Snackbar
@@ -164,58 +160,71 @@ int main() {
             </Button>
           </div>
         </FormControl>
-        <CodeMirror
-          value={languageDefaultCode[language]}
-          height="300px"
-          width="90%"
-          extensions={[extensionsEditor[language]]}
-          theme={draculaInit({
-            settings: {
-              caret: "#c6c6c6",
-              fontFamily: "monospace",
-            },
-            styles: [{ tag: t.comment, color: "#6272a4" }],
-          })}
-          onChange={handleEditorChange}
+        <div
           style={{
-            marginBlock: "2rem",
+            display: "flex",
+            justifyContent: "space-evenly",
+            gap: "0.5rem",
           }}
-        />
-        <label for="textarea">Console inputs:</label>
-        <br />
-        <textarea
-          rows={3}
-          cols="95"
-          value={consoleInputs}
-          onChange={(e) => setConsoleInputs(e.target.value)}
-          style={{
-            backgroundColor: "#1e1e1e",
-            color: "white",
-            padding: "1rem",
-            overflow: "auto",
-            borderRadius: "5px",
-            marginBlock: "10px",
-          }}
-        />
-        <br />
-        <label for="textarea">Output:</label>
-        <br />
-        <textarea
-          label="Output"
-          rows="5"
-          cols="95"
-          value={outputBoxValue}
-          readonly
-          style={{
-            caretColor: "transparent",
-            backgroundColor: "#1e1e1e",
-            color: "white",
-            padding: "1rem",
-            overflow: "auto",
-            borderRadius: "5px",
-            marginBlock: "10px",
-          }}
-        ></textarea>
+        >
+          <CodeMirror
+            value={languageDefaultCode[language]}
+            height="65vh"
+            width="50vw"
+            extensions={[extensionsEditor[language]]}
+            onChange={(value) => setCode(value)}
+            theme={draculaInit({
+              settings: {
+                caret: "#c6c6c6",
+                fontFamily: "monospace",
+              },
+              styles: [{ tag: t.comment, color: "#6272a4" }],
+            })}
+            style={{
+              marginTop: "2rem",
+            }}
+          />
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              flexBasis: "20%",
+              marginBlock: "2rem",
+              gap: "0.5rem",
+            }}
+          >
+            <label style={{ fontSize: "1.2rem" }}>Console inputs:</label>
+            <textarea
+              rows="3"
+              cols="30"
+              value={consoleInputs}
+              onChange={(e) => setConsoleInputs(e.target.value)}
+              style={{
+                backgroundColor: "#1e1e1e",
+                color: "white",
+                padding: "1rem",
+                overflow: "auto",
+                borderRadius: "5px",
+              }}
+            />
+            <label style={{ fontSize: "1.2rem" }}>Output:</label>
+            <textarea
+              label="Output"
+              rows="7"
+              cols="30"
+              value={outputBoxValue}
+              readOnly
+              style={{
+                caretColor: "transparent",
+                backgroundColor: "#1e1e1e",
+                color: "white",
+                padding: "1rem",
+                overflow: "auto",
+                borderRadius: "5px",
+              }}
+            ></textarea>
+          </div>
+        </div>
       </Box>
     </div>
   );
