@@ -1,9 +1,12 @@
 import React, { useEffect } from "react";
 import "./Login.css";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import LockIcon from "@mui/icons-material/Lock";
-import Input from "@mui/material/Input";
-import InputAdornment from "@mui/material/InputAdornment";
+import {
+  ChakraProvider,
+  PinInput,
+  PinInputField,
+  HStack,
+} from "@chakra-ui/react";
 
 const OTPPage = ({
   handleVerifyOtp,
@@ -20,7 +23,7 @@ const OTPPage = ({
     const timer =
       counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
     return () => clearInterval(timer);
-  }, [counter,setCounter]);
+  }, [counter, setCounter]);
   return (
     <div>
       <div className="Auth-form-container">
@@ -41,18 +44,16 @@ const OTPPage = ({
             <div className="form-group mt-3">
               <label>Enter otp</label>
               <br />
-              <Input
-                type="text"
-                className=" mt-2"
-                placeholder="Enter otp"
-                required
-                onChange={(e) => setOtp(e.target.value)}
-                startAdornment={
-                  <InputAdornment position="start">
-                    <LockIcon className="text-secondary" />
-                  </InputAdornment>
-                }
-              />
+              <ChakraProvider>
+                <HStack spacing="1rem" className="mt-2">
+                  <PinInput otp size="lg" onChange={(e) => setOtp(e)}>
+                    <PinInputField />
+                    <PinInputField />
+                    <PinInputField />
+                    <PinInputField />
+                  </PinInput>
+                </HStack>
+              </ChakraProvider>
             </div>
             {counter > 0 ? (
               <div
