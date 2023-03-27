@@ -139,17 +139,17 @@ const Project = ({
               {description}
             </Typography>
             <Stack direction="row" spacing={2} my={2}>
-              {githubLink !== "" && (
+              {githubLink && (
                 <Link href={githubLink} target="_blank" underline="none">
                   <GitHubIcon color="primary" />
                 </Link>
               )}
-              {youtubeVideoLink !== "" && (
+              {youtubeVideoLink && (
                 <Link href={youtubeVideoLink} target="_blank" underline="none">
                   <YouTubeIcon color="error" />
                 </Link>
               )}
-              {liveProjectLink !== "" && (
+              {liveProjectLink && (
                 <Link href={liveProjectLink} target="_blank" underline="none">
                   <PreviewIcon color="warning" />
                 </Link>
