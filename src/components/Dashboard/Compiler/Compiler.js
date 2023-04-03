@@ -23,11 +23,11 @@ const Compiler = () => {
 
   const languageArray = ["Java", "Python", "C++", "C", "Javascript"];
   const languageArrayExtension = {
-    Java: "java",
-    Python: "py",
-    "C++": "cpp",
-    C: "c",
-    Javascript: "js",
+    Java: 4,
+    Python: 5,
+    C: 6,
+    "C++": 7,
+    Javascript: 17,
   };
   const extensionsEditor = {
     Java: java(),
@@ -37,7 +37,8 @@ const Compiler = () => {
     Javascript: javascript(),
   };
   const [languageDefaultCode, setLanguageDefaultCode] = useState({
-    Java: `public class HelloWorld {
+    Java: `//'main' method must be in a class 'Progman'.
+    class Progman {
         public static void main(String[] args) {
             System.out.println("Hello, world!");
         }
@@ -80,23 +81,25 @@ int main() {
     setOutputBoxValue(" ");
     setCompilingSnackbar(true);
     var data = qs.stringify({
-      code: code,
-      language: languageArrayExtension[language],
-      input: consoleInputs[language],
+      Program: code,
+      LanguageChoice: languageArrayExtension[language],
+      Input: consoleInputs[language],
     });
     var config = {
-      method: "post",
-      url: "https://api.codex.jaagrav.in",
+      method: "POST",
+      url: "https://code-compiler.p.rapidapi.com/v2",
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+        "content-type": "application/x-www-form-urlencoded",
+        "X-RapidAPI-Key": `${process.env.REACT_APP_COMPILER_API_KEY}`,
+        "X-RapidAPI-Host": "code-compiler.p.rapidapi.com",
       },
+
       data: data,
     };
-
     axios(config)
       .then(function (response) {
-        const output = response?.data?.output;
-        const error = response?.data?.error;
+        const output = response?.data?.Result;
+        const error = response?.data?.Errors;
         setOutputBoxValue({
           ...outputBoxValue,
           [language]: output ? output : error,
